@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>REGISTER</title>
+	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</head>
+<body>
+
+	<h3>REGISTER</h3>
+
+		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE">
+
+		<br><br>
+
+		<input type="text" name="PASSWORD" id="PASSWORD" placeholder="CONSTRASEÑA">
+
+		<br><br>
+
+		<input type="text" name="REPEAT-PASSWORD" id="RPASSWORD" placeholder="CONSTRASEÑA">
+
+		<br><br>
+
+		<button type="submit" id="boton">
+			Confirmar
+		</button>
+
+</body>
+<script>
+$('#boton')
+.click(function(e){
+nombre = document.getElementById('NOMBRE').value;
+password = document.getElementById('PASSWORD').value;
+password2 = document.getElementById('RPASSWORD').value;
+if(password == password2){
+var info = '{"nombre": '+nombre+', "password": '+password+'}';
+$.ajax({
+	data: info,
+	url: 'http://localhost:8000/Register',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'POST',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+} else {
+	window.alert("las contraseñas no son iguales")
+}
+
+
+});
+
+</script>
+</html>

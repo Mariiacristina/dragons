@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>REPTIL</title>
+	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</head>
+<body>
+
+	<h3>REPTIL</h3>
+
+		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE">
+
+		<br><br>
+
+		<input type="text" name="TIPO" id="TIPO" placeholder="REPTIL">
+
+		<br><br>
+
+		<input type="text" name="NACIMIENTO" id="NACIMIENTO" placeholder="FECHA NACIMIENTO">
+
+		<br><br>
+
+		<input type="text" name="TEMP_SOL" id="TEMP_SOL" placeholder="ZONA SOL">
+
+		<br><br>
+
+		<input type="text" name="TEMP_SOMBRA" id="TEMP_SOMBRA" placeholder="ZONA SOMBRA">
+
+		<br><br>
+
+		<input type="text" name="TEM_MIN" id="TEMP_MIN" placeholder="TEMP MINIMA">
+
+		<br><br>
+
+		<input type="text" name="HUMEDAD" id="HUMEDAD" placeholder="HUMEDAD">
+
+		<br><br>
+
+		<input type="text" name="HUMEDAD_MIN" id="HUMEDAD_MIN" placeholder="HUMEDAD MINIMA">
+
+		<br><br>
+
+		<button type="submit" id="boton">
+			Confirmar
+		</button>
+
+</body>
+<script>
+$('#boton')
+.click(function(e){
+nombre = document.getElementById('NOMBRE').value;
+tipo = document.getElementById('TIPO').value;
+nacimiento = document.getElementById('NACIMIENTO').value;
+temp_sol = document.getElementById('TEMP_SOL').value;
+temp_sombra = document.getElementById('TEMP_SOMBRA').value;
+temp_min = document.getElementById('TEMP_MIN').value;
+humedad = document.getElementById('HUMEDAD').value;
+humedad_min = document.getElementById('HUMEDAD_MIN').value;
+var info = '{"nombre": '+nombre+', "tipo": '+tipo+', "nacimiento": '+nacimiento+', "temp_sol": '+temp_sol+', "temp_sombra": '+temp_sombra+', "temp_min": '+temp_min+', "humedad": '+humedad+', "humedad_min": '+humedad_min+'}';
+$.ajax({
+	data: info,
+	url: 'http://localhost:8000/Perfil/'+BUSCARIDPERSONA+'',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'POST',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+});
+</script>
+</html>
