@@ -29,6 +29,12 @@
 			Confirmar
 		</button>
 
+		<br><br>
+
+		<a href="http://localhost:8080/">
+		   <input type="button" value="Volver a Login" />
+		</a>
+
 </body>
 <script>
 $('#boton')
@@ -48,9 +54,13 @@ $.ajax({
 	beforeSend: function(){
 			window.alert("Procesando, espere porfavor...");
 	},
-	success: function (res){
-		console.log(res);
-	},
+	success: function (){
+		if(nombre != "" && password != "" && password2 != ""){
+		window.location.replace('/mainmenu')
+	}else{
+		alert("el formulario se encuentra incompleto")
+	}
+ },
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}

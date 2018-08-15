@@ -14,6 +14,7 @@ func init() {
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/register", register)
+	http.HandleFunc("/wawis",wawis)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -23,4 +24,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func register(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "register.gohtml", nil)
+}
+
+func wawis(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "wawis.gohtml", nil)
 }

@@ -38,7 +38,6 @@ $('#boton')
 nombre = document.getElementById('NOMBRE').value;
 password = document.getElementById('PASSWORD').value;
 var usuario ='{"nombre": "'+nombre+'","password": "'+password+'"}';
-console.log(usuario)
 $.ajax({
 	data: usuario,
 	url: 'http://localhost:8000/',
@@ -51,6 +50,7 @@ $.ajax({
 	},
 	success: function (res){
 		console.log(res);
+		window.location.replace('/wawis')
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
