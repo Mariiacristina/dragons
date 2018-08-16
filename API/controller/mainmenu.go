@@ -21,16 +21,15 @@ func Signin(w http.ResponseWriter, r *http.Request){
     if (res == "Existe"){
       log.Println("Se ha loggueado exitosamente")
       //setea la cabezera como tipo json
-/*      w.Header().Set("Content-Type", "application/json")
-      resjson, errjson := json.Marshal(persona)
+      w.Header().Set("Content-Type", "application/json")
+      json, errjson := json.Marshal(persona)
       if errjson != nil {
         http.Error(w,"error json", http.StatusInternalServerError)
         return
       }
-      //escribimos como cabezera que está todo bien
+      //escribimos como cabezera que está todo bien y esscribimos el cuerpo
       w.WriteHeader(http.StatusOK)
-      //y agregamos el cuerpo que vendría siendo el contenido json
-      w.Write(resjson)*/
+      w.Write(json)
     }else{
       log.Println("No se encontró usuario")
       http.Error(w,"No se encontró usuario", http.StatusInternalServerError)
