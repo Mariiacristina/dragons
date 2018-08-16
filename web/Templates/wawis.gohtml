@@ -25,19 +25,15 @@
 
 		<br><br>
 
-		<input type="text" name="TEMP_SOL" id="TEMP_SOL" placeholder="ZONA SOL">
+		<input type="text" name="TEMP_SOL" id="TEMP_SOL_MAX" placeholder="T max zona calor">
 
 		<br><br>
 
-		<input type="text" name="TEMP_SOMBRA" id="TEMP_SOMBRA" placeholder="ZONA SOMBRA">
+		<input type="text" name="TEMP_SOL_MIN" id="TEMP_SOL_MIN" placeholder="T min zona calor">
 
 		<br><br>
 
-		<input type="text" name="TEM_MIN" id="TEMP_MIN" placeholder="TEMP MINIMA">
-
-		<br><br>
-
-		<input type="text" name="HUMEDAD" id="HUMEDAD" placeholder="HUMEDAD">
+		<input type="text" name="TEMP_MIN" id="TEMP_MIN" placeholder="TEMP MINIMA TERRARIO">
 
 		<br><br>
 
@@ -56,12 +52,11 @@ $('#boton')
 nombre = document.getElementById('NOMBRE').value;
 tipo = document.getElementById('TIPO').value;
 nacimiento = document.getElementById('NACIMIENTO').value;
-temp_sol = document.getElementById('TEMP_SOL').value;
-temp_sombra = document.getElementById('TEMP_SOMBRA').value;
+temp_sol_max = document.getElementById('TEMP_SOL_MAX').value;
+temp_sol_min = document.getElementById('TEMP_SOL_MIN').value;
 temp_min = document.getElementById('TEMP_MIN').value;
-humedad = document.getElementById('HUMEDAD').value;
 humedad_min = document.getElementById('HUMEDAD_MIN').value;
-var info = '{"nombre": '+nombre+', "tipo": '+tipo+', "nacimiento": '+nacimiento+', "temp_sol": '+temp_sol+', "temp_sombra": '+temp_sombra+', "temp_min": '+temp_min+', "humedad": '+humedad+', "humedad_min": '+humedad_min+'}';
+var info = '{"nombre": "'+nombre+'", "tipo": "'+tipo+'", "nacimiento": "'+nacimiento+'", "temp_sol_max": "'+temp_sol_max+'", "temp_sol_min": "'+temp_sol_min+'", "temp_min": "'+temp_min+'", "humedad_min": "'+humedad_min+'}';
 $.ajax({
 	data: info,
 	url: 'http://localhost:8000/Perfil/'+BUSCARIDPERSONA+'',

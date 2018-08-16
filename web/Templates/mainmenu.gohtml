@@ -50,35 +50,13 @@ $.ajax({
 	},
 	success: function (res){
 		console.log(res);
-		window.location.replace('/wawis')
+		window.location.replace('/panel')
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}
 	});
 });
-
-/*$('#boton')
-.click(function(e){
-nombre = document.getElementById('NOMBRE').value;
-password = document.getElementById('PASSWORD').value;
-$.ajax({
-	url: 'http://localhost:8000/Signin/User/'+nombre+'/Pass/'+password+'',
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	beforeSend: function(){
-			window.alert("Procesando, espere porfavor...");
-	},
-	success: function (res){
-		console.log(res);
-	},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
-});*/
-
 
 </script>
 </html>

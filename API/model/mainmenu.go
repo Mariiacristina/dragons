@@ -11,7 +11,6 @@ func UsuarioExistente(persona schema.Signin)(exist string,errmod error){
   Usuario.Password = "hola"
   if (persona.Nombre == Usuario.Nombre && persona.Password == Usuario.Password){
     errmod = nil
-    log.Println("modelo")
     return "Existe", errmod
     }else{
     errmod = nil
