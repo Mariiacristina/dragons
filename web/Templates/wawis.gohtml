@@ -33,6 +33,10 @@
 
 		<br><br>
 
+		<input type="text" name="TEMP_MAX" id="TEMP_MAX" placeholder="TEMP MAXIMA TERRARIO">
+
+		<br><br>
+
 		<input type="text" name="TEMP_MIN" id="TEMP_MIN" placeholder="TEMP MINIMA TERRARIO">
 
 		<br><br>
@@ -54,9 +58,10 @@ tipo = document.getElementById('TIPO').value;
 nacimiento = document.getElementById('NACIMIENTO').value;
 temp_sol_max = document.getElementById('TEMP_SOL_MAX').value;
 temp_sol_min = document.getElementById('TEMP_SOL_MIN').value;
+temp_max = document.getElementById('TEMP_MAX').value;
 temp_min = document.getElementById('TEMP_MIN').value;
 humedad_min = document.getElementById('HUMEDAD_MIN').value;
-var info = '{"nombre": "'+nombre+'", "tipo": "'+tipo+'", "nacimiento": "'+nacimiento+'", "temp_sol_max": "'+temp_sol_max+'", "temp_sol_min": "'+temp_sol_min+'", "temp_min": "'+temp_min+'", "humedad_min": "'+humedad_min+'}';
+var info = '{"nombre": "'+nombre+'", "tipo": "'+tipo+'", "nacimiento": "'+nacimiento+'", "temp_sol_max": "'+temp_sol_max+'", "temp_sol_min": "'+temp_sol_min+'", "temp_max": "'+temp_max+'", "temp_min": "'+temp_min+'", "humedad_min": "'+humedad_min+'}';
 $.ajax({
 	data: info,
 	url: 'http://localhost:8000/Perfil/'+BUSCARIDPERSONA+'',

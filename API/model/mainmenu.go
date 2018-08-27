@@ -21,7 +21,7 @@ func UsuarioExistente(persona schema.Signin)(exist string,errmod error){
 
 
 func Register(persona schema.Signin)(resp error){
-  log.Println("entro al modelo")
+  log.Println("Register")
   resp = nil
   return resp
 
