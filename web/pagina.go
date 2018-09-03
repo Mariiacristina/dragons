@@ -8,7 +8,7 @@ import (
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
+	tpl = template.Must(template.ParseGlob("templates/*.html"))
 }
 
 func main() {
@@ -18,24 +18,25 @@ func main() {
 	http.HandleFunc("/panel",panel)
 	http.HandleFunc("/perfil",perfil)
 	http.ListenAndServe(":8080", nil)
+
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "mainmenu.gohtml", nil)
+	tpl.ExecuteTemplate(w, "mainmenu.html", nil)
 }
 
 func register(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "register.gohtml", nil)
+	tpl.ExecuteTemplate(w, "register.html", nil)
 }
 
 func wawis(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "wawis.gohtml", nil)
+	tpl.ExecuteTemplate(w, "wawis.html", nil)
 }
 
 func panel(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "panel.gohtml", nil)
+	tpl.ExecuteTemplate(w, "panel.html", nil)
 }
 
 func perfil(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "perfil.gohtml", nil)
+	tpl.ExecuteTemplate(w, "perfil.html", nil)
 }
