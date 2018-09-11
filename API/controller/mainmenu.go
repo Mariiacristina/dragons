@@ -13,13 +13,16 @@ func Signin(w http.ResponseWriter, r *http.Request){
   log.Println("SIGN IN")
   var persona schema.Signin
   _=json.NewDecoder(r.Body).Decode(&persona)
-  res, err := model.UsuarioExistente(persona)
+  err := model.UsuarioExistente(persona)
   if err != nil {
+    log.Println("No se encontró usuario")
     http.Error(w, "error en la base de datos", http.StatusInternalServerError)
     return
   } else {
-    if (res == "Existe"){
       log.Println("Se ha loggueado exitosamente")
+      //
+      //esta parte es para devolver a un usuariooooo
+      // \/
       //setea la cabezera como tipo json
       w.Header().Set("Content-Type", "application/json")
       json, errjson := json.Marshal(persona)
@@ -30,14 +33,11 @@ func Signin(w http.ResponseWriter, r *http.Request){
       //escribimos como cabezera que está todo bien y esscribimos el cuerpo
       w.WriteHeader(http.StatusOK)
       w.Write(json)
-    }else{
-      log.Println("No se encontró usuario")
-      http.Error(w,"No se encontró usuario", http.StatusInternalServerError)
-    }
   }
 }
 
 func Register(w http.ResponseWriter, r *http.Request){
+  log.Println("REGISTER")
   var cliente schema.Signin
   _=json.NewDecoder(r.Body).Decode(&cliente)
   err_reg := model.Register(cliente)

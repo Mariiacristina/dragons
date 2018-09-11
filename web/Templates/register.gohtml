@@ -43,7 +43,7 @@ nombre = document.getElementById('NOMBRE').value;
 password = document.getElementById('PASSWORD').value;
 password2 = document.getElementById('RPASSWORD').value;
 if(password == password2){
-var info = '{"nombre": '+nombre+', "password": '+password+'}';
+var info = '{"nombre": "'+nombre+'", "password": "'+password+'"}';
 $.ajax({
 	data: info,
 	url: 'http://localhost:8000/Register',

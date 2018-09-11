@@ -1,6 +1,7 @@
 package schema
 
 type Signin struct{
+  Id_cliente string `json:"id_cliente, omitempty"`
   Nombre string `json:"nombre, omitempty"`
   Password string `json: "password, omitempty"`
 }
