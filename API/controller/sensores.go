@@ -58,5 +58,48 @@ func GetHumedadTerrario(w http.ResponseWriter, r *http.Request){
 func GetLuminocidad(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
   log.Println("GET LUMINOCIDAD (ON-OFF)")
-  //var luminocidad = 1
+  var foco_UV schema.Accesorio
+  foco_UV.Nombre = "Foco_UV"
+  foco_UV.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(foco_UV)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
+}
+
+func GetFocoTermico(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
+  log.Println("GET FOCOTERMICO (ON-OFF)")
+  var foco_termico schema.Accesorio
+  foco_termico.Nombre = "Foco_Termico"
+  foco_termico.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(foco_termico)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
+}
+
+
+func GetPlacaTermica(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
+  log.Println("GET PLACATERMICA (ON-OFF)")
+  var placa_termica schema.Accesorio
+  placa_termica.Nombre = "Placa_Termica"
+  placa_termica.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(placa_termica)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
 }

@@ -12,13 +12,24 @@
 <body>
 
 	<h1>PANEL PRINCIPAL</h1>
-	<h2>
+	<h2>Sensores</h2>
+	<br>
+	<p>
 		Temperatura zona calor: <output id="temp_sol"></output>
 		<br>
 		Temperatura Terrario: <output id="temp_terrario"></output>
 		<br>
 		Humedad Terrario: <output id="temp_humedad"></output>
-	</h2>
+	</p>
+	<h2>Accesorios</h2>
+	<br>
+	<p>
+		Foco UV:  <output id="foco_uv"></output>
+		<br>
+		Foco Termico:  <output id="foco_termico"></output>
+		<br>
+		Placa Termica:  <output id="placa_termica"></output>
+	</p>
 
 		<a href="http://localhost:8080/perfil">
 		 	<input type="button" value="Perfil Usuario" />
@@ -39,6 +50,7 @@
 <script>
 
 $(document).ready(function () {
+//GET TEMPERATURA SOL
 $.ajax({
 	url: 'http://localhost:8000/pp/temp',
 	contentType:"application/json; charset: utf-8",
@@ -48,45 +60,91 @@ $.ajax({
 	success: function (res){
 		console.log(res);
 		document.getElementById('temp_sol').value = res.valor
-
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}
 	});
 
+//GET TEMPERATURA TERRARIO
+$.ajax({
+	url: 'http://localhost:8000/pp/tempterrario',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('temp_terrario').value = res.valor
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
 
-	$.ajax({
-		url: 'http://localhost:8000/pp/tempterrario',
-		contentType:"application/json; charset: utf-8",
-		crossDomain: true,
-		withCredentials:false,
-		type: 'GET',
-		success: function (res){
-			console.log(res);
-			document.getElementById('temp_terrario').value = res.valor
+//GET TEMPERATURA HUMEDAD
+$.ajax({
+	url: 'http://localhost:8000/pp/humedad',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('temp_humedad').value = res.valor
 		},
-		error: function(){
-			alert("Hubo algun tipo de error.");
-		}
-		});
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
 
-	$.ajax({
-		url: 'http://localhost:8000/pp/humedad',
-		contentType:"application/json; charset: utf-8",
-		crossDomain: true,
-		withCredentials:false,
-		type: 'GET',
-		success: function (res){
-			console.log(res);
-			document.getElementById('temp_humedad').value = res.valor
-
+//GET FOCO UV
+$.ajax({
+	url: 'http://localhost:8000/pp/luminocidad',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('foco_uv').value = res.estado
 		},
-		error: function(){
-			alert("Hubo algun tipo de error.");
-		}
-		});
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
 
+//GET FOCO TERIMCO
+$.ajax({
+	url: 'http://localhost:8000/pp/focotermico',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('foco_termico').value = res.estado
+		},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+
+//GET PLACA TERMICA
+$.ajax({
+	url: 'http://localhost:8000/pp/placatermica',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('placa_termica').value = res.estado
+		},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
 
 
  });

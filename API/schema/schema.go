@@ -21,3 +21,8 @@ type Sensor struct {
   Nombre string `json:"nombre, omitempty"`
   Valor int `json:"valor, omitempty"`
 }
+
+type Accesorio struct {
+  Nombre string `json:"nombre, omitempty"`
+  Estado string `json:"estado, omitempty"`
+}
