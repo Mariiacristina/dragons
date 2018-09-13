@@ -3,21 +3,60 @@ package controller
 import(
   "net/http"
   "log"
-  //"encoding/json"
+  "encoding/json"
+  "Reptile/API/schema"
 )
 
 func GetTemperaturaSol(w http.ResponseWriter, r *http.Request){
-  log.Println("GET TEMPERATURA PIEDRA")
+  //aqui va lo que se obtiene del arduino
+  log.Println("GET TEMPERATURA SOL")
+  var temperatura_sol schema.Sensor
+  temperatura_sol.Nombre = "temperatura_sol"
+  temperatura_sol.Valor = 37
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(temperatura_sol)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
 }
 
 func GetTemperaturaTerrario(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
   log.Println("GET TEMPERATURA TERRARIO")
+  var temperatura_terrario schema.Sensor
+  temperatura_terrario.Nombre = "temperatura_terrario"
+  temperatura_terrario.Valor = 28
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(temperatura_terrario)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
 }
 
 func GetHumedadTerrario(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
   log.Println("GET HUMEDAD TERRARIO")
+  var temperatura_humedad schema.Sensor
+  temperatura_humedad.Nombre = "temperatura_humedad"
+  temperatura_humedad.Valor = 50
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(temperatura_humedad)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
 }
 
 func GetLuminocidad(w http.ResponseWriter, r *http.Request){
-  log.Println("GET LUMINOCIDAD")
+  //aqui va lo que se obtiene del arduino
+  log.Println("GET LUMINOCIDAD (ON-OFF)")
+  //var luminocidad = 1
 }

@@ -11,7 +11,14 @@
 </head>
 <body>
 
-	<h3>PANEL PRINCIPAL</h3>
+	<h1>PANEL PRINCIPAL</h1>
+	<h2>
+		Temperatura zona calor: <output id="temp_sol"></output>
+		<br>
+		Temperatura Terrario: <output id="temp_terrario"></output>
+		<br>
+		Humedad Terrario: <output id="temp_humedad"></output>
+	</h2>
 
 		<a href="http://localhost:8080/perfil">
 		 	<input type="button" value="Perfil Usuario" />
@@ -29,4 +36,60 @@
 		   <input type="button" value="Volver al login (temp)" />
 		</a>
 </body>
+<script>
+
+$(document).ready(function () {
+$.ajax({
+	url: 'http://localhost:8000/pp/temp',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'GET',
+	success: function (res){
+		console.log(res);
+		document.getElementById('temp_sol').value = res.valor
+
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+
+
+	$.ajax({
+		url: 'http://localhost:8000/pp/tempterrario',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log(res);
+			document.getElementById('temp_terrario').value = res.valor
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
+		});
+
+	$.ajax({
+		url: 'http://localhost:8000/pp/humedad',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log(res);
+			document.getElementById('temp_humedad').value = res.valor
+
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
+		});
+
+
+
+ });
+</script>
+
 </html>

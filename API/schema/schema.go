@@ -16,3 +16,8 @@ type Reptil struct {
   Temp_min string `json:"temp_min, omitempty"`
   Humedad_min string `json:"humedad_min, omitempty"`
   }
+
+type Sensor struct {
+  Nombre string `json:"nombre, omitempty"`
+  Valor int `json:"valor, omitempty"`
+}
