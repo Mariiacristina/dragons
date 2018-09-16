@@ -14,7 +14,7 @@ func Connect()(db *sql.DB){
     log.Println("Error al connectar a la bdd")
     return
   } else {
-    log.Println("Connectada!...")
+    //log.Println("Connectada!...")
     return db}
 }
 
@@ -23,6 +23,6 @@ func Disconnect(db *sql.DB){
   if errdb != nil {
     log.Println("Error al cerrar")
   } else {
-    log.Println("Cerrando Sesion...")
+    //log.Println("Cerrando Sesion...")
   }
 }

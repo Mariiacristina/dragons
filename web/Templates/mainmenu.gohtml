@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<link  rel="stylesheet" type= "text/css" href = "/Templates/tst.css" >
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>INICIAR SESION</title>
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -26,15 +25,12 @@
 			Confirmar
 		</button>
 
-		<br><br>
-
-		<a href="http://localhost:8080/register">
-		   <input type="button" value="Register" />
-		</a>
-
-		<div id="test" class="test">
-			Holi Funciono
-		 </div>
+		<br>
+		<br>
+		<button onclick="window.location.href='http://localhost:8080/register'">Register</button>
+		<br>
+		<br>
+		<div id="Error"></div>
 
 </body>
 <script>
@@ -43,6 +39,8 @@ $('#boton')
 nombre = document.getElementById('NOMBRE').value;
 password = document.getElementById('PASSWORD').value;
 var usuario ='{"nombre": "'+nombre+'","password": "'+password+'"}';
+console.log("INICIAR SESION")
+console.log(usuario)
 $.ajax({
 	data: usuario,
 	url: 'http://localhost:8000/',
@@ -50,15 +48,13 @@ $.ajax({
 	crossDomain: true,
 	withCredentials:false,
 	type: 'post',
-	beforeSend: function(){
-			window.alert("Procesando, espere porfavor...");
-	},
 	success: function (res){
+		console.log("respuesta")
 		console.log(res);
 		window.location.replace('/panel')
 	},
 	error: function(){
-		alert("Hubo algun tipo de error.");
+		document.getElementById('Error').innerHTML = "El usuario no existe :( "
 	}
 	});
 });

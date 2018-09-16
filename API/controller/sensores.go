@@ -9,7 +9,7 @@ import(
 
 func GetTemperaturaSol(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET TEMPERATURA SOL")
+  log.Println("SENSORES - GET TEMPERATURA SOL")
   var temperatura_sol schema.Sensor
   temperatura_sol.Nombre = "temperatura_sol"
   temperatura_sol.Valor = 37
@@ -25,7 +25,7 @@ func GetTemperaturaSol(w http.ResponseWriter, r *http.Request){
 
 func GetTemperaturaTerrario(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET TEMPERATURA TERRARIO")
+  log.Println("SENSORES - GET TEMPERATURA TERRARIO")
   var temperatura_terrario schema.Sensor
   temperatura_terrario.Nombre = "temperatura_terrario"
   temperatura_terrario.Valor = 28
@@ -41,7 +41,7 @@ func GetTemperaturaTerrario(w http.ResponseWriter, r *http.Request){
 
 func GetHumedadTerrario(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET HUMEDAD TERRARIO")
+  log.Println("SENSORES - GET HUMEDAD TERRARIO")
   var temperatura_humedad schema.Sensor
   temperatura_humedad.Nombre = "temperatura_humedad"
   temperatura_humedad.Valor = 50
@@ -57,7 +57,7 @@ func GetHumedadTerrario(w http.ResponseWriter, r *http.Request){
 
 func GetLuminocidad(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET LUMINOCIDAD (ON-OFF)")
+  log.Println("SENSORES - GET LUMINOCIDAD (ON-OFF)")
   var foco_UV schema.Accesorio
   foco_UV.Nombre = "Foco_UV"
   foco_UV.Estado = "prendido"
@@ -73,7 +73,7 @@ func GetLuminocidad(w http.ResponseWriter, r *http.Request){
 
 func GetFocoTermico(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET FOCOTERMICO (ON-OFF)")
+  log.Println("SENSORES - GET FOCOTERMICO (ON-OFF)")
   var foco_termico schema.Accesorio
   foco_termico.Nombre = "Foco_Termico"
   foco_termico.Estado = "prendido"
@@ -90,7 +90,7 @@ func GetFocoTermico(w http.ResponseWriter, r *http.Request){
 
 func GetPlacaTermica(w http.ResponseWriter, r *http.Request){
   //aqui va lo que se obtiene del arduino
-  log.Println("GET PLACATERMICA (ON-OFF)")
+  log.Println("SENSORES - GET PLACATERMICA (ON-OFF)")
   var placa_termica schema.Accesorio
   placa_termica.Nombre = "Placa_Termica"
   placa_termica.Estado = "prendido"

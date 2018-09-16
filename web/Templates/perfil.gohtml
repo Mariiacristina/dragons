@@ -7,36 +7,300 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-</script>
+	</script>
+
+</style>
 </head>
 <body>
 
 	<h3>PERFIL PERSONA</h3>
+	<div style = "float: left">Nombre :</div>
+	<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nombre">	</div>
+	<br>
+	<br>
+
+	Tipo Reptil:
+	<select id="tipo" >
+	  <option value="iguana">Iguana</option>
+	  <option value="dragon">Dragón Barbudo</option>
+	  <option value="gecko">Gecko</option>
+	  <option value="piton">Pitón</option>
+	</select>
+	<br>
+	<br>
+
+	<div style = "float: left">Fecha Nacimiento Reptil :</div>
+	<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nacimiento">	</div>
+	<br>
+	<br>
+
+	<button type="submit" id="update_perfil">
+		Guardar Cambios
+	</button>
+	<br>
+	<br>
+
+
+	<h3>CONFIG REPTIL</h3>
+	<br>
+	Elegir Configuraión:
+	<select id="config" onchange="Change()" >
+		<option value="iguana">Iguana</option>
+		<option value="dragon">Dragón Barbudo</option>
+		<option value="gecko">Gecko</option>
+		<option value="piton">Pitón</option>
+		<option value="personalizada">Personalizada</option>
+	</select>
+	<br>
+	<br>
+
+	<div style = "float:left">Temperatura Zona calor Máxima :</div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_max"></div>
+	<br>
+	<br>
+	<div style="float:left">Temperatura Zona calor Mínima :</div>
+	<div  class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_min"></div>
+	<br>
+	<br>
+	<div style="float:left">Temperatura Terrario Máxima :</div>
+	<div  class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_max"></div>
+	<br>
+	<br>
+	<div style = "float:left">Temperatura Terrario Mínima :</div>
+	<div  class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
+	<br>
+	<br>
+	<div style = "float:left">Humedad Terrario Mínima :<div>
+	<div class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
+	<br>
+	<br>
+	<br>
+	<button type="submit" id="update_reptil">
+		Guardar Cambios
+	</button>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<button onclick="window.location.href='http://localhost:8080/panel'">Volver a Panel Principal</button>
+	<br>
+	<button onclick="window.location.href='http://localhost:8080/'">Salir</button>
+
 
 
 	<script>
-	/*
-	//VERSION CUMA DE COMO MANDAR WEAS POR URL TERRRRIIIBLE CUMA pero funciona.
-	$('#boton')
-	.click(function(e){
-	nombre = document.getElementById('NOMBRE').value;
-	password = document.getElementById('PASSWORD').value;
+
+	$(document).ready(function () {
+
+	//-------------------GET INFO CLIENTE PROBANDO ID 1
 	$.ajax({
-		url: 'http://localhost:8000/Signin/User/'+nombre+'/Pass/'+password+'',
+		url: 'http://localhost:8000/perfil/1',
+		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
 		type: 'GET',
-		beforeSend: function(){
-				window.alert("Procesando, espere porfavor...");
-		},
 		success: function (res){
+			console.log("INICIAR PAGINA - GET info Persona se envia ID")
+			console.log("respuesta")
 			console.log(res);
+			document.getElementById('nombre').innerHTML=res.nombre
+			document.getElementById('nacimiento').innerHTML=res.nacimiento
+			if(res.tipo != "Nada"){
+				document.getElementById('tipo').value=res.tipo
+			}
 		},
 		error: function(){
 			alert("Hubo algun tipo de error.");
 		}
 		});
-	});*/
+
+	//-----------------------GET INFO REPTIL PROBANDO PARA ID 1
+	$.ajax({
+		url: 'http://localhost:8000/reptil/1',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log("INICIAR PAGINA - GET info Reptil se envia ID")
+			console.log("respuesta")
+			console.log(res);
+			document.getElementById('sol_max').innerHTML = res.sol_max
+			document.getElementById('sol_min').innerHTML = res.sol_min
+			document.getElementById('temp_max').innerHTML = res.temp_max
+			document.getElementById('temp_min').innerHTML = res.temp_min
+			document.getElementById('humedad_min').innerHTML = res.humedad_min
+			document.getElementById('config').value = res.config_chosen
+		},
+		});
+
+	 });
+
+//----------------CAMBIAR PARAMETROS DE REPTIL, MEDIANTE MENU DESPLEGABLE
+//si es personalizada, carga denuevo su config
+		function Change(){
+		var config_default = document.getElementById("config").value;
+		if (config_default == "personalizada"){
+			$.ajax({
+				url: 'http://localhost:8000/reptil/1',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'GET',
+				success: function (res){
+					console.log("CAMBIAR DROPDOWN - GET configuración Reptil Personalizada")
+					console.log(res)
+					document.getElementById('sol_max').innerHTML = res.sol_max
+					document.getElementById('sol_min').innerHTML = res.sol_min
+					document.getElementById('temp_max').innerHTML = res.temp_max
+					document.getElementById('temp_min').innerHTML = res.temp_min
+					document.getElementById('humedad_min').innerHTML = res.humedad_min
+				},
+			 });
+		}else{
+		$.ajax({
+			url: 'http://localhost:8000/defaults/'+config_default+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'GET',
+			success: function (res){
+				console.log("CAMBIAR DROPDOWN - GET configuración Reptil Default")
+				console.log(res);
+				document.getElementById('sol_max').innerHTML = res.sol_max
+				document.getElementById('sol_min').innerHTML = res.sol_min
+				document.getElementById('temp_max').innerHTML = res.temp_max
+				document.getElementById('temp_min').innerHTML = res.temp_min
+				document.getElementById('humedad_min').innerHTML = res.humedad_min
+			},
+			error: function(){
+				alert("Hubo algun tipo de error.");
+			}
+			});
+		}
+};
+
+
+//---------------BOTON DE GUARDAR CAMBIOS PARA CLIENTE, PROBANDO PARA ID 1
+$('#update_perfil')
+.click(function(e){
+nombre = document.getElementById('nombre').innerHTML;
+tipo = document.getElementById('tipo').value;
+nacimiento = document.getElementById('nacimiento').innerHTML;
+var info ='{"nombre": "'+nombre+'","tipo": "'+tipo+'","nacimiento": "'+nacimiento+'"}';
+console.log("UPDATE - Configuración perfil")
+console.log(info)
+$.ajax({
+	data: info,
+	url: 'http://localhost:8000/perfil/1',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'put',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log("respuesta")
+		console.log(res);
+		window.alert("Cambios Guardados")
+		document.getElementById('nombre').innerHTML = res.nombre
+		document.getElementById('tipo').value = res.tipo
+		document.getElementById('nacimiento').innerHTML = res.nacimiento
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+});
+});
+
+
+//--------------------------ACTUALIZAR CONFIG REPTIL
+$('#update_reptil')
+.click(function(e){
+//si se edito algun campo, entonces se le llama personalizada
+if (count >= 1){
+sol_max = document.getElementById('sol_max').innerHTML
+sol_min = document.getElementById('sol_min').innerHTML
+temp_max = document.getElementById('temp_max').innerHTML
+temp_min = document.getElementById('temp_min').innerHTML
+humedad_min = document.getElementById('humedad_min').innerHTML
+config_chosen = "personalizada"
+var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'"}';
+console.log("UPDATE - Configuración reptil con configuración personalizada")
+console.log(info)
+$.ajax({
+	data: info,
+	url: 'http://localhost:8000/reptil/1',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'put',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log("respuesta")
+		console.log(res);
+		window.alert("Cambios Guardados")
+		document.getElementById('sol_max').innerHTML = res.sol_max
+		document.getElementById('sol_min').innerHTML = res.sol_min
+		document.getElementById('temp_max').innerHTML = res.temp_max
+		document.getElementById('temp_min').innerHTML = res.temp_min
+		document.getElementById('humedad_min').innerHTML = res.humedad_min
+		document.getElementById('config').value = res.config_chosen
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+	}else{
+	sol_max = document.getElementById('sol_max').innerHTML
+	sol_min = document.getElementById('sol_min').innerHTML
+	temp_max = document.getElementById('temp_max').innerHTML
+	temp_min = document.getElementById('temp_min').innerHTML
+	humedad_min = document.getElementById('humedad_min').innerHTML
+	config_chosen = document.getElementById('config').value
+	var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'"}';
+	console.log("UPDATE - Configuración reptil con configuración default")
+	console.log(info)
+	$.ajax({
+		data: info,
+		url: 'http://localhost:8000/reptil/1',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'put',
+		beforeSend: function(){
+				window.alert("Procesando, espere porfavor...");
+		},
+		success: function (res){
+			console.log("respuesta")
+			console.log(res)
+			window.alert("Cambios Guardados")
+			document.getElementById('sol_max').innerHTML = res.sol_max
+			document.getElementById('sol_min').innerHTML = res.sol_min
+			document.getElementById('temp_max').innerHTML = res.temp_max
+			document.getElementById('temp_min').innerHTML = res.temp_min
+			document.getElementById('humedad_min').innerHTML = res.humedad_min
+			document.getElementById('config').value = res.config_chosen
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
+		});
+	}
+});
+//-------------------------FUNCION PARA CALCULAR SI ES PERSONALIZADO
+var count = 0;
+var contenido = $('.reptile').html();
+$('.reptile').blur(function() {
+    if (contenido!=$(this).html()){
+			count ++;
+    }
+});
 </script>
 </body>
 </html>

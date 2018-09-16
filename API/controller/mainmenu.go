@@ -5,12 +5,11 @@ import(
   "log"
   "encoding/json"
   "Reptile/API/model"
-  //"github.com/gorilla/mux"
   "Reptile/API/schema"
 )
 
 func Signin(w http.ResponseWriter, r *http.Request){
-  log.Println("SIGN IN")
+  log.Println("MAINMENU - SIGN IN")
   var persona schema.Signin
   _=json.NewDecoder(r.Body).Decode(&persona)
   err := model.UsuarioExistente(persona)
@@ -32,7 +31,7 @@ func Signin(w http.ResponseWriter, r *http.Request){
 }
 
 func Register(w http.ResponseWriter, r *http.Request){
-  log.Println("REGISTER")
+  log.Println("MAINMENU - REGISTER")
   var cliente schema.Signin
   _=json.NewDecoder(r.Body).Decode(&cliente)
   err_reg := model.Register(cliente)

@@ -8,8 +8,9 @@ import(
 
 var (
   err error
+  errExec error
 )
-//ASI SE HACEN LOS SELECT
+
 func UsuarioExistente(persona schema.Signin)(err error){
   var Usuario schema.Signin
   db := connection.Connect()
@@ -26,7 +27,6 @@ func UsuarioExistente(persona schema.Signin)(err error){
   }
 }
 
-//ASI SE HACEN LOS INSERT
 func Register(persona schema.Signin)(resp error){
   db := connection.Connect()
   _,err = db.Exec("INSERT INTO cliente (nombre,password) VALUES (?,?)",persona.Nombre,persona.Password)

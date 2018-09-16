@@ -23,10 +23,12 @@ func Enrutamiento()(http.Handler){
   router.HandleFunc("/perfil/{idPersona}", controller.GetInfoPersona).Methods("GET")
   router.HandleFunc("/perfil/{idPersona}", controller.UpdatePersona).Methods("PUT")
   router.HandleFunc("/perfil/{idPersona}", controller.DeletePersona).Methods("DELETE")
+  //reptil
   router.HandleFunc("/reptil/{idPersona}", controller.GetInfoReptil).Methods("GET")
-  router.HandleFunc("/reptil/{idPersona}", controller.PostReptil).Methods("POST")
   router.HandleFunc("/reptil/{idPersona}", controller.UpdateReptil).Methods("PUT")
   router.HandleFunc("/reptil/{idPersona}", controller.DeleteReptil).Methods("DELETE")
+  //default
+  router.HandleFunc("/defaults/{defaults}", controller.GetDefault).Methods("GET")
 
   return router
 

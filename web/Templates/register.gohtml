@@ -30,10 +30,7 @@
 		</button>
 
 		<br><br>
-
-		<a href="http://localhost:8080/">
-		   <input type="button" value="Volver a Login" />
-		</a>
+		<button onclick="window.location.href='http://localhost:8080/'">Volver al Login</button>
 
 </body>
 <script>
@@ -42,8 +39,10 @@ $('#boton')
 nombre = document.getElementById('NOMBRE').value;
 password = document.getElementById('PASSWORD').value;
 password2 = document.getElementById('RPASSWORD').value;
-if(password == password2){
+if(password == password2 && nombre != "" && password !=""){
 var info = '{"nombre": "'+nombre+'", "password": "'+password+'"}';
+console.log("REGISTER")
+console.log(info)
 $.ajax({
 	data: info,
 	url: 'http://localhost:8000/Register',
@@ -55,18 +54,14 @@ $.ajax({
 			window.alert("Procesando, espere porfavor...");
 	},
 	success: function (){
-		if(nombre != "" && password != "" && password2 != ""){
 		window.location.replace('/mainmenu')
-	}else{
-		alert("el formulario se encuentra incompleto")
-	}
  },
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}
 	});
 } else {
-	window.alert("las contraseñas no son iguales")
+	window.alert("las contraseñas no son iguales, o el formulario está incompleto")
 }
 
 
