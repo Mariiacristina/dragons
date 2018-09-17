@@ -66,7 +66,7 @@ func UpdateCliente(id string,update_persona schema.Cliente)(persona schema.Clien
     log.Println("Problema en actualizar cliente:", err)
     return update_persona,err
   }else{
-    //update_persona.Id_cliente = new_id
+    update_persona.Id_cliente = new_id
     return update_persona,err
   }
 }

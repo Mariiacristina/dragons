@@ -16,9 +16,13 @@ func Enrutamiento()(http.Handler){
   router.HandleFunc("/pp/temp", controller.GetTemperaturaSol).Methods("GET")
   router.HandleFunc("/pp/tempterrario", controller.GetTemperaturaTerrario).Methods("GET")
   router.HandleFunc("/pp/humedad", controller.GetHumedadTerrario).Methods("GET")
+  //Accesorios
   router.HandleFunc("/pp/luminocidad", controller.GetLuminocidad).Methods("GET")
+  router.HandleFunc("/pp/luminocidad", controller.UpdateLuminocidad).Methods("PUT")
   router.HandleFunc("/pp/focotermico", controller.GetFocoTermico).Methods("GET")
+  router.HandleFunc("/pp/focotermico", controller.UpdateFocoTermico).Methods("PUT")
   router.HandleFunc("/pp/placatermica", controller.GetPlacaTermica).Methods("GET")
+  router.HandleFunc("/pp/placatermica", controller.UpdatePlacaTermica).Methods("PUT")
   //Perfil
   router.HandleFunc("/perfil/{idPersona}", controller.GetInfoPersona).Methods("GET")
   router.HandleFunc("/perfil/{idPersona}", controller.UpdatePersona).Methods("PUT")

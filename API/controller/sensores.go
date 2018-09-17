@@ -103,3 +103,51 @@ func GetPlacaTermica(w http.ResponseWriter, r *http.Request){
   w.WriteHeader(http.StatusOK)
   w.Write(json)
 }
+
+func UpdateLuminocidad(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
+  log.Println("SENSORES - UPDATE FOCO UV (ON-OFF)")
+  var placa_termica schema.Accesorio
+  placa_termica.Nombre = "Placa_Termica"
+  placa_termica.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(placa_termica)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
+}
+
+func UpdateFocoTermico(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
+  log.Println("SENSORES - UPDATE FOCO TERMICO (ON-OFF)")
+  var placa_termica schema.Accesorio
+  placa_termica.Nombre = "Placa_Termica"
+  placa_termica.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(placa_termica)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
+}
+
+func UpdatePlacaTermica(w http.ResponseWriter, r *http.Request){
+  //aqui va lo que se obtiene del arduino
+  log.Println("SENSORES - UPDATE PLACATERMICA (ON-OFF)")
+  var placa_termica schema.Accesorio
+  placa_termica.Nombre = "Placa_Termica"
+  placa_termica.Estado = "prendido"
+  w.Header().Set("Content-Type", "application/json")
+  json, errjson := json.Marshal(placa_termica)
+  if errjson != nil {
+    http.Error(w,"error json", http.StatusInternalServerError)
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+  w.Write(json)
+}

@@ -14,8 +14,8 @@ func init() {
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/register", register)
-	http.HandleFunc("/wawis",wawis)
 	http.HandleFunc("/panel",panel)
+	http.HandleFunc("/botones",botones)
 	http.HandleFunc("/perfil",perfil)
 	http.ListenAndServe(":8080", nil)
 
@@ -29,14 +29,14 @@ func register(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "register.gohtml", nil)
 }
 
-func wawis(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "wawis.gohtml", nil)
-}
-
 func panel(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "panel.gohtml", nil)
 }
 
 func perfil(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "perfil.gohtml", nil)
+}
+
+func perfil(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "botones.gohtml", nil)
 }

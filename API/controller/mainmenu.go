@@ -12,7 +12,7 @@ func Signin(w http.ResponseWriter, r *http.Request){
   log.Println("MAINMENU - SIGN IN")
   var persona schema.Signin
   _=json.NewDecoder(r.Body).Decode(&persona)
-  err := model.UsuarioExistente(persona)
+  cliente,err := model.UsuarioExistente(persona)
   if err != nil {
     log.Println("No se encontró usuario")
     http.Error(w, "error en la base de datos", http.StatusInternalServerError)
@@ -20,7 +20,7 @@ func Signin(w http.ResponseWriter, r *http.Request){
   } else {
       log.Println("Se ha loggueado exitosamente")
       w.Header().Set("Content-Type", "application/json")
-      json, errjson := json.Marshal(persona)
+      json, errjson := json.Marshal(cliente)
       if errjson != nil {
         http.Error(w,"error json", http.StatusInternalServerError)
         return

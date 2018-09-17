@@ -7,8 +7,8 @@ import(
   "encoding/json"
   "Reptile/API/model"
   "Reptile/API/schema"
-  //"encoding/json"
 )
+
 
 func GetInfoPersona(w http.ResponseWriter, r *http.Request){
   log.Println("PERFIL - GET INFORMACION PERSONA")

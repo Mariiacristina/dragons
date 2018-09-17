@@ -70,7 +70,7 @@
 	<div  class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
 	<br>
 	<br>
-	<div style = "float:left">Humedad Terrario Mínima :<div>
+	<div style = "float:left">Humedad Terrario Mínima :</div>
 	<div class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
 	<br>
 	<br>
@@ -86,17 +86,20 @@
 	<br>
 	<button onclick="window.location.href='http://localhost:8080/panel'">Volver a Panel Principal</button>
 	<br>
-	<button onclick="window.location.href='http://localhost:8080/'">Salir</button>
+	<button id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
 
 
 
 	<script>
+	var id=localStorage.getItem("id_cliente")
+	console.log("el id del cliente ingresado es:")
+	console.log(id)
+
 
 	$(document).ready(function () {
-
-	//-------------------GET INFO CLIENTE PROBANDO ID 1
+	//-------------------GET INFO CLIENTE-----------------------
 	$.ajax({
-		url: 'http://localhost:8000/perfil/1',
+		url: 'http://localhost:8000/perfil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -116,9 +119,9 @@
 		}
 		});
 
-	//-----------------------GET INFO REPTIL PROBANDO PARA ID 1
+	//-----------------------GET INFO REPTIL----------------------
 	$.ajax({
-		url: 'http://localhost:8000/reptil/1',
+		url: 'http://localhost:8000/reptil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -144,7 +147,7 @@
 		var config_default = document.getElementById("config").value;
 		if (config_default == "personalizada"){
 			$.ajax({
-				url: 'http://localhost:8000/reptil/1',
+				url: 'http://localhost:8000/reptil/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -183,7 +186,7 @@
 };
 
 
-//---------------BOTON DE GUARDAR CAMBIOS PARA CLIENTE, PROBANDO PARA ID 1
+//---------------BOTON DE GUARDAR CAMBIOS PARA CLIENTE--------------------
 $('#update_perfil')
 .click(function(e){
 nombre = document.getElementById('nombre').innerHTML;
@@ -194,7 +197,7 @@ console.log("UPDATE - Configuración perfil")
 console.log(info)
 $.ajax({
 	data: info,
-	url: 'http://localhost:8000/perfil/1',
+	url: 'http://localhost:8000/perfil/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -233,7 +236,7 @@ console.log("UPDATE - Configuración reptil con configuración personalizada")
 console.log(info)
 $.ajax({
 	data: info,
-	url: 'http://localhost:8000/reptil/1',
+	url: 'http://localhost:8000/reptil/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -268,7 +271,7 @@ $.ajax({
 	console.log(info)
 	$.ajax({
 		data: info,
-		url: 'http://localhost:8000/reptil/1',
+		url: 'http://localhost:8000/reptil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -301,6 +304,12 @@ $('.reptile').blur(function() {
 			count ++;
     }
 });
+//---------------------------BOTON SALIR--------------------------
+$('#salir')
+.click(function(e){
+localStorage.removeItem("id_cliente");
+});
+
 </script>
 </body>
 </html>
