@@ -37,6 +37,6 @@ func perfil(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "perfil.gohtml", nil)
 }
 
-func perfil(w http.ResponseWriter, r *http.Request) {
+func botones(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "botones.gohtml", nil)
 }
