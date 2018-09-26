@@ -74,6 +74,8 @@
 
 </body>
 <script>
+
+//--------------------------LOGIN---------------------------
 $('#boton')
 .click(function(e){
 nombre = document.getElementById('NOMBRE').value;
@@ -91,7 +93,12 @@ $.ajax({
 	success: function (res){
 		console.log("respuesta")
 		console.log(res);
-		window.location.replace('/panel')
+		if (typeof(Storage) !== "undefined") {
+		   localStorage.setItem("id_cliente", res.id_cliente);
+				window.location.replace('/panel')
+		} else {
+		    alert(":( no web storage supported)")
+		}
 	},
 	error: function(){
 		document.getElementById('Error').innerHTML = "El usuario no existe :( "

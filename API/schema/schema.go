@@ -2,7 +2,7 @@ package schema
 
 
 type Signin struct{
-  Id_cliente string `json:"id_cliente, omitempty"`
+  Id_cliente int `json:"id_cliente, omitempty"`
   Nombre string `json:"nombre, omitempty"`
   Password string `json: "password, omitempty"`
 }
@@ -34,4 +34,9 @@ type Sensor struct {
 type Accesorio struct {
   Nombre string `json:"nombre, omitempty"`
   Estado string `json:"estado, omitempty"`
+}
+
+type Auto struct {
+  Nombre string `json:"nombre, omitempty"`
+  Estado int `json:"estado, omitempty"`
 }
