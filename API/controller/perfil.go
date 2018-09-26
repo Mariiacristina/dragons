@@ -123,3 +123,175 @@ func GetDefault(w http.ResponseWriter, r *http.Request){
     w.Write(json)
   }
 }
+
+func UpdateAutoSol(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - UPDATE AUTO SOL")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  var update_sol schema.Auto
+  _=json.NewDecoder(r.Body).Decode(&update_sol)
+  sol_ready,err := model.UpdateAutoSol(id,update_sol)
+  if err != nil {
+    log.Println("Error al actualizar")
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  } else {
+      w.Header().Set("Content-Type", "application/json")
+      json, errjson := json.Marshal(sol_ready)
+      if errjson != nil {
+        http.Error(w,"error json", http.StatusInternalServerError)
+        return
+      }
+      w.WriteHeader(http.StatusOK)
+      w.Write(json)
+  }
+}
+
+func UpdateAutoTerrario(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - UPDATE AUTO TERRARIO")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  var update_terrario schema.Auto
+  _=json.NewDecoder(r.Body).Decode(&update_terrario)
+  terrario_ready,err := model.UpdateAutoTerrario(id,update_terrario)
+  if err != nil {
+    log.Println("Error al actualizar")
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  } else {
+      w.Header().Set("Content-Type", "application/json")
+      json, errjson := json.Marshal(terrario_ready)
+      if errjson != nil {
+        http.Error(w,"error json", http.StatusInternalServerError)
+        return
+      }
+      w.WriteHeader(http.StatusOK)
+      w.Write(json)
+  }
+}
+
+func UpdateAutoHumedad(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - UPDATE AUTO HUMEDAD")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  var update_humedad schema.Auto
+  _=json.NewDecoder(r.Body).Decode(&update_humedad)
+  humedad_ready,err := model.UpdateAutoHumedad(id,update_humedad)
+  if err != nil {
+    log.Println("Error al actualizar")
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  } else {
+      w.Header().Set("Content-Type", "application/json")
+      json, errjson := json.Marshal(humedad_ready)
+      if errjson != nil {
+        http.Error(w,"error json", http.StatusInternalServerError)
+        return
+      }
+      w.WriteHeader(http.StatusOK)
+      w.Write(json)
+  }
+}
+
+func UpdateAutoLuz(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - UPDATE AUTO LUZ")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  var update_luz schema.Auto
+  _=json.NewDecoder(r.Body).Decode(&update_luz)
+  luz_ready,err := model.UpdateAutoLuz(id,update_luz)
+  if err != nil {
+    log.Println("Error al actualizar")
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  } else {
+      w.Header().Set("Content-Type", "application/json")
+      json, errjson := json.Marshal(luz_ready)
+      if errjson != nil {
+        http.Error(w,"error json", http.StatusInternalServerError)
+        return
+      }
+      w.WriteHeader(http.StatusOK)
+      w.Write(json)
+  }
+}
+
+func GetAutoSol(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - GET AUTOMATIZACION SOL")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  get_sol, err := model.GetAutoSol(id)
+  if err != nil {
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  }else{
+    w.Header().Set("Content-Type", "application/json")
+    json, errjson := json.Marshal(get_sol)
+    if errjson != nil {
+      http.Error(w,"error json", http.StatusInternalServerError)
+      return
+    }
+    w.WriteHeader(http.StatusOK)
+    w.Write(json)
+  }
+}
+
+func GetAutoTerrario(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - GET AUTOMATIZACION TERRARIO")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  get_terrario, err := model.GetAutoTerrario(id)
+  if err != nil {
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  }else{
+    w.Header().Set("Content-Type", "application/json")
+    json, errjson := json.Marshal(get_terrario)
+    if errjson != nil {
+      http.Error(w,"error json", http.StatusInternalServerError)
+      return
+    }
+    w.WriteHeader(http.StatusOK)
+    w.Write(json)
+  }
+}
+
+func GetAutoHumedad(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - GET AUTOMATIZACION HUMEDAD")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  get_humedad, err := model.GetAutoHumedad(id)
+  if err != nil {
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  }else{
+    w.Header().Set("Content-Type", "application/json")
+    json, errjson := json.Marshal(get_humedad)
+    if errjson != nil {
+      http.Error(w,"error json", http.StatusInternalServerError)
+      return
+    }
+    w.WriteHeader(http.StatusOK)
+    w.Write(json)
+  }
+}
+
+func GetAutoLuz(w http.ResponseWriter, r *http.Request){
+  log.Println("PERFIL - GET AUTOMATIZACION LUZ")
+  vars := mux.Vars(r)
+  id :=vars["idPersona"]
+  get_luz, err := model.GetAutoLuz(id)
+  if err != nil {
+    http.Error(w, "error en la base de datos", http.StatusInternalServerError)
+    return
+  }else{
+    w.Header().Set("Content-Type", "application/json")
+    json, errjson := json.Marshal(get_luz)
+    if errjson != nil {
+      http.Error(w,"error json", http.StatusInternalServerError)
+      return
+    }
+    w.WriteHeader(http.StatusOK)
+    w.Write(json)
+  }
+}

@@ -33,6 +33,17 @@ func Enrutamiento()(http.Handler){
   router.HandleFunc("/reptil/{idPersona}", controller.DeleteReptil).Methods("DELETE")
   //default
   router.HandleFunc("/defaults/{defaults}", controller.GetDefault).Methods("GET")
+  //AUTO
+  router.HandleFunc("/auto/sol/{idPersona}", controller.UpdateAutoSol).Methods("PUT")
+  router.HandleFunc("/auto/terrario/{idPersona}", controller.UpdateAutoTerrario).Methods("PUT")
+  router.HandleFunc("/auto/humedad/{idPersona}", controller.UpdateAutoHumedad).Methods("PUT")
+  router.HandleFunc("/auto/luminocidad/{idPersona}", controller.UpdateAutoLuz).Methods("PUT")
+  router.HandleFunc("/auto/sol/{idPersona}", controller.GetAutoSol).Methods("GET")
+  router.HandleFunc("/auto/terrario/{idPersona}", controller.GetAutoTerrario).Methods("GET")
+  router.HandleFunc("/auto/humedad/{idPersona}", controller.GetAutoHumedad).Methods("GET")
+  router.HandleFunc("/auto/luminocidad/{idPersona}", controller.GetAutoLuz).Methods("GET")
+
+
 
   return router
 

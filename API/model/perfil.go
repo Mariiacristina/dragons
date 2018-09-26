@@ -105,3 +105,155 @@ func UpdateReptil(id string,update_reptil schema.Reptil)(reptil schema.Reptil,er
   log.Println("nunca deberia llegar aca")
   return update_reptil,err
 }
+
+func UpdateAutoSol(id string,update_sol schema.Auto)(auto_sol schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  db := connection.Connect()
+  _,errExec = db.Exec("UPDATE automatizacion SET temp_sol = ? WHERE id_cliente = ?",update_sol.Estado,new_id)
+  connection.Disconnect(db)
+  if(errExec != nil){
+    log.Println("Problema en ACTUALIZAR automatizacon sol:", err)
+    return update_sol,errExec
+  }else{
+    return update_sol,errExec
+  }
+}
+
+func UpdateAutoTerrario(id string,update_terrario schema.Auto)(auto_terrario schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  db := connection.Connect()
+  _,errExec = db.Exec("UPDATE automatizacion SET temp_terrario = ? WHERE id_cliente = ?",update_terrario.Estado,new_id)
+  connection.Disconnect(db)
+  if(errExec != nil){
+    log.Println("Problema en ACTUALIZAR automatizacon terrario:", err)
+    return update_terrario,errExec
+  }else{
+    return update_terrario,errExec
+  }
+}
+
+func UpdateAutoHumedad(id string,update_humedad schema.Auto)(auto_humedad schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  db := connection.Connect()
+  _,errExec = db.Exec("UPDATE automatizacion SET humedad = ? WHERE id_cliente = ?",update_humedad.Estado,new_id)
+  connection.Disconnect(db)
+  if(errExec != nil){
+    log.Println("Problema en ACTUALIZAR automatizacon humedad:", err)
+    return update_humedad,errExec
+  }else{
+    return update_humedad,errExec
+  }
+}
+
+func UpdateAutoLuz(id string,update_luz schema.Auto)(auto_luz schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  db := connection.Connect()
+  _,errExec = db.Exec("UPDATE automatizacion SET luz = ? WHERE id_cliente = ?",update_luz.Estado,new_id)
+  connection.Disconnect(db)
+  if(errExec != nil){
+    log.Println("Problema en ACTUALIZAR automatizacon luz:", err)
+    return update_luz,errExec
+  }else{
+    return update_luz,errExec
+  }
+}
+
+func GetAutoSol(id string)(auto_sol_resp schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  var auto_sol schema.Auto
+  db := connection.Connect()
+  err = db.QueryRow("SELECT temp_sol FROM automatizacion WHERE id_cliente = ?",new_id).Scan(&auto_sol.Estado)
+  if(err != nil && err != sql.ErrNoRows){
+    log.Println("Problema en el modelo GET AUTO SOL:", err)
+    connection.Disconnect(db)
+    return auto_sol,err
+  }
+  if(err != nil && err == sql.ErrNoRows){
+    _,errExec = db.Exec("INSERT INTO automatizacion VALUES(?,?,?,?,?)",new_id,0,0,0,0)
+    connection.Disconnect(db)
+    if(errExec != nil) {
+      log.Println("Problema en INSERTAR automatizacion:", err)
+      return auto_sol,errExec
+    }else{
+      auto_sol.Nombre = "temp_sol"
+      return auto_sol,errExec
+    }
+  }
+  auto_sol.Nombre = "temp_sol"
+  return auto_sol,errExec
+}
+
+func GetAutoTerrario(id string)(auto_terrario_resp schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  var auto_terrario schema.Auto
+  db := connection.Connect()
+  err = db.QueryRow("SELECT temp_terrario FROM automatizacion WHERE id_cliente = ?",new_id).Scan(&auto_terrario.Estado)
+  if(err != nil && err != sql.ErrNoRows){
+    log.Println("Problema en el modelo GET AUTO TERRARIO:", err)
+    connection.Disconnect(db)
+    return auto_terrario,err
+  }
+  if(err != nil && err == sql.ErrNoRows){
+    _,errExec = db.Exec("INSERT INTO automatizacion VALUES(?,?,?,?,0)",new_id,0,0,0,0)
+    connection.Disconnect(db)
+    if(errExec != nil) {
+      log.Println("Problema en INSERTAR automatizacion TERRARIO:", err)
+      return auto_terrario,errExec
+    }else{
+      auto_terrario.Nombre = "temp_terrario"
+      return auto_terrario,errExec
+    }
+  }
+  auto_terrario.Nombre = "temp_sol"
+  return auto_terrario,errExec
+}
+
+func GetAutoHumedad(id string)(auto_humedad_resp schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  var auto_humedad schema.Auto
+  db := connection.Connect()
+  err = db.QueryRow("SELECT humedad FROM automatizacion WHERE id_cliente = ?",new_id).Scan(&auto_humedad.Estado)
+  if(err != nil && err != sql.ErrNoRows){
+    log.Println("Problema en el modelo GET AUTO HUMEDAD:", err)
+    connection.Disconnect(db)
+    return auto_humedad,err
+  }
+  if(err != nil && err == sql.ErrNoRows){
+    _,errExec = db.Exec("INSERT INTO automatizacion VALUES(?,?,?,?,?)",new_id,0,0,0,0)
+    connection.Disconnect(db)
+    if(errExec != nil) {
+      log.Println("Problema en INSERTAR automatizacion HUMEDAD:", err)
+      return auto_humedad,errExec
+    }else{
+      auto_humedad.Nombre = "temp_humedad"
+      return auto_humedad,errExec
+    }
+  }
+  auto_humedad.Nombre = "temp_humedad"
+  return auto_humedad,errExec
+}
+
+func GetAutoLuz(id string)(auto_humedad_resp schema.Auto,err error){
+  new_id, err := strconv.Atoi(id)
+  var auto_luz schema.Auto
+  db := connection.Connect()
+  err = db.QueryRow("SELECT luz FROM automatizacion WHERE id_cliente = ?",new_id).Scan(&auto_luz.Estado)
+  if(err != nil && err != sql.ErrNoRows){
+    log.Println("Problema en el modelo GET AUTO LUZ:", err)
+    connection.Disconnect(db)
+    return auto_luz,err
+  }
+  if(err != nil && err == sql.ErrNoRows){
+    _,errExec = db.Exec("INSERT INTO automatizacion VALUES(?,?,?,?,?)",new_id,0,0,0,0)
+    connection.Disconnect(db)
+    if(errExec != nil) {
+      log.Println("Problema en INSERTAR automatizacion LUZ:", err)
+      return auto_luz,errExec
+    }else{
+      auto_luz.Nombre = "temp_luz"
+      return auto_luz,errExec
+    }
+  }
+  auto_luz.Nombre = "temp_luz"
+  return auto_luz,errExec
+}

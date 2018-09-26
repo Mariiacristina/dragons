@@ -80,6 +80,21 @@
 	</button>
 	<br>
 	<br>
+
+
+	<h3>AUTOMATIZACIÓN TERRARIO</h3>
+	<p>En esta sección se debe clickear lo que se desea que esté automatizado, por default todo está en manual</p>
+	<br>
+	<input type="checkbox" onclick="AutoSol()"  id = "temp_sol" value="temp_sol"> Automatizar temperatura Zona Calor del terrario
+	<br>
+	<input type="checkbox" onclick="AutoTerrario()" id = "temp_terrario" value="temp_terrario"> Automatizar temperatura Terrario
+	<br>
+	<input type="checkbox" onclick="AutoHumedad()" id = "humedad" value="humedad"> Automatizar humedad Terrario
+	<br>
+	<input type="checkbox" onclick="AutoLuminocidad()" id= "luminocidad" value="luminocidad"> Automatizar hora luz terrario
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>
@@ -138,6 +153,88 @@
 			document.getElementById('config').value = res.config_chosen
 		},
 		});
+		//-------------GET AUTO PERFIL---------------------------
+	$.ajax({
+		url: 'http://localhost:8000/auto/sol/'+id+'',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log("INICIAR PAGINA - GET AUTO SOL se envia ID")
+			console.log("respuesta")
+			console.log(res);
+			$.ajax({
+				url: 'http://localhost:8000/auto/terrario/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'GET',
+				beforeSend: function () {
+				},
+				success: function (res_terrario){
+					console.log("INICIAR PAGINA - GET AUTO TERRARIO se envia ID")
+					console.log("respuesta")
+					console.log(res_terrario);
+					if (res_terrario.estado == 1) {
+						$("#temp_terrario").attr("checked","checked");
+					}else{
+						$("#temp_terrario").removeAttr("checked","checked");
+					}
+				}
+				});
+
+			$.ajax({
+				url: 'http://localhost:8000/auto/humedad/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'GET',
+				beforeSend: function () {
+				},
+				success: function (res_humedad){
+					console.log("INICIAR PAGINA - GET AUTO HUMEDAD se envia ID")
+					console.log("respuesta")
+					console.log(res_humedad);
+					if (res_humedad.estado == 1) {
+						$("#humedad").attr("checked","checked");
+					}else{
+						$("#humedad").removeAttr("checked","checked");
+					}
+				}
+				});
+
+			$.ajax({
+				url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'GET',
+				beforeSend: function () {
+				},
+				success: function (res_luminocidad){
+					console.log("INICIAR PAGINA - GET AUTO LUMINOCIDAD se envia ID")
+					console.log("respuesta")
+					console.log(res);
+					if (res_luminocidad.estado == 1) {
+						$("#luminocidad").attr("checked","checked");
+					}else{
+						$("#luminocidad").removeAttr("checked","checked");
+					}
+				}
+				});
+
+			if (res.estado == 1) {
+				$("#temp_sol").attr("checked","checked");
+			}else{
+				$("#temp_sol").removeAttr("checked","checked");
+			}
+		}
+		});
+
+
+
+
 
 	 });
 
@@ -310,6 +407,141 @@ $('#salir')
 localStorage.removeItem("id_cliente");
 });
 
+//-----------------------AUTOMATIZACIÓN-------------------------
+function AutoSol() {
+	if ($('#temp_sol:checkbox:checked').length > 0){
+		console.log("esta clickeado")
+		var info = '{"nombre": "temp_sol", "estado": 1}'
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/sol/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}else{
+		var info = '{"nombre": "temp_sol", "estado": 0}'
+		console.log("no está clickeado")
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/sol/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}
+}
+function AutoTerrario() {
+	if ($('#temp_terrario:checkbox:checked').length > 0){
+		console.log("esta clickeado")
+		var info = '{"nombre": "temp_terrario", "estado": 1}'
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/terrario/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}else{
+		var info = '{"nombre": "temp_terrario", "estado": 0}'
+		console.log("no está clickeado")
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/terrario/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}
+}
+
+function AutoHumedad() {
+	if ($('#humedad:checkbox:checked').length > 0){
+		console.log("esta clickeado")
+		var info = '{"nombre": "temp_humedad", "estado": 1}'
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/humedad/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}else{
+		var info = '{"nombre": "temp_humedad", "estado": 0}'
+		console.log("no está clickeado")
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/humedad/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}
+}
+
+function AutoLuminocidad() {
+	if ($('#luminocidad:checkbox:checked').length > 0){
+		console.log("esta clickeado")
+		var info = '{"nombre": "temp_luminocidad", "estado": 1}'
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}else{
+		var info = '{"nombre": "temp_luminocidad", "estado": 0}'
+		console.log("no está clickeado")
+		$.ajax({
+			data: info,
+			url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			success: function (res){
+				console.log("respuesta")
+				console.log(res);
+			}
+		});
+	}
+}
 </script>
 </body>
 </html>

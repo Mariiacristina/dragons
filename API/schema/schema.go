@@ -35,3 +35,8 @@ type Accesorio struct {
   Nombre string `json:"nombre, omitempty"`
   Estado string `json:"estado, omitempty"`
 }
+
+type Auto struct {
+  Nombre string `json:"nombre, omitempty"`
+  Estado int `json:"estado, omitempty"`
+}
