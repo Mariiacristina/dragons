@@ -5,29 +5,69 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>INICIAR SESION</title>
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-	</script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+	<style>
+	 .confir{
+			background-color: #00cc00;
+			height:30%;
+			padding: 10px 10px;
+			font-size: 32px;
+			border: ridge;
+			width: 250px;
+			font-style: italic;
+			color:white;
+			}
+		.regis{
+			background-color: #0000ff;
+			height:30%;
+			padding: 10px 10px;
+			font-size: 32px;
+			border: ridge;
+			width: 250px;
+			font-style: italic;
+			color: #ffe6b3;
+			}
+		.inpu{
+            background-color: #99b3ff;
+            height:20px;
+            padding: 20px 20px;
+			border: solid;
+			border-color: #3333ff;
+			font-size: 16px;
+			width: 50%;
+        }
+		.tx{
+			font-size: 30px;
+			font-color:red;
+			font-style: italic;
+			}
+		.bob{
+			background-color: #ccd9ff;
+			text-align:center;
+			padding: 120px;
+		}
+	</style>
 </head>
-<body>
+<body class="bob">
 
-	<h3>INICIAR SESION</h3>
+	<p class="tx">Ingresa Usuario y Contraseña</p>
+	<br>
+	<p class="tx">Para iniciar sesión</p>
 
-		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE">
-
-		<br><br>
-
-		<input type="text" name="PASSWORD" id="PASSWORD" placeholder="CONSTRASEÑA">
+		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE" class="inpu">
 
 		<br><br>
 
-		<button type="submit" id="boton">
-			Confirmar
+		<input type="text" name="PASSWORD" id="PASSWORD" placeholder="CONSTRASEÑA" class="inpu">
+
+		<br><br>
+
+		<button type="submit" id="boton" class="confir">
+			Ingresar
 		</button>
 
-		<br>
-		<br>
-		<button onclick="window.location.href='http://localhost:8080/register'">Register</button>
+		
+		<button onclick="window.location.href='http://localhost:8080/register'" class="regis">Registrarse</button>
 		<br>
 		<br>
 		<div id="Error"></div>
