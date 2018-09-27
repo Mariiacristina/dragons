@@ -5,11 +5,71 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>PANEL PRINCIPAL</title>
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-</script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<style>
+		li {
+				display: inline;
+		}
+		/* Style the navigation bar */
+		.navbar {
+		width: 100%;
+		background-color: #555;
+		overflow: auto;
+		}
+		/* Navbar links */
+		.navbar a {
+		float: left;
+		text-align: center;
+		padding: 12px;
+		color: white;
+		text-decoration: none;
+		font-size: 17px;
+		}
+		/* Navbar links on mouse-over */
+		.navbar a:hover {
+		background-color: #000;
+		}
+		/* Current/active navbar link */
+		.active {
+		background-color: #4CAF50;
+		}
+		/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+		@media screen and (max-width: 500px) {
+		.navbar a {
+			float: none;
+			display: block;
+		}
+		}
+		.bo{
+			background-color: #80ff80;
+			text-align:center;
+			padding: 25px;
+		}
+		.pers{
+			background-color: green;
+			height:100%;
+		}
+		.tx{
+				font-size: 30px;
+				font-color:red;
+				font-style: italic;
+				}
+		.spa{
+				font-size: 40px;
+				font-style: italic;
+				align-content: center;
+	}
+	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="bo">
+	<div class="navbar">
+		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a> 
+		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-bomb"></i> Panel Principal</a> 
+		<a href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Configuración</a> 
+		<a href="http://localhost:8080/botones"><i class="fa fa-fw fa-bullseye"></i> Botones de Emergencia</a>
+        <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+	</div>
 
 	<h1>PANEL PRINCIPAL</h1>
 	<h2>Sensores</h2>

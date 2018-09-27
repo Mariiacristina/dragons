@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Botones</title>
+	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+	<style>
+        li {
+            display: inline;
+        }
+
+        /* Style the navigation bar */
+        .navbar {
+        width: 100%;
+        background-color: #555;
+        overflow: auto;
+        }
+
+        /* Navbar links */
+        .navbar a {
+        float: left;
+        text-align: center;
+        padding: 12px;
+        color: white;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+        /* Navbar links on mouse-over */
+        .navbar a:hover {
+        background-color: #000;
+        }
+
+        /* Current/active navbar link */
+        .active {
+        background-color: #4CAF50;
+        }
+
+        /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+        @media screen and (max-width: 500px) {
+        .navbar a {
+            float: none;
+            display: block;
+        }
+        }
+        .emergencia{
+            background-color: #00b300;
+            height:100px;
+            padding: 20px 20px;
+            border: solid;
+			border-color: #3333ff;
+        }
+        .bo{
+			background-color: #80ff80;
+			text-align:center;
+			padding: 25px;
+		}
+	 </style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="bo">
+
+	
+
+	<div class="navbar">
+		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a> 
+		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-hand-rock-o"></i> Panel Principal</a> 
+		<a href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Comfiguración</a> 
+		<a href="http://localhost:8080/botones"><i class="fa fa-fw fa-bullseye"></i> Botones de Emergencia</a>
+        <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+	</div>
+	
+
+
+	<h1>BOTONES DE EMERGENCIA</h2>
+    
+		<br><br>
+        <h2>APAGAR PLACA</h2>
+		<button class="emergencia" type="submit" id="apagarplaca">
+			  <h3>APAGAR PLACA </h3> 
+		</button>
+
+    
+		<h2>APAGAR BOMBILLO </h2>
+		<br><br>
+		<button class="emergencia" type="submit" id="apagarbombillo">
+	    <h3>APAGAR BOMBILLO </h3> 
+		</button>
+
+        <br><br>
+		<h2>APAGAR CASCADA </h2>
+		<button class="emergencia" type="submit" id="apagarcascada">
+        <h3>APAGAR CASCADA </h3> 
+		</button>
+
+        <br><br>
+		<h2>APAGAR UV </h2>
+		<br><br>
+		<button class="emergencia" type="submit" id="apagaruv">
+            <h3>APAGAR UV </h3> 
+		</button>
+
+</body>
+<script>
+$('#apagarplaca')
+.click(function(e){
+placaoff = true;
+var gestionplaca ='{"placaoff": "'+placaoff+'"}';
+$.ajax({
+	data: gestionplaca,
+	url: 'http://localhost:8000/botones',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'post',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+		window.location.replace('/botones')
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+});
+
+</script>
+<script>
+$('#apagarbombillo')
+.click(function(e){
+bombillooff = true;
+var gestionarbombillo ='{"bombillooff": "'+bombillooff+'"}';
+$.ajax({
+	data: gestionarbombillo,
+	url: 'http://localhost:8000/botones',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'post',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+		window.location.replace('/botones')
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+});
+
+</script>
+<script>
+$('#apagarcascada')
+.click(function(e){
+cascadaoff = true;
+var gestionarcascada ='{"cascadaoff": "'+cascadaoff+'"}';
+$.ajax({
+	data: gestionarcascada,
+	url: 'http://localhost:8000/botones',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'post',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+		window.location.replace('/botones')
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+});
+
+</script>
+<script>
+$('#apagaruv')
+.click(function(e){
+uvoff = true;
+var gestionaruv ='{"uvoff": "'+uvoff+'"}';
+$.ajax({
+	data: gestionaruv,
+	url: 'http://localhost:8080/botones',
+	contentType:"application/json; charset: utf-8",
+	crossDomain: true,
+	withCredentials:false,
+	type: 'post',
+	beforeSend: function(){
+			window.alert("Procesando, espere porfavor...");
+	},
+	success: function (res){
+		console.log(res);
+		window.location.replace('/botones')
+	},
+	error: function(){
+		alert("Hubo algun tipo de error.");
+	}
+	});
+});
+
+</script>
+</html>
