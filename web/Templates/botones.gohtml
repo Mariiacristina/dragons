@@ -121,36 +121,52 @@ $.ajax({
 	success: function (res){
 		console.log(res);
 		window.location.replace('/botones')
+		
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
+		 if (placaoff == true) {
+        alert("Esta Apagado");
+		document.getElementById("apagarplaca").style.background = "#ff0000";
+    } else {
+        alert("Esta Encendido");
+		document.getElementById("apagarplaca").style.background = "yellow";
+    }		
 	}
 	});
 });
-
 </script>
+
 <script>
 $('#apagarbombillo')
 .click(function(e){
-bombillooff = true;
-var gestionarbombillo ='{"bombillooff": "'+bombillooff+'"}';
-$.ajax({
-	data: gestionarbombillo,
-	url: 'http://localhost:8000/botones',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'post',
-	beforeSend: function(){
-			window.alert("Procesando, espere porfavor...");
-	},
-	success: function (res){
-		console.log(res);
-		window.location.replace('/botones')
-	},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
+	bombillooff = true;
+	var gestionarbombillo ='{"bombillooff": "'+bombillooff+'"}';
+	$.ajax({
+		data: gestionarbombillo,
+		url: 'http://localhost:8000/botones',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'post',
+		beforeSend: function(){
+				window.alert("Procesando, espere porfavor...");
+		},
+		success: function (res){
+			console.log(res);
+			if (bombillooff == true) {
+			alert("Esta Apagado");
+			document.getElementById("apagarbombillo").style.background = "#ff0000";
+			}
+			else {
+			alert("Esta Encendido");
+			document.getElementById("apagarbombillo").style.background = "yellow";
+			}
+			window.location.replace('/botones')
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
 	});
 });
 
@@ -172,7 +188,19 @@ $.ajax({
 	},
 	success: function (res){
 		console.log(res);
-		window.location.replace('/botones')
+		if (cascadaoff == true) {
+			alert("Esta Apagado");
+			document.getElementById("apagarcascada").style.background = "#ff0000";
+			}
+			else {
+			alert("Esta Encendido");
+			document.getElementById("apagarcascada").style.background = "yellow";
+			}
+			window.location.replace('/botones')
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
@@ -198,6 +226,14 @@ $.ajax({
 	},
 	success: function (res){
 		console.log(res);
+		if (uvoff == true) {
+			alert("Esta Apagado");
+			document.getElementById("apagaruv").style.background = "#ff0000";
+			}
+			else {
+			alert("Esta Encendido");
+			document.getElementById("apagaruv").style.background = "yellow";
+			}
 		window.location.replace('/botones')
 	},
 	error: function(){
