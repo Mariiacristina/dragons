@@ -17,7 +17,7 @@ func main() {
 	http.HandleFunc("/panel",panel)
 	http.HandleFunc("/botones",botones)
 	http.HandleFunc("/perfil",perfil)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 
 }
 

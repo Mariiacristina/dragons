@@ -13,7 +13,7 @@ func main (){
   origins := handlers.AllowedOrigins([]string{"*"})
 
   m := rutas.Enrutamiento()
-  log.Fatal(http.ListenAndServe(":8000",handlers.CORS(headers,methods,origins)(m)))
+  log.Fatal(http.ListenAndServe(":80",handlers.CORS(headers,methods,origins)(m)))
 
 
 

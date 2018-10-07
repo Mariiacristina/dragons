@@ -99,9 +99,9 @@
 	<br>
 	<br>
 	<br>
-	<button onclick="window.location.href='http://localhost:8080/panel'">Volver a Panel Principal</button>
+	<button onclick="window.location.href='http://18.228.59.66/panel'">Volver a Panel Principal</button>
 	<br>
-	<button id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
+	<button id="salir" onclick="window.location.href='http://18.228.59.66'">Salir</button>
 
 
 
@@ -114,7 +114,7 @@
 	$(document).ready(function () {
 	//-------------------GET INFO CLIENTE-----------------------
 	$.ajax({
-		url: 'http://localhost:8000/perfil/'+id+'',
+		url: 'http://52.67.80.202/perfil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -136,7 +136,7 @@
 
 	//-----------------------GET INFO REPTIL----------------------
 	$.ajax({
-		url: 'http://localhost:8000/reptil/'+id+'',
+		url: 'http://52.67.80.202/reptil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -155,7 +155,7 @@
 		});
 		//-------------GET AUTO PERFIL---------------------------
 	$.ajax({
-		url: 'http://localhost:8000/auto/sol/'+id+'',
+		url: 'http://52.67.80.202/auto/sol/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -165,7 +165,7 @@
 			console.log("respuesta")
 			console.log(res);
 			$.ajax({
-				url: 'http://localhost:8000/auto/terrario/'+id+'',
+				url: 'http://52.67.80.202/auto/terrario/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -185,7 +185,7 @@
 				});
 
 			$.ajax({
-				url: 'http://localhost:8000/auto/humedad/'+id+'',
+				url: 'http://52.67.80.202/auto/humedad/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -205,7 +205,7 @@
 				});
 
 			$.ajax({
-				url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+				url: 'http://52.67.80.202/auto/luminocidad/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -244,7 +244,7 @@
 		var config_default = document.getElementById("config").value;
 		if (config_default == "personalizada"){
 			$.ajax({
-				url: 'http://localhost:8000/reptil/'+id+'',
+				url: 'http://52.67.80.202/reptil/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -261,7 +261,7 @@
 			 });
 		}else{
 		$.ajax({
-			url: 'http://localhost:8000/defaults/'+config_default+'',
+			url: 'http://52.67.80.202/defaults/'+config_default+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -294,7 +294,7 @@ console.log("UPDATE - Configuración perfil")
 console.log(info)
 $.ajax({
 	data: info,
-	url: 'http://localhost:8000/perfil/'+id+'',
+	url: 'http://52.67.80.202/perfil/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -333,7 +333,7 @@ console.log("UPDATE - Configuración reptil con configuración personalizada")
 console.log(info)
 $.ajax({
 	data: info,
-	url: 'http://localhost:8000/reptil/'+id+'',
+	url: 'http://52.67.80.202/reptil/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -368,7 +368,7 @@ $.ajax({
 	console.log(info)
 	$.ajax({
 		data: info,
-		url: 'http://localhost:8000/reptil/'+id+'',
+		url: 'http://52.67.80.202/reptil/'+id+'',
 		contentType:"application/json; charset: utf-8",
 		crossDomain: true,
 		withCredentials:false,
@@ -414,7 +414,7 @@ function AutoSol() {
 		var info = '{"nombre": "temp_sol", "estado": 1}'
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/sol/'+id+'',
+			url: 'http://52.67.80.202/auto/sol/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -429,7 +429,7 @@ function AutoSol() {
 		console.log("no está clickeado")
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/sol/'+id+'',
+			url: 'http://52.67.80.202/auto/sol/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -447,7 +447,7 @@ function AutoTerrario() {
 		var info = '{"nombre": "temp_terrario", "estado": 1}'
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/terrario/'+id+'',
+			url: 'http://52.67.80.202/auto/terrario/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -462,7 +462,7 @@ function AutoTerrario() {
 		console.log("no está clickeado")
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/terrario/'+id+'',
+			url: 'http://52.67.80.202/auto/terrario/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -481,7 +481,7 @@ function AutoHumedad() {
 		var info = '{"nombre": "temp_humedad", "estado": 1}'
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/humedad/'+id+'',
+			url: 'http://52.67.80.202/auto/humedad/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -496,7 +496,7 @@ function AutoHumedad() {
 		console.log("no está clickeado")
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/humedad/'+id+'',
+			url: 'http://52.67.80.202/auto/humedad/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -515,7 +515,7 @@ function AutoLuminocidad() {
 		var info = '{"nombre": "temp_luminocidad", "estado": 1}'
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+			url: 'http://52.67.80.202/auto/luminocidad/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,
@@ -530,7 +530,7 @@ function AutoLuminocidad() {
 		console.log("no está clickeado")
 		$.ajax({
 			data: info,
-			url: 'http://localhost:8000/auto/luminocidad/'+id+'',
+			url: 'http://52.67.80.202/auto/luminocidad/'+id+'',
 			contentType:"application/json; charset: utf-8",
 			crossDomain: true,
 			withCredentials:false,

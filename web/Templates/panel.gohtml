@@ -32,10 +32,10 @@
 	</p>
 
 	<br>
-	<button onclick="window.location.href='http://localhost:8080/perfil'">Configuración Perfil</button>
+	<button onclick="window.location.href='http://18.228.59.66/perfil'">Configuración Perfil</button>
 	<br>
 	<br>
-	<button id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
+	<button id="salir" onclick="window.location.href='http://18.228.59.66'">Salir</button>
 
 </body>
 <script>
@@ -48,7 +48,7 @@ console.log(id)
 
 //GET TEMPERATURA SOL
 $.ajax({
-	url: 'http://localhost:8000/pp/temp',
+	url: 'http://52.67.80.202/pp/temp',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -65,7 +65,7 @@ $.ajax({
 
 //GET TEMPERATURA TERRARIO
 $.ajax({
-	url: 'http://localhost:8000/pp/tempterrario',
+	url: 'http://52.67.80.202/pp/tempterrario',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -82,7 +82,7 @@ $.ajax({
 
 //GET TEMPERATURA HUMEDAD
 $.ajax({
-	url: 'http://localhost:8000/pp/humedad',
+	url: 'http://52.67.80.202/pp/humedad',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -99,7 +99,7 @@ $.ajax({
 
 //GET FOCO UV
 $.ajax({
-	url: 'http://localhost:8000/pp/luminocidad',
+	url: 'http://52.67.80.202/pp/luminocidad',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -116,7 +116,7 @@ $.ajax({
 
 //GET FOCO TERIMCO
 $.ajax({
-	url: 'http://localhost:8000/pp/focotermico',
+	url: 'http://52.67.80.202/pp/focotermico',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -133,7 +133,7 @@ $.ajax({
 
 //GET PLACA TERMICA
 $.ajax({
-	url: 'http://localhost:8000/pp/placatermica',
+	url: 'http://52.67.80.202/pp/placatermica',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
