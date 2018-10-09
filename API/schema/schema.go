@@ -34,7 +34,7 @@ type Accesorio struct {
 	Estado string `json:"estado, omitempty"`
 }
 type Botones struct {
-	PLaca          string `json:"placa, omitempty"`
+	Placa          string `json:"placa, omitempty"`
 	EstadoPlaca    string `json:"estadoplaca, omitempty"`
 	Bombillo       string `json:"bombillo, omitempty"`
 	EstadoBombillo string `json:"estadobombillo, omitempty"`

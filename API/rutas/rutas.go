@@ -17,8 +17,7 @@ func Enrutamiento() http.Handler {
 	router.HandleFunc("/pp/temp", controller.GetTemperaturaSol).Methods("GET")
 	router.HandleFunc("/pp/tempterrario", controller.GetTemperaturaTerrario).Methods("GET")
 	router.HandleFunc("/pp/humedad", controller.GetHumedadTerrario).Methods("GET")
-	//Botones
-	router.HandleFunc("/botones/cargar", controller.GetBotones).Methods("GET")
+
 	//Accesorios
 	router.HandleFunc("/pp/luminocidad", controller.GetLuminocidad).Methods("GET")
 	router.HandleFunc("/pp/luminocidad", controller.UpdateLuminocidad).Methods("PUT")
@@ -45,7 +44,9 @@ func Enrutamiento() http.Handler {
 	router.HandleFunc("/auto/terrario/{idPersona}", controller.GetAutoTerrario).Methods("GET")
 	router.HandleFunc("/auto/humedad/{idPersona}", controller.GetAutoHumedad).Methods("GET")
 	router.HandleFunc("/auto/luminocidad/{idPersona}", controller.GetAutoLuz).Methods("GET")
-
+	//Botones
+	router.HandleFunc("/botones/", controller.GetBotones).Methods("GET")
+	//router.HandleFunc("/botones/", controller.GetBotones).Methods("GET")
 	return router
 
 }

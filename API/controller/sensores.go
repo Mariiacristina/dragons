@@ -7,32 +7,6 @@ import (
 	"net/http"
 )
 
-//borrar es la estructura
-type Botones struct {
-	PLaca          string `json:"placa, omitempty"`
-	EstadoPlaca    string `json:"estadoplaca, omitempty"`
-	Bombillo       string `json:"bombillo, omitempty"`
-	EstadoBombillo string `json:"estadobombillo, omitempty"`
-	Cascada        string `json:"cascada, omitempty"`
-	EstadoCascada  string `json:"estadocascada, omitempty"`
-	Uv             string `json:"uv, omitempty"`
-	EstadoUv       string `json:"estadouv, omitempty"`
-}
-
-func GetBotones(w http.ResponseWriter, r *http.Request) {
-	log.Println("Actuadores - GET sí: (ON-OFF)")
-	var botones schema.Botones
-	botones.Placa = "Foco_Termico"
-	botones.Estado = "prendido"
-	w.Header().Set("Content-Type", "application/json")
-	json, errjson := json.Marshal(foco_termico)
-	if errjson != nil {
-		http.Error(w, "error json", http.StatusInternalServerError)
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Write(json)
-}
 func GetTemperaturaSol(w http.ResponseWriter, r *http.Request) {
 	//aqui va lo que se obtiene del arduino
 	log.Println("SENSORES - GET TEMPERATURA SOL")
@@ -169,6 +143,27 @@ func UpdatePlacaTermica(w http.ResponseWriter, r *http.Request) {
 	placa_termica.Estado = "prendido"
 	w.Header().Set("Content-Type", "application/json")
 	json, errjson := json.Marshal(placa_termica)
+	if errjson != nil {
+		http.Error(w, "error json", http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(json)
+}
+
+func GetBotones(w http.ResponseWriter, r *http.Request) {
+	log.Println("Obtención del estado-botones al cargar la pagina")
+	var botones schema.Botones
+	botones.Placa = "placa"
+	botones.EstadoPlaca = "estadoplaca"
+	botones.Bombillo = "bombillo"
+	botones.EstadoBombillo = "estadobombillo"
+	botones.Cascada = "cascada"
+	botones.EstadoCascada = "estadocasscada"
+	botones.Uv = "uv"
+	botones.EstadoUv = "estadouv"
+	w.Header().Set("Content-Type", "application/json")
+	json, errjson := json.Marshal(botones)
 	if errjson != nil {
 		http.Error(w, "error json", http.StatusInternalServerError)
 		return

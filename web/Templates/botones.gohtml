@@ -60,7 +60,7 @@
 	 </style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bo" onload="CargarBotones">
+<body class="bo" onload="CargarBotones()">
 
 	
 
@@ -106,23 +106,25 @@
 
 	<script>
 		var id=localStorage.getItem("id_cliente")
-		console.log("el id del cliente ingresado es:")
+
 		console.log(id)
 
 		function CargarBotones(){
 				$.ajax({
-					url: 'http://localhost:8000/botones/cargar/'+id+'',
+					//url: 'http://localhost:8000/botones/cargar/'+id+'',
+					url: 'http://localhost:8000/botones/',
 					contentType:"application/json; charset: utf-8",
 					crossDomain: true,
 					withCredentials:false,
 					type: 'GET',
 					success: function (res){
 						console.log("Apagar o encender equipos")
-						console.log(res)
-						document.getElementById('placa').innerHTML = res.placa
-						document.getElementById('bombilllo').innerHTML = res.bombillo
-						document.getElementById('cascada').innerHTML = res.cascada
-						document.getElementById('uv').innerHTML = res.uv
+						console.log(res.placa)
+						console.log(res.bombillo)
+						//document.getElementById('placa').innerHTML = res.placa
+						//document.getElementById('bombilllo').innerHTML = res.bombillo
+						//document.getElementById('cascada').innerHTML = res.cascada
+						//document.getElementById('uv').innerHTML = res.uv
 			},
 			});
 		}
@@ -136,7 +138,7 @@
 		console.log(gestionplaca)
 		$.ajax({
 				data: gestionplaca,
-				url: 'http://localhost:8000/pp/placatermica',
+				url: 'http://localhost:8000/botones/',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -200,6 +202,7 @@ $('#apagarbombillo')
 });
 
 </script>
+
 <script>
 $('#apagarcascada')
 .click(function(e){
@@ -227,17 +230,16 @@ $.ajax({
 			}
 			window.location.replace('/botones')
 		},
-		error: function(){
-			alert("Hubo algun tipo de error.");
-		}
-	},
 	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
+			alert("Hubo algun tipo de error.");
+		},
 	});
 });
-
 </script>
+
+
+
+
 <script>
 $('#apagaruv')
 .click(function(e){
