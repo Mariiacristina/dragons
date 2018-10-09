@@ -77,41 +77,40 @@
 	<h1>BOTONES DE EMERGENCIA</h2>
     
 		<br><br>
-        <h2>APAGAR PLACA</h2>
+        <h2>GESTIONAR PLACA</h2>
 		<button class="emergencia" type="submit" id="apagarplaca" value="placa">
-			  <h3>APAGAR PLACA </h3> 
+			  <h3>GESTIONAR PLACA </h3> 
 		</button>
 
     
-		<h2>APAGAR BOMBILLO </h2>
+		<h2>GESTIONAR BOMBILLO </h2>
 		<br><br>
 		<button class="emergencia" type="submit" id="apagarbombillo" value="bombillo">
-	    <h3>APAGAR BOMBILLO </h3> 
+	    <h3>GESTIONAR BOMBILLO </h3> 
 		</button>
 
         <br><br>
-		<h2>APAGAR CASCADA </h2>
+		<h2>GESTIONAR CASCADA </h2>
 		<button class="emergencia" type="submit" id="apagarcascada" value="cascada">
-        <h3>APAGAR CASCADA </h3> 
+        <h3>GESTIONAR CASCADA </h3> 
 		</button>
 
         <br><br>
-		<h2>APAGAR UV </h2>
+		<h2>GESTIONAR UV </h2>
 		<br><br>
 		<button class="emergencia" type="submit" id="apagaruv" value="uv">
-            <h3>APAGAR UV </h3> 
+            <h3>GESTIONAR UV </h3> 
 		</button>
 
 </body>
 
 	<script>
 		var id=localStorage.getItem("id_cliente")
-
+		console.log("identificador de sesion:")
 		console.log(id)
 
 		function CargarBotones(){
 				$.ajax({
-					//url: 'http://localhost:8000/botones/cargar/'+id+'',
 					url: 'http://localhost:8000/botones/',
 					contentType:"application/json; charset: utf-8",
 					crossDomain: true,
@@ -121,10 +120,44 @@
 						console.log("Apagar o encender equipos")
 						console.log(res.placa)
 						console.log(res.bombillo)
-						//document.getElementById('placa').innerHTML = res.placa
-						//document.getElementById('bombilllo').innerHTML = res.bombillo
-						//document.getElementById('cascada').innerHTML = res.cascada
-						//document.getElementById('uv').innerHTML = res.uv
+
+
+						if (res.placa == 'true') {
+						alert("Placa esta Apagado y se debe encender");
+						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById("apagarplaca").style.background = "#ff0000";
+						} else {
+							alert("Placa esta Encendido, se debe apagar");
+							document.getElementById("apagarplaca").style.background = "red";
+						}
+
+						if (res.bombillo == 'true') {
+						alert("Bombillo esta Apagado y se debe encender");
+						document.getElementById('apagarbombillo').innerHTML = res.bombillo
+						document.getElementById("apagarbombillo").style.background = "#ff0000";
+						} else {
+							alert("Bombillo esta Encendido, se debe apagar");
+							document.getElementById("apagarbombillo").style.background = "red";
+						}
+
+						if (res.cascada == 'true') {
+						alert("Cascada esta Apagado y se debe encender");
+						document.getElementById('apagarcascada').innerHTML = res.cascada
+						document.getElementById("apagarcascada").style.background = "#ff0000";
+						} else {
+							alert("Cascada esta Encendido, se debe apagar");
+							document.getElementById("apagarcascada").style.background = "red";
+						}
+
+						if (res.uv == 'true') {
+						alert("Uv esta Apagado y se debe encender");
+						document.getElementById('apagaruv').innerHTML = res.uv
+						document.getElementById("apagaruv").style.background = "#ff0000";
+						} else {
+							alert("Uv esta Encendido, se debe apagar");
+							document.getElementById("apagaruv").style.background = "red";
+						}
+					
 			},
 			});
 		}

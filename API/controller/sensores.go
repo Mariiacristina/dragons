@@ -154,13 +154,13 @@ func UpdatePlacaTermica(w http.ResponseWriter, r *http.Request) {
 func GetBotones(w http.ResponseWriter, r *http.Request) {
 	log.Println("Obtención del estado-botones al cargar la pagina")
 	var botones schema.Botones
-	botones.Placa = "placa"
+	botones.Placa = "true"
 	botones.EstadoPlaca = "estadoplaca"
-	botones.Bombillo = "bombillo"
+	botones.Bombillo = "false"
 	botones.EstadoBombillo = "estadobombillo"
-	botones.Cascada = "cascada"
+	botones.Cascada = "true"
 	botones.EstadoCascada = "estadocasscada"
-	botones.Uv = "uv"
+	botones.Uv = "false"
 	botones.EstadoUv = "estadouv"
 	w.Header().Set("Content-Type", "application/json")
 	json, errjson := json.Marshal(botones)
