@@ -53,14 +53,14 @@
 			border-color: #3333ff;
         }
         .bo{
-			background-color: #80ff80;
+			background-color: #ccffcc;
 			text-align:center;
 			padding: 25px;
 		}
 	 </style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bo">
+<body class="bo" onload="CargarBotones">
 
 	
 
@@ -78,64 +78,93 @@
     
 		<br><br>
         <h2>APAGAR PLACA</h2>
-		<button class="emergencia" type="submit" id="apagarplaca">
+		<button class="emergencia" type="submit" id="apagarplaca" value="placa">
 			  <h3>APAGAR PLACA </h3> 
 		</button>
 
     
 		<h2>APAGAR BOMBILLO </h2>
 		<br><br>
-		<button class="emergencia" type="submit" id="apagarbombillo">
+		<button class="emergencia" type="submit" id="apagarbombillo" value="bombillo">
 	    <h3>APAGAR BOMBILLO </h3> 
 		</button>
 
         <br><br>
 		<h2>APAGAR CASCADA </h2>
-		<button class="emergencia" type="submit" id="apagarcascada">
+		<button class="emergencia" type="submit" id="apagarcascada" value="cascada">
         <h3>APAGAR CASCADA </h3> 
 		</button>
 
         <br><br>
 		<h2>APAGAR UV </h2>
 		<br><br>
-		<button class="emergencia" type="submit" id="apagaruv">
+		<button class="emergencia" type="submit" id="apagaruv" value="uv">
             <h3>APAGAR UV </h3> 
 		</button>
 
 </body>
-<script>
-$('#apagarplaca')
-.click(function(e){
-placaoff = true;
-var gestionplaca ='{"placaoff": "'+placaoff+'"}';
-$.ajax({
-	data: gestionplaca,
-	url: 'http://localhost:8000/botones',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'post',
-	beforeSend: function(){
-			window.alert("Procesando, espere porfavor...");
-	},
-	success: function (res){
-		console.log(res);
-		window.location.replace('/botones')
-		
-	},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-		 if (placaoff == true) {
-        alert("Esta Apagado");
-		document.getElementById("apagarplaca").style.background = "#ff0000";
-    } else {
-        alert("Esta Encendido");
-		document.getElementById("apagarplaca").style.background = "yellow";
-    }		
-	}
-	});
-});
-</script>
+
+	<script>
+		var id=localStorage.getItem("id_cliente")
+		console.log("el id del cliente ingresado es:")
+		console.log(id)
+
+		function CargarBotones(){
+				$.ajax({
+					url: 'http://localhost:8000/botones/cargar/'+id+'',
+					contentType:"application/json; charset: utf-8",
+					crossDomain: true,
+					withCredentials:false,
+					type: 'GET',
+					success: function (res){
+						console.log("Apagar o encender equipos")
+						console.log(res)
+						document.getElementById('placa').innerHTML = res.placa
+						document.getElementById('bombilllo').innerHTML = res.bombillo
+						document.getElementById('cascada').innerHTML = res.cascada
+						document.getElementById('uv').innerHTML = res.uv
+			},
+			});
+		}
+	</script>
+	<script>
+		$('#apagarplaca')
+		.click(function(e){
+		placaoff = document.getElementById('apagarplaca'.value);
+		var gestionplaca ='{"placaoff": "'+placaoff+'"}';
+		console.log("Placa Esta encendida")
+		console.log(gestionplaca)
+		$.ajax({
+				data: gestionplaca,
+				url: 'http://localhost:8000/pp/placatermica',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'post',
+				beforeSend: function(){
+					window.alert("Procesando, espere porfavor...");
+				},
+				success: function (res){
+					console.log(res);
+					if (placaoff == true) {
+						alert("Esta Apagado y se debe encender");
+						document.getElementById("apagarplaca").style.background = "#ff0000";
+					} else {
+						alert("Esta Encendido, se debe apagar");
+						document.getElementById("apagarplaca").style.background = "yellow";
+					}
+					window.location.replace('/botones')
+					},
+				error: function(){
+					alert("Hubo algun tipo de error.");		
+				}
+				});
+		});
+	</script>
+
+
+
+
 
 <script>
 $('#apagarbombillo')
