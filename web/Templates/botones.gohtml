@@ -52,6 +52,13 @@
             border: solid;
 			border-color: #3333ff;
         }
+		.emergencia1{
+            background-color: #00b300;
+            height:100px;
+            padding: 20px 20px;
+            border: solid;
+			border-color: #3333ff;
+        }
         .bo{
 			background-color: #ccffcc;
 			text-align:center;
@@ -85,20 +92,20 @@
     
 		<h2>GESTIONAR BOMBILLO </h2>
 		<br><br>
-		<button class="emergencia" type="submit" id="apagarbombillo" value="bombillo">
+		<button class="emergencia1" type="submit" id="apagarbombillo" value="bombillo">
 	    <h3>GESTIONAR BOMBILLO </h3> 
 		</button>
 
         <br><br>
 		<h2>GESTIONAR CASCADA </h2>
-		<button class="emergencia" type="submit" id="apagarcascada" value="cascada">
+		<button class="emergencia1" type="submit" id="apagarcascada" value="cascada">
         <h3>GESTIONAR CASCADA </h3> 
 		</button>
 
         <br><br>
 		<h2>GESTIONAR UV </h2>
 		<br><br>
-		<button class="emergencia" type="submit" id="apagaruv" value="uv">
+		<button class="emergencia1" type="submit" id="apagaruv" value="uv">
             <h3>GESTIONAR UV </h3> 
 		</button>
 
@@ -119,45 +126,46 @@
 					success: function (res){
 						console.log("Apagar o encender equipos")
 						console.log(res.placa)
-						console.log(res.bombillo)
-
-
 						if (res.placa == 'true') {
-						alert("Placa esta Apagado y se debe encender");
-						document.getElementById('apagarplaca').innerHTML = res.placa
-						document.getElementById("apagarplaca").style.background = "#ff0000";
-						} else {
+							alert("Placa esta Apagado y se debe encender, ok");
+							document.getElementById('apagarplaca').innerHTML = res.placa
+							document.getElementById("apagarplaca").style.background = "#00FF00";
+						} 
+						if (res.placa == 'false') {
 							alert("Placa esta Encendido, se debe apagar");
+							document.getElementById('apagarplaca').innerHTML = res.placa
 							document.getElementById("apagarplaca").style.background = "red";
 						}
-
 						if (res.bombillo == 'true') {
-						alert("Bombillo esta Apagado y se debe encender");
-						document.getElementById('apagarbombillo').innerHTML = res.bombillo
-						document.getElementById("apagarbombillo").style.background = "#ff0000";
-						} else {
+							alert("Bombillo esta Apagado y se debe encender");
+							document.getElementById('apagarbombillo').innerHTML = res.bombillo
+							document.getElementById("apagarbombillo").style.background = "#00FF00";
+						} 
+						if (res.bombillo == 'false') {
 							alert("Bombillo esta Encendido, se debe apagar");
+							document.getElementById('apagarbombillo').innerHTML = res.bombillo
 							document.getElementById("apagarbombillo").style.background = "red";
 						}
-
 						if (res.cascada == 'true') {
-						alert("Cascada esta Apagado y se debe encender");
-						document.getElementById('apagarcascada').innerHTML = res.cascada
-						document.getElementById("apagarcascada").style.background = "#ff0000";
-						} else {
+							alert("Cascada esta Apagado y se debe encender");
+							document.getElementById('apagarcascada').innerHTML = res.cascada
+							document.getElementById("apagarcascada").style.background = "#00FF00";
+						} 
+						if (res.cascada == 'false') {
 							alert("Cascada esta Encendido, se debe apagar");
+							document.getElementById('apagarcascada').innerHTML = res.cascada
 							document.getElementById("apagarcascada").style.background = "red";
 						}
-
 						if (res.uv == 'true') {
-						alert("Uv esta Apagado y se debe encender");
-						document.getElementById('apagaruv').innerHTML = res.uv
-						document.getElementById("apagaruv").style.background = "#ff0000";
-						} else {
+							alert("Uv esta Apagado y se debe encender");
+							document.getElementById('apagaruv').innerHTML = res.uv
+							document.getElementById("apagaruv").style.background = "#00FF00";
+						} 
+						if (res.uv == 'false') {
 							alert("Uv esta Encendido, se debe apagar");
+							document.getElementById('apagaruv').innerHTML = res.uv
 							document.getElementById("apagaruv").style.background = "red";
 						}
-					
 			},
 			});
 		}
