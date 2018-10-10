@@ -154,6 +154,8 @@ func UpdatePlacaTermica(w http.ResponseWriter, r *http.Request) {
 func GetBotones(w http.ResponseWriter, r *http.Request) {
 	log.Println("Obtención del estado-botones al cargar la pagina")
 	var botones schema.Botones
+	//Al escalar se puede agregar marca del complemeto para estadisticas
+	//Valores debiesen obtenerse de una bbdd
 	botones.Placa = "true"
 	botones.EstadoPlaca = "estadoplaca"
 	botones.Bombillo = "false"
@@ -162,6 +164,29 @@ func GetBotones(w http.ResponseWriter, r *http.Request) {
 	botones.EstadoCascada = "estadocasscada"
 	botones.Uv = "false"
 	botones.EstadoUv = "estadouv"
+	w.Header().Set("Content-Type", "application/json")
+	json, errjson := json.Marshal(botones)
+	if errjson != nil {
+		http.Error(w, "error json", http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(json)
+}
+
+func SetPlaca(w http.ResponseWriter, r *http.Request) {
+	log.Println("Gestion del estado de la placa")
+	var botones schema.Botones
+	botones.Placa = "false"
+	log.Println("Cambiando el Estado de la Maquina.. obtubo estado anterior")
+	//botones.Placa = "true"
+	//botones.EstadoPlaca = "estadoplaca"
+	if botones.Placa == "true" {
+		botones.Placa = "false"
+	}
+	if botones.Placa == "false" {
+		botones.Placa = "true"
+	}
 	w.Header().Set("Content-Type", "application/json")
 	json, errjson := json.Marshal(botones)
 	if errjson != nil {

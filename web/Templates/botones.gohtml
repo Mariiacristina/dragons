@@ -117,68 +117,69 @@
 		console.log(id)
 
 		function CargarBotones(){
-				$.ajax({
-					url: 'http://localhost:8000/botones/',
-					contentType:"application/json; charset: utf-8",
-					crossDomain: true,
-					withCredentials:false,
-					type: 'GET',
-					success: function (res){
-						console.log("Apagar o encender equipos")
-						console.log(res.placa)
-						if (res.placa == 'true') {
-							alert("Placa esta Apagado y se debe encender, ok");
-							document.getElementById('apagarplaca').innerHTML = res.placa
-							document.getElementById("apagarplaca").style.background = "#00FF00";
-						} 
-						if (res.placa == 'false') {
-							alert("Placa esta Encendido, se debe apagar");
-							document.getElementById('apagarplaca').innerHTML = res.placa
-							document.getElementById("apagarplaca").style.background = "red";
-						}
-						if (res.bombillo == 'true') {
-							alert("Bombillo esta Apagado y se debe encender");
-							document.getElementById('apagarbombillo').innerHTML = res.bombillo
-							document.getElementById("apagarbombillo").style.background = "#00FF00";
-						} 
-						if (res.bombillo == 'false') {
-							alert("Bombillo esta Encendido, se debe apagar");
-							document.getElementById('apagarbombillo').innerHTML = res.bombillo
-							document.getElementById("apagarbombillo").style.background = "red";
-						}
-						if (res.cascada == 'true') {
-							alert("Cascada esta Apagado y se debe encender");
-							document.getElementById('apagarcascada').innerHTML = res.cascada
-							document.getElementById("apagarcascada").style.background = "#00FF00";
-						} 
-						if (res.cascada == 'false') {
-							alert("Cascada esta Encendido, se debe apagar");
-							document.getElementById('apagarcascada').innerHTML = res.cascada
-							document.getElementById("apagarcascada").style.background = "red";
-						}
-						if (res.uv == 'true') {
-							alert("Uv esta Apagado y se debe encender");
-							document.getElementById('apagaruv').innerHTML = res.uv
-							document.getElementById("apagaruv").style.background = "#00FF00";
-						} 
-						if (res.uv == 'false') {
-							alert("Uv esta Encendido, se debe apagar");
-							document.getElementById('apagaruv').innerHTML = res.uv
-							document.getElementById("apagaruv").style.background = "red";
-						}
-			},
+			$.ajax({
+				url: 'http://localhost:8000/botones/',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'GET',
+				success: function (res){
+					console.log("Apagar o encender equipos")
+					console.log(res.placa)
+					var plac = res.placa
+					console.log(plac)
+					if (res.placa == 'true') {
+						alert("Placa esta Apagado y se debe encender, ok");
+						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById("apagarplaca").style.background = "#00FF00";
+						console.log(apagarplaca.value)
+					} 
+					if (res.placa == 'false') {
+						alert("Placa esta Encendido, se debe apagar");
+						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById("apagarplaca").style.background = "#ff5b5a";
+					}
+					if (res.bombillo == 'true') {
+						alert("Bombillo esta Apagado y se debe encender");
+						document.getElementById('apagarbombillo').innerHTML = res.bombillo
+						document.getElementById("apagarbombillo").style.background = "#00FF00";
+					} 
+					if (res.bombillo == 'false') {
+						alert("Bombillo esta Encendido, se debe apagar");
+						document.getElementById('apagarbombillo').innerHTML = res.bombillo
+						document.getElementById("apagarbombillo").style.background = "#ff5b5a";
+					}
+					if (res.cascada == 'true') {
+						alert("Cascada esta Apagado y se debe encender");
+						document.getElementById('apagarcascada').innerHTML = res.cascada
+						document.getElementById("apagarcascada").style.background = "#00FF00";
+					} 
+					if (res.cascada == 'false') {
+						alert("Cascada esta Encendido, se debe apagar");
+						document.getElementById('apagarcascada').innerHTML = res.cascada
+						document.getElementById("apagarcascada").style.background = "#ff5b5a";
+					}
+					if (res.uv == 'true') {
+						alert("Uv esta Apagado y se debe encender");
+						document.getElementById('apagaruv').innerHTML = res.uv
+						document.getElementById("apagaruv").style.background = "#00FF00";
+					} 
+					if (res.uv == 'false') {
+						alert("Uv esta Encendido, se debe apagar");
+						document.getElementById('apagaruv').innerHTML = res.uv
+						document.getElementById("apagaruv").style.background = "#ff5b5a";
+					}
+				},
 			});
 		}
 	</script>
 	<script>
 		$('#apagarplaca')
 		.click(function(e){
-		placaoff = document.getElementById('apagarplaca'.value);
-		var gestionplaca ='{"placaoff": "'+placaoff+'"}';
-		console.log("Placa Esta encendida")
-		console.log(gestionplaca)
-		$.ajax({
-				data: gestionplaca,
+			var plaka = '{"test": "'+test'"}';
+			console.log("Inicio de cambio de estado de Placa")
+			$.ajax({
+				data: plaka,
 				url: 'http://localhost:8000/botones/',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
@@ -189,19 +190,23 @@
 				},
 				success: function (res){
 					console.log(res);
-					if (placaoff == true) {
-						alert("Esta Apagado y se debe encender");
-						document.getElementById("apagarplaca").style.background = "#ff0000";
-					} else {
-						alert("Esta Encendido, se debe apagar");
-						document.getElementById("apagarplaca").style.background = "yellow";
+					if (res.placa == 'true') {
+						alert("Placa esta Apagado y se debe encender, ok");
+						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById("apagarplaca").style.background = "#00FF00";
+						console.log(apagarplaca.value)
+					} 
+					if (res.placa == 'false') {
+						alert("Placa esta Encendido, se debe apagar");
+						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById("apagarplaca").style.background = "#ff5b5a";
 					}
 					window.location.replace('/botones')
 					},
 				error: function(){
 					alert("Hubo algun tipo de error.");		
-				}
-				});
+					}
+			});
 		});
 	</script>
 
