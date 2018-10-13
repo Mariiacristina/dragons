@@ -177,15 +177,90 @@ func GetBotones(w http.ResponseWriter, r *http.Request) {
 func SetPlaca(w http.ResponseWriter, r *http.Request) {
 	log.Println("Gestion del estado de la placa")
 	var botones schema.Botones
-	botones.Placa = "false"
+	botones.Placa = "true" //solicitado a ddbb
 	log.Println("Cambiando el Estado de la Maquina.. obtubo estado anterior")
-	//botones.Placa = "true"
-	//botones.EstadoPlaca = "estadoplaca"
 	if botones.Placa == "true" {
-		botones.Placa = "false"
-	}
-	if botones.Placa == "false" {
+		botones.Placa = "false" //envio a ddbb
+		log.Println("Cambiando el Estado de la Maquina a Encendido")
+		log.Println(botones.Placa)
+	} else {
 		botones.Placa = "true"
+		log.Println("Cambiando el Estado de la Maquina a Apagado")
+		log.Println(botones.Placa)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json, errjson := json.Marshal(botones)
+	if errjson != nil {
+		http.Error(w, "error json", http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(json)
+}
+
+func SetBombillo(w http.ResponseWriter, r *http.Request) {
+	log.Println("Gestion del estado de bombillo")
+	var botones schema.Botones
+	botones.Bombillo = "false" //solicitado a ddbb
+	log.Println("Cambiando el Estado de la Maquina.. obtubo estado anterior")
+	if botones.Bombillo == "true" {
+		botones.Bombillo = "false" //envio a ddbb
+		log.Println("Cambiando el Estado de la Maquina a Encendido")
+		log.Println(botones.Bombillo)
+	} else {
+		botones.Bombillo = "true"
+		log.Println("Cambiando el Estado de la Maquina a Apagado")
+		log.Println(botones.Bombillo)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json, errjson := json.Marshal(botones)
+	if errjson != nil {
+		http.Error(w, "error json", http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(json)
+}
+
+func SetCascada(w http.ResponseWriter, r *http.Request) {
+	log.Println("Gestion del estado de cascada")
+	var botones schema.Botones
+	botones.Cascada = "true" //solicitado a ddbb
+	log.Println("Cambiando el Estado de la Maquina.. obtubo estado anterior")
+	if botones.Cascada == "true" {
+		botones.Cascada = "false" //envio a ddbb
+		log.Println("Cambiando el Estado de la Maquina a Encendido")
+		log.Println(botones.Cascada)
+	} else {
+		botones.Cascada = "true" //  enviar a DDBB
+		log.Println("Cambiando el Estado de la Maquina a Apagado")
+		log.Println(botones.Cascada)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json, errjson := json.Marshal(botones)
+	if errjson != nil {
+		http.Error(w, "error json", http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(json)
+}
+
+func SetUv(w http.ResponseWriter, r *http.Request) {
+	log.Println("Gestion del estado de Uv")
+	var botones schema.Botones
+	botones.Uv = "false" //solicitado a ddbb
+	log.Println("Cambiando el Estado de la Maquina.. obtubo estado anterior")
+	if botones.Uv == "true" {
+		botones.Uv = "false" //envio a ddbb
+		log.Println("Cambiando el Estado de la Maquina a Encendido")
+		log.Println(botones.Uv)
+	} else {
+		botones.Uv = "true"
+		log.Println("Cambiando el Estado de la Maquina a Apagado")
+		log.Println(botones.Bombillo)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json, errjson := json.Marshal(botones)

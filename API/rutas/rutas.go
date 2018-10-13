@@ -46,7 +46,10 @@ func Enrutamiento() http.Handler {
 	router.HandleFunc("/auto/luminocidad/{idPersona}", controller.GetAutoLuz).Methods("GET")
 	//Botones
 	router.HandleFunc("/botones/", controller.GetBotones).Methods("GET")
-	router.HandleFunc("/botones/", controller.SetPlaca).Methods("POST")
+	router.HandleFunc("/botones/placa/", controller.SetPlaca).Methods("POST")
+	router.HandleFunc("/botones/bombillo/", controller.SetBombillo).Methods("POST")
+	router.HandleFunc("/botones/cascada/", controller.SetCascada).Methods("POST")
+	router.HandleFunc("/botones/uv/", controller.SetUv).Methods("POST")
 	return router
 
 }
