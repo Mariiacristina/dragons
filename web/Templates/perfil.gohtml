@@ -7,6 +7,13 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"> </script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">	</script>
 	<style>
+	body, html {
+		height: 100%;
+		background-image: url("https://wpblink.com/sites/default/files/wallpaper/animal/66185/lizard-wallpapers-hd-66185-9461845.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+}
 		li {
 				display: inline;
 		}
@@ -40,29 +47,100 @@
 			display: block;
 		}
 		}
-		.bo{
-			background-color: #80ff80;
-			text-align:center;
-			padding: 25px;
+
+		* {
+    box-sizing: border-box;
 		}
-		.pers{
-			background-color: green;
-			height:100%;
+		.columna{
+			float: left;
+			padding: 10px;
 		}
-		.tx{
-				font-size: 30px;
-				font-color:red;
-				font-style: italic;
-				}
-		.spa{
-				font-size: 40px;
-				font-style: italic;
-				align-content: center;
+
+		.info_persona{
+			background: rgba(239,143,232,0.5);
+			float: left;
+			width: 48%;
+			padding: 10px 10px;
+			border: solid;
+			border-color: red;
+			font-size: 32px;
+			font-style: italic;
+			color:black;
 		}
+
+		.css_reptil{
+			background: rgba(80,250,213,0.5);
+			float: right;
+			width: 48%;
+			padding: 10px 10px;
+			border: solid;
+			border-color: green;
+			font-size: 32px;
+			font-style: italic;
+			color:black;
+
+		}
+
+		.css_automatizacion{
+			background: rgba(249,216,31,0.5);
+			float: left;
+			width: 48%;
+			height: 100%;
+			padding: 10px 10px;
+			border: solid;
+			border-color: yellow;
+			font-size: 32px;
+			font-style: italic;
+			color:black;
+		}
+
+	.row:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+	}
+
+	.confir{
+		 background-color: #32CD32;
+		 height:10%;
+		 padding: 10px 10px;
+		 font-size: 20px;
+		 border: ridge;
+		 width: 100px;
+		 font-style: italic;
+		 color:black;
+		 }
+
+	.confir:hover {
+			background-color: #006400;
+			color:white;
+	}
+
+	.regis{
+		background-color: #87CEEB;
+		height:10%;
+		padding: 10px 10px;
+		font-size: 32px;
+		border: ridge;
+		width: 250px;
+		font-style: italic;
+		color: black;
+		}
+
+	.regis:hover {
+			background-color: #800080;
+			color:white;
+	}
+
+	.desplegable {
+		font-style: italic;
+		font-size: 20px;
+	}
+
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bo">
+<body>
 	<div class="navbar">
 		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a>
 		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-bomb"></i> Panel Principal</a>
@@ -71,38 +149,41 @@
         <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
 	</div>
 
-	<h3>PERFIL PERSONA</h3>
-	<div style = "float: left">Nombre :</div>
-	<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nombre">	</div>
-	<br>
-	<br>
+<div class = "row">
+	<h1>PERFIL PERSONA</h1>
+	<div class = "columna info_persona">
+		<div style = "float: left">Nombre :</div>
+		<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nombre">	</div>
+		<br>
+		<br>
 
 	Tipo Reptil:
-	<select id="tipo" >
-	  <option value="iguana">Iguana</option>
-	  <option value="dragon">Dragón Barbudo</option>
-	  <option value="gecko">Gecko</option>
-	  <option value="piton">Pitón</option>
-	</select>
-	<br>
-	<br>
+		<select class = "desplegable" id="tipo" >
+	  	<option value="iguana">Iguana</option>
+	  	<option value="dragon">Dragón Barbudo</option>
+	  	<option value="gecko">Gecko</option>
+	  	<option value="piton">Pitón</option>
+		</select>
+		<br>
+		<br>
 
-	<div style = "float: left">Fecha Nacimiento Reptil :</div>
-	<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nacimiento">	</div>
-	<br>
-	<br>
+		<div style = "float: left">Fecha Nacimiento Reptil :</div>
+		<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nacimiento">	</div>
+		<br>
+		<br>
 
-	<button type="submit" id="update_perfil">
-		Guardar Cambios
-	</button>
-	<br>
-	<br>
+		<button style = "float: right" type="submit" id="update_perfil" class = "confir">
+			Guardar Cambios
+		</button>
+		<br>
+		<br>
+	</div>
 
-
-	<h3>CONFIG REPTIL</h3>
+	<h1  style = "float: right; width: 48%;" >CONFIG REPTIL</h1>
 	<br>
+	<div class = "columna css_reptil">
 	Elegir Configuraión:
-	<select id="config" onchange="Change()" >
+	<select class = "desplegable" id="config" onchange="Change()" >
 		<option value="iguana">Iguana</option>
 		<option value="dragon">Dragón Barbudo</option>
 		<option value="gecko">Gecko</option>
@@ -113,34 +194,35 @@
 	<br>
 
 	<div style = "float:left">Temperatura Zona calor Máxima :</div>
-	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_max"></div>
+	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_max"></div>
 	<br>
 	<br>
 	<div style="float:left">Temperatura Zona calor Mínima :</div>
-	<div  class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_min"></div>
+	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_min"></div>
 	<br>
 	<br>
 	<div style="float:left">Temperatura Terrario Máxima :</div>
-	<div  class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_max"></div>
+	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_max"></div>
 	<br>
 	<br>
 	<div style = "float:left">Temperatura Terrario Mínima :</div>
-	<div  class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
+	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
 	<br>
 	<br>
 	<div style = "float:left">Humedad Terrario Mínima :</div>
-	<div class ="reptile"  style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
+	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
 	<br>
 	<br>
 	<br>
-	<button type="submit" id="update_reptil">
+	<button style = "float:right" class = "confir" type="submit" id="update_reptil">
 		Guardar Cambios
 	</button>
 	<br>
 	<br>
+</div>
 
-
-	<h3>AUTOMATIZACIÓN TERRARIO</h3>
+	<h1>AUTOMATIZACIÓN TERRARIO</h1>
+	<div class = "columna css_automatizacion">
 	<p>En esta sección se debe clickear lo que se desea que esté automatizado, por default todo está en manual</p>
 	<br>
 	<input type="checkbox" onclick="AutoSol()"  id = "temp_sol" value="temp_sol"> Automatizar temperatura Zona Calor del terrario
@@ -151,16 +233,9 @@
 	<br>
 	<input type="checkbox" onclick="AutoLuminocidad()" id = "luminocidad" value="luminocidad"> Automatizar hora luz terrario
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<button onclick="window.location.href='http://localhost:8080/panel'">Volver a Panel Principal</button>
-	<br>
-	<button id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
-
+</div>
+	<button style="float:right" class = "regis" id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
+</div>
 
 
 	<script>

@@ -7,6 +7,13 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 <style>
+body, html {
+	height: 100%;
+	background-image: url("https://c.wallhere.com/photos/5e/ee/bearded_dragon_reflection_lizard_reptile-1115652.jpg!d");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
 		li {
 				display: inline;
 		}
@@ -40,29 +47,23 @@
 			display: block;
 		}
 		}
-		.bo{
-			background-color: #80ff80;
-			text-align:center;
-			padding: 25px;
+
+		.panel{
+			background: rgba(250,185,80,0.5);
+			float: left;
+			width: 30%;
+			font-size: 20px;
+			font-style: italic;
+			color:black;
 		}
-		.pers{
-			background-color: green;
-			height:100%;
-		}
-		.tx{
-				font-size: 30px;
-				font-color:red;
-				font-style: italic;
-				}
-		.spa{
-				font-size: 40px;
-				font-style: italic;
-				align-content: center;
-	}
+
+
+
+
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bo">
+<body>
 	<div class="navbar">
 		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a>
 		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-bomb"></i> Panel Principal</a>
@@ -70,7 +71,10 @@
 		<a href="http://localhost:8080/botones"><i class="fa fa-fw fa-bullseye"></i> Botones de Emergencia</a>
         <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
 	</div>
-
+	<br>
+	<br>
+	<br>
+	<div class = "panel">
 	<h1>PANEL PRINCIPAL</h1>
 	<h2>Sensores</h2>
 	<br>
@@ -90,12 +94,7 @@
 		<br>
 		Placa Termica:  <output id="placa_termica"></output>
 	</p>
-
-	<br>
-	<button onclick="window.location.href='http://localhost:8080/perfil'">Configuración Perfil</button>
-	<br>
-	<br>
-	<button id="salir" onclick="window.location.href='http://localhost:8080/'">Salir</button>
+</div>
 
 </body>
 <script>
