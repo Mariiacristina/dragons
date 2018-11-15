@@ -7,53 +7,71 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 	<style>
+	body, html {
+		height: 100%;
+		text-align:center;
+}
+
+		.bg {
+		background-image: url("http://animalsbirds.com/wp-content/uploads/2017/04/Veiled-Chameleon-HD-Wallpapers-background-1024x640.jpg");
+		height: 100%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+}
 	 .confir{
-			background-color: #00cc00;
-			height:30%;
+			background-color: #32CD32;
+			height:10%;
 			padding: 10px 10px;
 			font-size: 32px;
 			border: ridge;
 			width: 250px;
 			font-style: italic;
-			color:white;
+			color:black;
 			}
 		.regis{
-			background-color: #0000ff;
-			height:30%;
+			background-color: #87CEEB;
+			height:10%;
 			padding: 10px 10px;
 			font-size: 32px;
 			border: ridge;
 			width: 250px;
 			font-style: italic;
-			color: #ffe6b3;
+			color: black;
 			}
 		.inpu{
-            background-color: #99b3ff;
-            height:20px;
-            padding: 20px 20px;
+			background-color: pink;
+			background: rgba(239,143,232,0.5);
+      height:20px;
+      padding: 20px 20px;
 			border: solid;
-			border-color: #3333ff;
-			font-size: 16px;
-			width: 50%;
-        }
-		.tx{
+			border-color: blue;
 			font-size: 30px;
-			font-color:red;
+			font-weight: bold;
+			width: 50%;
+			margin-bottom: 100px;
+        }
+		.confir:hover {
+		    background-color: #006400;
+				color:white;
+		}
+
+		.regis:hover {
+				background-color: #800080;
+				color:white;
+		}
+		.tx{
 			font-style: italic;
 			}
-		.bob{
-			background-color: #ccd9ff;
-			text-align:center;
-			padding: 120px;
-		}
 	</style>
+	<h1 class = "tx"> Iniciar Sesión</h1>
 </head>
-<body class="bob">
-
-	<p class="tx">Ingresa Usuario y Contraseña</p>
-	<br>
-	<p class="tx">Para iniciar sesión</p>
-
+<body>
+	<div class="bg">
+		<br>
+		<br>
+		<br>
+		<br>
 		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE" class="inpu">
 
 		<br><br>
@@ -66,12 +84,12 @@
 			Ingresar
 		</button>
 
-		
+
 		<button onclick="window.location.href='http://localhost:8080/register'" class="regis">Registrarse</button>
 		<br>
 		<br>
 		<div id="Error"></div>
-
+	</div>
 </body>
 <script>
 

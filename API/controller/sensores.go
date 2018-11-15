@@ -10,6 +10,8 @@ import (
 func GetTemperaturaSol(w http.ResponseWriter, r *http.Request) {
 	//aqui va lo que se obtiene del arduino
 	log.Println("SENSORES - GET TEMPERATURA SOL")
+	//vars := mux.Vars(r)
+	//id :=vars["idPersona"]
 	var temperatura_sol schema.Sensor
 	temperatura_sol.Nombre = "temperatura_sol"
 	temperatura_sol.Valor = 37

@@ -7,83 +7,83 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 	<style>
-		.bob{
-			background-color: #ffe6e6;
-			text-align:center;
-			padding: 100px;
-			}
-
-		.con{
-			background-color: #E6E6E6;
-			height:50px;
-			padding: 40px 40px;
-			border: double;
-			font-size: 20px;
-			}
-		.asd{
-			background-color: #fff2e6;
-			height:20px;
+	body, html {
+		height: 100%;
+		text-align:center;
+		background-image: url("https://stmed.net/sites/default/files/reptile-wallpapers-25600-5830782.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+}
+	 .confir{
+			background-color: #32CD32;
+			height:10%;
 			padding: 10px 10px;
+			font-size: 32px;
+			border: ridge;
+			width: 250px;
+			font-style: italic;
+			color:black;
+			}
+		.regis{
+			background-color: #87CEEB;
+			height:10%;
+			padding: 10px 10px;
+			font-size: 32px;
+			border: ridge;
+			width: 250px;
+			font-style: italic;
+			color: black;
+			}
+		.inpu{
+			background-color: black;
+			background: rgba(79,47,77,0.5);
+      height:20px;
+      padding: 20px 20px;
 			border: solid;
-			font-size: 16px;
-			width: 50%;
-			}
-		.tx{
+			border-color: blue;
 			font-size: 30px;
-			font-color:black;
-			font-style: italic;
-			}
-		.reg{
-			background-color: #ff6666;
-			height:30%;
-			padding: 10px 10px;
-			font-size: 32px;
-			border: ridge;
-			width: 250px;
-			font-style: italic;
-			color:white;
-			}	
-		.bk{
-			background-color: #ff9999;
-			height:30%;
-			padding: 10px 10px;
-			font-size: 32px;
-			border: ridge;
-			width: 250px;
-			font-style: italic;
-			color: #9933ff;
-			}
-		.vid{
-			height:30%;
-			width: 5500px;
+			font-weight: bold;
+			width: 50%;
+			margin-bottom: 100px;
+        }
+		.confir:hover {
+		    background-color: #006400;
+				color:white;
 		}
 
-
-
+		.regis:hover {
+				background-color: #800080;
+				color:white;
+		}
+		.tx{
+			font-size: 40px;
+			font-style: italic;
+			font-weight: bold;
+			}
 	</style>
 </head>
 <body class="bob">
-
 	<h1 class="tx">Crea Tu Usuario</h1>
 	<h2>Ingresa tu Nombre y Contraseña</h2>
 
-		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE" class="asd">
+		<input type="text" name="NOMBRE" id="NOMBRE" placeholder="NOMBRE" class="inpu">
 
 		<br><br>
 
-		<input type="text" name="PASSWORD" id="PASSWORD" placeholder="CONSTRASEÑA" class="asd">
+		<input type="text" name="PASSWORD" id="PASSWORD" placeholder="CONSTRASEÑA" class="inpu">
 
 		<br><br>
 
-		<input type="text" name="REPEAT-PASSWORD" id="RPASSWORD" placeholder="CONSTRASEÑA" class="asd">
+		<input type="text" name="REPEAT-PASSWORD" id="RPASSWORD" placeholder="REPETIR CONSTRASEÑA" class="inpu">
 
 		<br><br>
 
-		<button type="submit" id="boton" class="reg">
+		<button type="submit" id="boton" class="confir">
 			Registrarte
 		</button>
 
-		<button onclick="window.location.href='http://localhost:8080/'" class="bk">Regresar</button>
+		<button onclick="window.location.href='http://localhost:8080/'" class="regis">Regresar</button>
 
 </body>
 <script>
