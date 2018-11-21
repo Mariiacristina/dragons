@@ -7,6 +7,17 @@
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 	<style>
+
+	body, html {
+		height: 100%;
+		background-image: url("https://wallpapercave.com/wp/wp2165344.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+	* {
+			box-sizing: border-box;
+		}
         li {
             display: inline;
         }
@@ -45,75 +56,85 @@
             display: block;
         }
         }
-        .emergencia{
-            background-color: #00b300;
-            height:100px;
-            padding: 20px 20px;
-            border: solid;
+
+		.columna2{
+			float: right;
+				}
+
+		.columna{
+				float: left;
+			}
+
+		.css_boton {
+			height:100px;
+			width: 250px;
+			border: solid;
 			border-color: #3333ff;
-        }
-		.emergencia1{
-            background-color: #00b300;
-            height:100px;
-            padding: 20px 20px;
-            border: solid;
-			border-color: #3333ff;
-        }
-        .bo{
-			background-color: #ccffcc;
-			text-align:center;
-			padding: 25px;
+			font-style: italic;
+			color: black;
+			font-size: 20px;
 		}
-	 </style>
+
+		.row:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+		}
+
+		.txt{
+			color: white
+		}
+
+
+	 </style>/
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bo" onload="CargarBotones()">
+<body>
 
-	
+
 
 	<div class="navbar">
-		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a> 
-		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-hand-rock-o"></i> Panel Principal</a> 
-		<a href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Comfiguración</a> 
+		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a>
+		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-hand-rock-o"></i> Panel Principal</a>
+		<a href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Comfiguración</a>
 		<a href="http://localhost:8080/botones"><i class="fa fa-fw fa-bullseye"></i> Botones de Emergencia</a>
         <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
 	</div>
-	
 
 
-	<h1>BOTONES DE EMERGENCIA</h2>
-    
-		<br><br>
-        <h2>GESTIONAR PLACA</h2>
-		<button class="emergencia" type="submit" id="apagarplaca" value="placa">
-			  <h3>GESTIONAR PLACA </h3> 
-		</button>
+<h1 class = "txt">BOTONES DE EMERGENCIA</h2>
+	<div class = "row">
+		<div class = "columna">
+			<br><br>
+			<h2 class = "txt">LUZ ULTRA VIOLETA </h2>
+			<br><br>
+			<button class = "css_boton" type="submit" id="apagaruv" value="uv">
+			</button>
 
-    
-		<h2>GESTIONAR BOMBILLO </h2>
-		<br><br>
-		<button class="emergencia1" type="submit" id="apagarbombillo" value="bombillo">
-	    <h3>GESTIONAR BOMBILLO </h3> 
-		</button>
+			<h2 class = "txt">FOCO TERMICO </h2>
+			<br><br>
+			<button class = "css_boton" type="submit" id="apagarbombillo" value="bombillo">
+			</button>
+		</div>
 
-        <br><br>
-		<h2>GESTIONAR CASCADA </h2>
-		<button class="emergencia1" type="submit" id="apagarcascada" value="cascada">
-        <h3>GESTIONAR CASCADA </h3> 
-		</button>
+		<div class = "columna2">
+			<br><br>
+	        <h2 class = "txt">PLACA TERMICA</h2>
+			<button class = "css_boton" type="submit" id="apagarplaca" value="placa">
+			</button>
 
-        <br><br>
-		<h2>GESTIONAR UV </h2>
-		<br><br>
-		<button class="emergencia1" type="submit" id="apagaruv" value="uv">
-            <h3>GESTIONAR UV </h3> 
-		</button>
 
+	        <br><br>
+			<h2 class = "txt">CASCADA AUTOMÁTICA </h2>
+			<button class = "css_boton" type="submit" id="apagarcascada" value="cascada">
+			</button>
+		</div>
+	</div>
 </body>
 
 	<script>
-
-		function CargarBotones(){
+	$(document).ready(function () {
+		//------------------------get info botones
 			$.ajax({
 				url: 'http://localhost:8000/botones/',
 				contentType:"application/json; charset: utf-8",
@@ -121,97 +142,80 @@
 				withCredentials:false,
 				type: 'GET',
 				success: function (res){
-					console.log("Apagar o encender equipos")
-					console.log(res.placa)
-					var plac = res.placa
-					console.log(plac)
+					console.log("GET - BOTONES")
+
 					if (res.placa == 'true') {
-						//alert("Placa esta Apagado y se debe encender, ok");
-						localStorage.setItem('estadoplaca',res.placa);
-						document.getElementById('apagarplaca').innerHTML = res.placa;
+						document.getElementById('apagarplaca').innerHTML = "Está PRENDIDO";
 						document.getElementById("apagarplaca").style.background = "#00FF00";
-						console.log(apagarplaca.value);
-						console.log(localStorage.getItem('estadoplaca'));
 					} else {
-						//alert("Placa esta Encendido, se debe apagar");
-						localStorage.setItem('estadoplaca',res.placa);
-						document.getElementById('apagarplaca').innerHTML = res.placa
+						document.getElementById('apagarplaca').innerHTML = "Está APAGADO";
 						document.getElementById("apagarplaca").style.background = "#ff5b5a";
 					}
 					if (res.bombillo == 'true') {
-						//alert("Bombillo esta Apagado y se debe encender");
-						localStorage.setItem('estadobombillo',res.bombillo);
-						document.getElementById('apagarbombillo').innerHTML = res.bombillo
+						document.getElementById('apagarbombillo').innerHTML = "Está PRENDIDO";
 						document.getElementById("apagarbombillo").style.background = "#00FF00";
 					} else {
-						//alert("Bombillo esta Encendido, se debe apagar");
-						localStorage.setItem('estadobombillo',res.bombillo);
-						document.getElementById('apagarbombillo').innerHTML = res.bombillo
+
+						document.getElementById('apagarbombillo').innerHTML = "Está APAGADO";
 						document.getElementById("apagarbombillo").style.background = "#ff5b5a";
 						console.log(localStorage.getItem('estadobombillo'));
 					}
 					if (res.cascada == 'true') {
-						//alert("Cascada esta Apagado y se debe encender");
-						localStorage.setItem('estadocascada',res.cascada);
-						document.getElementById('apagarcascada').innerHTML = res.cascada
+
+						document.getElementById('apagarcascada').innerHTML = "Está PRENDIDO";
 						document.getElementById("apagarcascada").style.background = "#00FF00";
-						console.log(localStorage.getItem('estadocascada'));
 					} else {
-						//alert("Cascada esta Encendido, se debe apagar");
-						localStorage.setItem('estadocascada',res.cascada);
-						document.getElementById('apagarcascada').innerHTML = res.cascada
+
+						document.getElementById('apagarcascada').innerHTML = "Está APAGADO";
 						document.getElementById("apagarcascada").style.background = "#ff5b5a";
 					}
 					if (res.uv == 'true') {
-						//alert("Uv esta Apagado y se debe encender");
-						localStorage.setItem('estadouv',res.uv);
-						document.getElementById('apagaruv').innerHTML = res.uv
+						document.getElementById('apagaruv').innerHTML = "Está PRENDIDO";
 						document.getElementById("apagaruv").style.background = "#00FF00";
 					} else {
-						//alert("Uv esta Encendido, se debe apagar");
-						localStorage.setItem('estadouv',res.uv);
-						document.getElementById('apagaruv').innerHTML = res.uv
+						document.getElementById('apagaruv').innerHTML = "Está APAGADO";
 						document.getElementById("apagaruv").style.background = "#ff5b5a";
-						console.log(localStorage.getItem('estadouv'));
 					}
-				},
-			});
-		}
-
-		$('#apagarplaca')
-		.click(function(e){
-			console.log("Inicio de cambio de estado de Placa")
-			//if boton de apagar placa color == verde entonces manda un ajax apagandolo, y cmo respuesta cambie el color del boton a rojo
-			$.ajax({
-				//data: plaka,
-				url: 'http://localhost:8000/botones/placa/',
-				contentType:"application/json; charset: utf-8",
-				crossDomain: true,
-				withCredentials:false,
-				type: 'post',
-				
-				success: function (res){
-					console.log(res.placa);
-					if (res.placa == "true") {
-						alert("Placa esta encendida y se apaga");
-						document.getElementById('apagarplaca').innerHTML = res.placa;
-						document.getElementById("apagarplaca").style.background = "#00FF00";  //verde
-						localStorage.setItem('estadoplaca',res.placa);
-					} 
-					else {
-						alert("Placa esta Apagada y se enciende");
-						document.getElementById('apagarplaca').innerHTML = res.placa
-						document.getElementById("apagarplaca").style.background = "#ff5b5a";    //rojo
-						localStorage.setItem('estadoplaca',res.placa);
-					}
-					
-					},
-				error: function(){
-					alert("Hubo algun tipo de error.");		
-					}
+				}
 			});
 		});
 
+	$('#apagarplaca')
+	.click(function(e){
+		console.log("Inicio de cambio de estado de Placa")
+		var estado_placa
+		if (document.getElementById('apagarplaca').innerHTML == "Está PRENDIDO"){
+			estado_placa = 1
+		}else{
+			estado_placa = 0
+		}
+		//if boton de apagar placa color == verde entonces manda un ajax apagandolo, y cmo respuesta cambie el color del boton a rojo
+		$.ajax({
+			url: 'http://localhost:8000/botones/placa/',
+			contentType:"application/json; charset: utf-8",
+			crossDomain: true,
+			withCredentials:false,
+			type: 'put',
+			data: '{"nombre": "placa", "valor": "'+estado_placa+'"}'
+
+			success: function (res){
+				console.log(res.placa);
+				if (res.placa == "true") {
+					document.getElementById('apagarplaca').innerHTML = "Está PRENDIDO";
+					document.getElementById("apagarplaca").style.background = "#00FF00";  //verde
+				}
+				else {
+					document.getElementById('apagarplaca').innerHTML = "Está APAGADO"
+					document.getElementById("apagarplaca").style.background = "#ff5b5a";    //rojo
+				}
+
+			},
+			error: function(){
+				alert("Hubo algun tipo de error.");
+				}
+		});
+	});
+/*
 		$('#apagarbombillo')
 		.click(function(e){
 			console.log("Inicio de cambio de estado de Bombillo")
@@ -236,10 +240,10 @@
 						document.getElementById("apagarbombillo").style.background = "#ff5b5a";    //rojo
 						localStorage.setItem('estadobombillo',res.bombillo);
 					}
-					
+
 					},
 				error: function(){
-					alert("Hubo algun tipo de error.");		
+					alert("Hubo algun tipo de error.");
 					}
 			});
 		});
@@ -269,10 +273,10 @@
 						document.getElementById("apagarcascada").style.background = "#ff5b5a";    //rojo
 						localStorage.setItem('estadocascada',res.cascada);
 					}
-					
+
 					},
 				error: function(){
-					alert("Hubo algun tipo de error.");		
+					alert("Hubo algun tipo de error.");
 					}
 			});
 		});
@@ -301,13 +305,13 @@
 						document.getElementById("apagaruv").style.background = "#ff5b5a";    //rojo
 						localStorage.setItem('estadouv',res.uv);
 					}
-					
+
 					},
 				error: function(){
-					alert("Hubo algun tipo de error.");		
+					alert("Hubo algun tipo de error.");
 					}
 			});
 		});
-
+		*/
 	</script>
 </html>

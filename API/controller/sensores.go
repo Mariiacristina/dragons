@@ -158,7 +158,7 @@ func GetBotones(w http.ResponseWriter, r *http.Request) {
 	var botones schema.Botones
 	//Al escalar se puede agregar marca del complemeto para estadisticas
 	//Valores debiesen obtenerse de una bbdd
-	botones.Placa = "true"
+	botones.Placa = "false"
 	botones.EstadoPlaca = "estadoplaca"
 	botones.Bombillo = "false"
 	botones.EstadoBombillo = "estadobombillo"

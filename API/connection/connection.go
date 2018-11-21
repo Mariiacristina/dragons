@@ -9,7 +9,7 @@ var (
   errdb error
 )
 func Connect()(db *sql.DB){
-  db, errdb := sql.Open("mysql","sql10256343:ve2NaIqaIW@tcp(sql10.freemysqlhosting.net:3306)/sql10256343")
+  db, errdb := sql.Open("mysql","sql10266487:wLdQ9eVH2A@tcp(sql10.freemysqlhosting.net:3306)/sql10266487")
   if errdb != nil{
     log.Println("Error al connectar a la bdd")
     return

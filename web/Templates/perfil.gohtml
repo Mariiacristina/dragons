@@ -194,23 +194,23 @@
 	<br>
 
 	<div style = "float:left">Temperatura Zona calor Máxima :</div>
-	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_max"></div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_max"></div>
 	<br>
 	<br>
 	<div style="float:left">Temperatura Zona calor Mínima :</div>
-	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_min"></div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="sol_min"></div>
 	<br>
 	<br>
 	<div style="float:left">Temperatura Terrario Máxima :</div>
-	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_max"></div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_max"></div>
 	<br>
 	<br>
 	<div style = "float:left">Temperatura Terrario Mínima :</div>
-	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="temp_min"></div>
 	<br>
 	<br>
 	<div style = "float:left">Humedad Terrario Mínima :</div>
-	<div style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
 	<br>
 	<br>
 	<br>
@@ -532,6 +532,7 @@ var contenido = $('.reptile').html();
 $('.reptile').blur(function() {
     if (contenido!=$(this).html()){
 			count ++;
+			console.log(count)
     }
 });
 //---------------------------BOTON SALIR--------------------------
