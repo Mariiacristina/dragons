@@ -17,6 +17,7 @@ func main() {
 	http.HandleFunc("/panel",panel)
 	http.HandleFunc("/botones",botones)
 	http.HandleFunc("/perfil",perfil)
+	http.HandleFunc("/alarmas",alarmas)
 	http.ListenAndServe(":8080", nil)
 
 }
@@ -39,4 +40,8 @@ func perfil(w http.ResponseWriter, r *http.Request) {
 
 func botones(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "botones.gohtml", nil)
+}
+
+func alarmas(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "alarmas.gohtml", nil)
 }

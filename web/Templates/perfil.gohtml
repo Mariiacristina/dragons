@@ -142,11 +142,11 @@
 </head>
 <body>
 	<div class="navbar">
-		<a class="active" href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a>
-		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-bomb"></i> Panel Principal</a>
-		<a href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Configuración</a>
+		<a href="http://localhost:8080/panel"><i class="fa fa-fw fa-linux"></i> Home</a>
+    <a href="http://localhost:8080/alarmas"><i class="fa fa-fw fa-hand-rock-o"></i> Alarmas</a>
+		<a class="active" href="http://localhost:8080/perfil"><i class="fa fa-fw fa-code-fork"></i> Perfil de Configuración</a>
 		<a href="http://localhost:8080/botones"><i class="fa fa-fw fa-bullseye"></i> Botones de Emergencia</a>
-        <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+    <a href="http://localhost:8080/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
 	</div>
 
 <div class = "row">
@@ -213,7 +213,21 @@
 	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="humedad_min"></div>
 	<br>
 	<br>
+	<div style = "float:left">Luz UV dia (prender luz uv):</div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="uv_inicio"></div>
 	<br>
+	<br>
+	<div style = "float:left">Luz UV noche (apagar luz uv):</div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="uv_tiempo"></div>
+	<br>
+	<br>
+	<div style = "float:left">Tiempo de encendido Catarata Automatica :</div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="catarata_on"></div>
+	<br>
+	<br>
+	<div style = "float:left">Tiempo apagado Catarata Automatica :</div>
+	<div class ="reptile" style = "float:left;width: 50px;height: 20px;" contentEditable="true" id="catarata_off"></div>
+
 	<button style = "float:right" class = "confir" type="submit" id="update_reptil">
 		Guardar Cambios
 	</button>
@@ -284,6 +298,10 @@
 			document.getElementById('temp_min').innerHTML = res.temp_min
 			document.getElementById('humedad_min').innerHTML = res.humedad_min
 			document.getElementById('config').value = res.config_chosen
+			document.getElementById('uv_inicio').innerHTML = res.uv_inicio
+			document.getElementById('uv_tiempo').innerHTML = res.uv_tiempo
+			document.getElementById('catarata_on').innerHTML = res.catarata_on
+			document.getElementById('catarata_off').innerHTML = res.catarata_off
 		},
 		});
 		//-------------GET AUTO PERFIL---------------------------
@@ -390,6 +408,10 @@
 					document.getElementById('temp_max').innerHTML = res.temp_max
 					document.getElementById('temp_min').innerHTML = res.temp_min
 					document.getElementById('humedad_min').innerHTML = res.humedad_min
+					document.getElementById('uv_inicio').innerHTML = res.uv_inicio
+					document.getElementById('uv_tiempo').innerHTML = res.uv_tiempo
+					document.getElementById('catarata_on').innerHTML = res.catarata_on
+					document.getElementById('catarata_off').innerHTML = res.catarata_off
 				},
 			 });
 		}else{
@@ -407,6 +429,10 @@
 				document.getElementById('temp_max').innerHTML = res.temp_max
 				document.getElementById('temp_min').innerHTML = res.temp_min
 				document.getElementById('humedad_min').innerHTML = res.humedad_min
+				document.getElementById('uv_inicio').innerHTML = res.uv_inicio
+				document.getElementById('uv_tiempo').innerHTML = res.uv_tiempo
+				document.getElementById('catarata_on').innerHTML = res.catarata_on
+				document.getElementById('catarata_off').innerHTML = res.catarata_off
 			},
 			error: function(){
 				alert("Hubo algun tipo de error.");
@@ -461,7 +487,11 @@ temp_max = document.getElementById('temp_max').innerHTML
 temp_min = document.getElementById('temp_min').innerHTML
 humedad_min = document.getElementById('humedad_min').innerHTML
 config_chosen = "personalizada"
-var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'"}';
+uv_inicio = document.getElementById('uv_inicio').innerHTML
+uv_tiempo = document.getElementById('uv_tiempo').innerHTML
+catarata_on = document.getElementById('catarata_on').innerHTML
+catarata_off = document.getElementById('catarata_off').innerHTML
+var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'","uv_inicio": "'+uv_inicio+'","uv_tiempo": "'+uv_tiempo+'","catarata_on": "'+catarata_on+'","catarata_off": "'+catarata_off+'"}';
 console.log("UPDATE - Configuración reptil con configuración personalizada")
 console.log(info)
 $.ajax({
@@ -484,6 +514,10 @@ $.ajax({
 		document.getElementById('temp_min').innerHTML = res.temp_min
 		document.getElementById('humedad_min').innerHTML = res.humedad_min
 		document.getElementById('config').value = res.config_chosen
+		document.getElementById('uv_inicio').innerHTML = res.uv_inicio
+		document.getElementById('uv_tiempo').innerHTML = res.uv_tiempo
+		document.getElementById('catarata_on').innerHTML = res.catarata_on
+		document.getElementById('catarata_off').innerHTML = res.catarata_off
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
@@ -496,7 +530,11 @@ $.ajax({
 	temp_min = document.getElementById('temp_min').innerHTML
 	humedad_min = document.getElementById('humedad_min').innerHTML
 	config_chosen = document.getElementById('config').value
-	var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'"}';
+	uv_inicio = document.getElementById('uv_inicio').innerHTML
+	uv_tiempo = document.getElementById('uv_tiempo').innerHTML
+	catarata_on = document.getElementById('catarata_on').innerHTML
+	catarata_off = document.getElementById('catarata_off').innerHTML
+	var info ='{"sol_max": "'+sol_max+'","sol_min": "'+sol_min+'","temp_max": "'+temp_max+'","temp_min": "'+temp_min+'","humedad_min": "'+humedad_min+'","config_chosen": "'+config_chosen+'","uv_inicio": "'+uv_inicio+'","uv_tiempo": "'+uv_tiempo+'","catarata_on": "'+catarata_on+'","catarata_off": "'+catarata_off+'"}';
 	console.log("UPDATE - Configuración reptil con configuración default")
 	console.log(info)
 	$.ajax({
@@ -519,6 +557,10 @@ $.ajax({
 			document.getElementById('temp_min').innerHTML = res.temp_min
 			document.getElementById('humedad_min').innerHTML = res.humedad_min
 			document.getElementById('config').value = res.config_chosen
+			document.getElementById('uv_inicio').innerHTML = res.uv_inicio
+			document.getElementById('uv_tiempo').innerHTML = res.uv_tiempo
+			document.getElementById('catarata_on').innerHTML = res.catarata_on
+			document.getElementById('catarata_off').innerHTML = res.catarata_off
 		},
 		error: function(){
 			alert("Hubo algun tipo de error.");

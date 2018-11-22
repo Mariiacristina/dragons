@@ -22,6 +22,10 @@ type Reptil struct {
 	Temp_min      string `json:"temp_min, omitempty"`
 	Humedad_min   string `json:"humedad_min, omitempty"`
 	Config_chosen string `json:"config_chosen, omitempty"`
+	Uv_inicio      string `json:"uv_inicio, omitempty"`
+	Uv_tiempo      string `json:"uv_tiempo, omitempty"`
+	Catarata_on   string `json:"catarata_on, omitempty"`
+	Catarata_off string `json:"catarata_off, omitempty"`
 }
 
 type Sensor struct {
