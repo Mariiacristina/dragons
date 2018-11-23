@@ -6,6 +6,7 @@ import(
   "Reptile/API/connection"
   "strconv"
   "database/sql"
+  "fmt"
 )
 
 
@@ -46,8 +47,10 @@ func GetAccesorios_esp(id string)(resp_accesorios schema.Objetos,err error){
 //arreglar este update
 func UpdateAccesorio(id string,update_accesorio schema.Sensor)(accesorio_update schema.Sensor,err error){
   new_id,err := strconv.Atoi(id)
+  log.Println(update_accesorio)
   db := connection.Connect()
-    _,err = db.Exec("UPDATE estado_objetos SET ? = ? WHERE estado_objetos.id_cliente = ?",update_accesorio.Nombre,update_accesorio.Valor,new_id)
+  s := fmt.Sprintf("UPDATE estado_objetos SET %s = %d WHERE estado_objetos.id_cliente = %d",update_accesorio.Nombre,update_accesorio.Valor,new_id)
+  _,err = db.Exec(s)
   connection.Disconnect(db)
   if(err != nil) {
     log.Println("Problema en actualizar accesorios", err)

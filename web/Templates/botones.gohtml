@@ -196,12 +196,15 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "uv", "valor": "0"}',
+				data: '{"nombre": "uv", "valor": 0}',
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
+					console.log(res)
+					if (res.valor == 0) {
 						document.getElementById('foco_uv').innerHTML = "Está APAGADO"
 						document.getElementById("foco_uv").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('foco_uv').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_uv").style.background = "#00FF00";
 					}
 
 				},
@@ -218,13 +221,16 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "uv", "valor": "1"}',
+				data: '{"nombre": "uv", "valor": 1}',
 
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
-						document.getElementById('foco_uv').innerHTML = "Está PRENDIDO"
+					console.log(res)
+					if (res.valor == 0) {
+						document.getElementById('foco_uv').innerHTML = "Está APAGADO"
 						document.getElementById("foco_uv").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('foco_uv').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_uv").style.background = "#00FF00";
 					}
 
 				},
@@ -248,14 +254,15 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "foco_termico", "valor": "0"}',
+				data: '{"nombre": "foco_termico", "valor": 0}',
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
+					if (res.valor == 0) {
 						document.getElementById('foco_termico').innerHTML = "Está APAGADO"
 						document.getElementById("foco_termico").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('foco_termico').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_termico").style.background = "#00FF00";
 					}
-
 				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
@@ -270,15 +277,16 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "foco_termico", "valor": "1"}',
+				data: '{"nombre": "foco_termico", "valor": 1}',
 
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
-						document.getElementById('foco_termico').innerHTML = "Está PRENDIDO"
+					if (res.valor == 0) {
+						document.getElementById('foco_termico').innerHTML = "Está APAGADO"
 						document.getElementById("foco_termico").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('foco_termico').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_termico").style.background = "#00FF00";
 					}
-
 				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
@@ -300,14 +308,15 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "placa_termica", "valor": "0"}',
+				data: '{"nombre": "placa_termica", "valor": 0}',
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
+					if (res.valor == 0) {
 						document.getElementById('placa_termica').innerHTML = "Está APAGADO"
 						document.getElementById("placa_termica").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('placa_termica').innerHTML = "Está PRENDIDO";
+						document.getElementById("placa_termica").style.background = "#00FF00";
 					}
-
 				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
@@ -322,15 +331,16 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "placa_termica", "valor": "1"}',
+				data: '{"nombre": "placa_termica", "valor": 1}',
 
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
-						document.getElementById('placa_termica').innerHTML = "Está PRENDIDO"
+					if (res.valor == 0) {
+						document.getElementById('placa_termica').innerHTML = "Está APAGADO"
 						document.getElementById("placa_termica").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('placa_termica').innerHTML = "Está PRENDIDO";
+						document.getElementById("placa_termica").style.background = "#00FF00";
 					}
-
 				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
@@ -353,12 +363,14 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "catarata", "valor": "0"}',
+				data: '{"nombre": "catarata", "valor": 0}',
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
+					if (res.valor == 0) {
 						document.getElementById('catarata').innerHTML = "Está APAGADO"
 						document.getElementById("catarata").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('catarata').innerHTML = "Está PRENDIDO";
+						document.getElementById("catarata").style.background = "#00FF00";
 					}
 
 				},
@@ -375,13 +387,15 @@
 				crossDomain: true,
 				withCredentials:false,
 				type: 'put',
-				data: '{"nombre": "catarata", "valor": "1"}',
+				data: '{"nombre": "catarata", "valor": 1}',
 
 				success: function (res){
-					console.log(res.placa);
-					if (res.placa == 0) {
-						document.getElementById('catarata').innerHTML = "Está PRENDIDO"
+					if (res.valor == 0) {
+						document.getElementById('catarata').innerHTML = "Está APAGADO"
 						document.getElementById("catarata").style.background = "#ff5b5a";    //rojo
+					}else{
+						document.getElementById('catarata').innerHTML = "Está PRENDIDO";
+						document.getElementById("catarata").style.background = "#00FF00";
 					}
 
 				},
