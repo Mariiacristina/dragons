@@ -18,72 +18,72 @@
 	* {
 			box-sizing: border-box;
 		}
-        li {
-            display: inline;
-        }
+      li {
+          display: inline;
+      }
 
-        /* Style the navigation bar */
-        .navbar {
-        width: 100%;
-        background-color: #555;
-        overflow: auto;
-        }
+      /* Style the navigation bar */
+      .navbar {
+      width: 100%;
+      background-color: #555;
+      overflow: auto;
+      }
 
-        /* Navbar links */
-        .navbar a {
-        float: left;
-        text-align: center;
-        padding: 12px;
-        color: white;
-        text-decoration: none;
-        font-size: 17px;
-        }
+      /* Navbar links */
+      .navbar a {
+      float: left;
+      text-align: center;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+      }
 
-        /* Navbar links on mouse-over */
-        .navbar a:hover {
-        background-color: #000;
-        }
+      /* Navbar links on mouse-over */
+      .navbar a:hover {
+      background-color: #000;
+      }
 
-        /* Current/active navbar link */
-        .active {
-        background-color: #4CAF50;
-        }
+      /* Current/active navbar link */
+      .active {
+      background-color: #4CAF50;
+      }
 
-        /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
-        @media screen and (max-width: 500px) {
-        .navbar a {
-            float: none;
-            display: block;
-        }
-        }
+      /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+      @media screen and (max-width: 500px) {
+      .navbar a {
+          float: none;
+          display: block;
+      }
+      }
 
-		.columna2{
-			float: right;
-				}
-
-		.columna{
-				float: left;
+	.columna2{
+		float: right;
 			}
 
-		.css_boton {
-			height:100px;
-			width: 250px;
-			border: solid;
-			border-color: #3333ff;
-			font-style: italic;
-			color: black;
-			font-size: 20px;
+	.columna{
+			float: left;
 		}
 
-		.row:after {
-	    content: "";
-	    display: table;
-	    clear: both;
-		}
+	.css_boton {
+		height:100px;
+		width: 250px;
+		border: solid;
+		border-color: #3333ff;
+		font-style: italic;
+		color: black;
+		font-size: 20px;
+	}
 
-		.txt{
-			color: white
-		}
+	.row:after {
+    content: "";
+    display: table;
+    clear: both;
+	}
+
+	.txt{
+		color: white
+	}
 
 
 	 </style>/
@@ -108,35 +108,39 @@
 			<br><br>
 			<h2 class = "txt">LUZ ULTRA VIOLETA </h2>
 			<br><br>
-			<button class = "css_boton" type="submit" id="apagaruv" value="uv">
+			<button class = "css_boton" type="submit" id="foco_uv">
 			</button>
 
 			<h2 class = "txt">FOCO TERMICO </h2>
 			<br><br>
-			<button class = "css_boton" type="submit" id="apagarbombillo" value="bombillo">
+			<button class = "css_boton" type="submit" id="foco_termico">
 			</button>
 		</div>
 
 		<div class = "columna2">
 			<br><br>
 	        <h2 class = "txt">PLACA TERMICA</h2>
-			<button class = "css_boton" type="submit" id="apagarplaca" value="placa">
+			<button class = "css_boton" type="submit" id="placa_termica">
 			</button>
 
 
 	        <br><br>
 			<h2 class = "txt">CASCADA AUTOMÁTICA </h2>
-			<button class = "css_boton" type="submit" id="apagarcascada" value="cascada">
+			<button class = "css_boton" type="submit" id="catarata">
 			</button>
 		</div>
 	</div>
 </body>
 
 	<script>
+	var id=localStorage.getItem("id_cliente")
+	console.log("el id del cliente ingresado es:")
+	console.log(id)
+
 	$(document).ready(function () {
 		//------------------------get info botones
 			$.ajax({
-				url: 'http://localhost:8000/botones/',
+				url: 'http://localhost:8000/accesorios/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
@@ -144,174 +148,250 @@
 				success: function (res){
 					console.log("GET - BOTONES")
 
-					if (res.placa == 'true') {
-						document.getElementById('apagarplaca').innerHTML = "Está PRENDIDO";
-						document.getElementById("apagarplaca").style.background = "#00FF00";
+					if (res.uv == 1) {
+						document.getElementById('foco_uv').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_uv").style.background = "#00FF00";
 					} else {
-						document.getElementById('apagarplaca').innerHTML = "Está APAGADO";
-						document.getElementById("apagarplaca").style.background = "#ff5b5a";
+						document.getElementById('foco_uv').innerHTML = "Está APAGADO";
+						document.getElementById("foco_uv").style.background = "#ff5b5a";
 					}
-					if (res.bombillo == 'true') {
-						document.getElementById('apagarbombillo').innerHTML = "Está PRENDIDO";
-						document.getElementById("apagarbombillo").style.background = "#00FF00";
+					if (res.focotermico == 1) {
+						document.getElementById('foco_termico').innerHTML = "Está PRENDIDO";
+						document.getElementById("foco_termico").style.background = "#00FF00";
+					} else {
+						document.getElementById('foco_termico').innerHTML = "Está APAGADO";
+						document.getElementById("foco_termico").style.background = "#ff5b5a";
+					}
+					if (res.placatermica == 1) {
+
+						document.getElementById('placa_termica').innerHTML = "Está PRENDIDO";
+						document.getElementById("placa_termica").style.background = "#00FF00";
 					} else {
 
-						document.getElementById('apagarbombillo').innerHTML = "Está APAGADO";
-						document.getElementById("apagarbombillo").style.background = "#ff5b5a";
-						console.log(localStorage.getItem('estadobombillo'));
+						document.getElementById('placa_termica').innerHTML = "Está APAGADO";
+						document.getElementById("placa_termica").style.background = "#ff5b5a";
 					}
-					if (res.cascada == 'true') {
-
-						document.getElementById('apagarcascada').innerHTML = "Está PRENDIDO";
-						document.getElementById("apagarcascada").style.background = "#00FF00";
+					if (res.catarata == 1) {
+						document.getElementById('catarata').innerHTML = "Está PRENDIDO";
+						document.getElementById("catarata").style.background = "#00FF00";
 					} else {
-
-						document.getElementById('apagarcascada').innerHTML = "Está APAGADO";
-						document.getElementById("apagarcascada").style.background = "#ff5b5a";
+						document.getElementById('catarata').innerHTML = "Está APAGADO";
+						document.getElementById("catarata").style.background = "#ff5b5a";
 					}
-					if (res.uv == 'true') {
-						document.getElementById('apagaruv').innerHTML = "Está PRENDIDO";
-						document.getElementById("apagaruv").style.background = "#00FF00";
-					} else {
-						document.getElementById('apagaruv').innerHTML = "Está APAGADO";
-						document.getElementById("apagaruv").style.background = "#ff5b5a";
-					}
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
 				}
 			});
 		});
-
-	$('#apagarplaca')
+//-------------------------------ON CLICK---------------------------------------
+	$('#foco_uv')
 	.click(function(e){
-		console.log("Inicio de cambio de estado de Placa")
-		var estado_placa
-		if (document.getElementById('apagarplaca').innerHTML == "Está PRENDIDO"){
-			estado_placa = 1
+		console.log("UPDATE FOCO_UV")
+		if (document.getElementById('foco_uv').innerHTML == "Está PRENDIDO"){
+			//está prendido, hay que apagarlo
+			console.log("APAGAR FOCO UV")
+			$.ajax({
+				url: 'http://localhost:8000/botones/update/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'put',
+				data: '{"nombre": "uv", "valor": "0"}',
+				success: function (res){
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('foco_uv').innerHTML = "Está APAGADO"
+						document.getElementById("foco_uv").style.background = "#ff5b5a";    //rojo
+					}
+
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
+					}
+			});
 		}else{
-			estado_placa = 0
+			//etá apagado, hay que prenderlo
+			console.log("PRENDER FOCO UV")
+			$.ajax({
+				url: 'http://localhost:8000/botones/update/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'put',
+				data: '{"nombre": "uv", "valor": "1"}',
+
+				success: function (res){
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('foco_uv').innerHTML = "Está PRENDIDO"
+						document.getElementById("foco_uv").style.background = "#ff5b5a";    //rojo
+					}
+
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
+					}
+			});
 		}
-		//if boton de apagar placa color == verde entonces manda un ajax apagandolo, y cmo respuesta cambie el color del boton a rojo
-		$.ajax({
-			url: 'http://localhost:8000/botones/placa/',
-			contentType:"application/json; charset: utf-8",
-			crossDomain: true,
-			withCredentials:false,
-			type: 'put',
-			data: '{"nombre": "placa", "valor": "'+estado_placa+'"}'
 
-			success: function (res){
-				console.log(res.placa);
-				if (res.placa == "true") {
-					document.getElementById('apagarplaca').innerHTML = "Está PRENDIDO";
-					document.getElementById("apagarplaca").style.background = "#00FF00";  //verde
-				}
-				else {
-					document.getElementById('apagarplaca').innerHTML = "Está APAGADO"
-					document.getElementById("apagarplaca").style.background = "#ff5b5a";    //rojo
-				}
-
-			},
-			error: function(){
-				alert("Hubo algun tipo de error.");
-				}
-		});
 	});
-/*
-		$('#apagarbombillo')
-		.click(function(e){
-			console.log("Inicio de cambio de estado de Bombillo")
+
+	$('#foco_termico')
+	.click(function(e){
+		console.log("UPDATE FOCO_TERMICO")
+		if (document.getElementById('foco_termico').innerHTML == "Está PRENDIDO"){
+			//está prendido, hay que apagarlo
+			console.log("APAGAR FOCO TERMICO")
 			$.ajax({
-				url: 'http://localhost:8000/botones/bombillo/',
+				url: 'http://localhost:8000/botones/update/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
-				type: 'post',
-				beforeSend: function(){
-					window.alert("Procesando, espere porfavor...");
-				},
+				type: 'put',
+				data: '{"nombre": "foco_termico", "valor": "0"}',
 				success: function (res){
-					console.log(res.bombillo);
-					if (res.bombillo == "true") {
-						alert("bombillo esta encendida y se apaga");
-						document.getElementById('apagarbombillo').innerHTML = res.bombillo;
-						document.getElementById("apagarbombillo").style.background = "#00FF00";  //verde
-						localStorage.setItem('estadobombillo',res.bombillo);
-					}	else {		alert("bombillo esta Apagada y se enciende");
-						document.getElementById('apagarbombillo').innerHTML = res.bombillo
-						document.getElementById("apagarbombillo").style.background = "#ff5b5a";    //rojo
-						localStorage.setItem('estadobombillo',res.bombillo);
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('foco_termico').innerHTML = "Está APAGADO"
+						document.getElementById("foco_termico").style.background = "#ff5b5a";    //rojo
 					}
 
-					},
+				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
 					}
 			});
-		});
-
-
-		$('#apagarcascada')
-		.click(function(e){
-			console.log("Inicio de cambio de estado de Cascada")
+		}else{
+			//etá apagado, hay que prenderlo
+			console.log("PRENDER FOCO TERMICO")
 			$.ajax({
-				url: 'http://localhost:8000/botones/cascada/',
+				url: 'http://localhost:8000/botones/update/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
-				type: 'post',
-				beforeSend: function(){
-					window.alert("Procesando, espere porfavor...");
-				},
+				type: 'put',
+				data: '{"nombre": "foco_termico", "valor": "1"}',
+
 				success: function (res){
-					console.log(res.cascada);
-					if (res.cascada == "true") {
-						alert("cascada esta encendida y se apaga");
-						document.getElementById('apagarcascada').innerHTML = res.cascada;
-						document.getElementById("apagarcascada").style.background = "#00FF00";  //verde
-						localStorage.setItem('estadocascada',res.cascada);
-					}	else {		alert("cascada esta Apagada y se enciende");
-						document.getElementById('apagarcascada').innerHTML = res.cascada
-						document.getElementById("apagarcascada").style.background = "#ff5b5a";    //rojo
-						localStorage.setItem('estadocascada',res.cascada);
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('foco_termico').innerHTML = "Está PRENDIDO"
+						document.getElementById("foco_termico").style.background = "#ff5b5a";    //rojo
 					}
 
-					},
+				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
 					}
 			});
-		});
+		}
 
-		$('#apagaruv')
-		.click(function(e){
-			console.log("Inicio de cambio de estado de Uv")
+	});
+
+	$('#placa_termica')
+	.click(function(e){
+		console.log("UPDATE PLACA TERMICA")
+		if (document.getElementById('placa_termica').innerHTML == "Está PRENDIDO"){
+			//está prendido, hay que apagarlo
+			console.log("APAGAR PLACA TERMICA")
 			$.ajax({
-				url: 'http://localhost:8000/botones/uv/',
+				url: 'http://localhost:8000/botones/update/'+id+'',
 				contentType:"application/json; charset: utf-8",
 				crossDomain: true,
 				withCredentials:false,
-				type: 'post',
-				beforeSend: function(){
-					window.alert("Procesando, espere porfavor...");
-				},
+				type: 'put',
+				data: '{"nombre": "placa_termica", "valor": "0"}',
 				success: function (res){
-					console.log(res.uv);
-					if (res.uv == "true") {
-						alert("uv esta encendida y se apaga");
-						document.getElementById('apagaruv').innerHTML = res.uv;
-						document.getElementById("apagaruv").style.background = "#00FF00";  //verde
-						localStorage.setItem('estadouv',res.uv);
-					}	else {		alert("uv esta Apagada y se enciende");
-						document.getElementById('apagaruv').innerHTML = res.uv
-						document.getElementById("apagaruv").style.background = "#ff5b5a";    //rojo
-						localStorage.setItem('estadouv',res.uv);
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('placa_termica').innerHTML = "Está APAGADO"
+						document.getElementById("placa_termica").style.background = "#ff5b5a";    //rojo
 					}
 
-					},
+				},
 				error: function(){
 					alert("Hubo algun tipo de error.");
 					}
 			});
-		});
-		*/
+		}else{
+			console.log("PRENDER PLACA TERMICA")
+			//etá apagado, hay que prenderlo
+			$.ajax({
+				url: 'http://localhost:8000/botones/update/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'put',
+				data: '{"nombre": "placa_termica", "valor": "1"}',
+
+				success: function (res){
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('placa_termica').innerHTML = "Está PRENDIDO"
+						document.getElementById("placa_termica").style.background = "#ff5b5a";    //rojo
+					}
+
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
+					}
+			});
+		}
+
+	});
+
+	$('#catarata')
+	.click(function(e){
+		console.log("UPDATE CATARATA")
+		var estado_placa
+		if (document.getElementById('catarata').innerHTML == "Está PRENDIDO"){
+			//está prendido, hay que apagarlo
+			console.log("APAGAR CATARATA")
+			$.ajax({
+				url: 'http://localhost:8000/botones/update/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'put',
+				data: '{"nombre": "catarata", "valor": "0"}',
+				success: function (res){
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('catarata').innerHTML = "Está APAGADO"
+						document.getElementById("catarata").style.background = "#ff5b5a";    //rojo
+					}
+
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
+					}
+			});
+		}else{
+			console.log("PRENDER CATARATA")
+			//etá apagado, hay que prenderlo
+			$.ajax({
+				url: 'http://localhost:8000/botones/update/'+id+'',
+				contentType:"application/json; charset: utf-8",
+				crossDomain: true,
+				withCredentials:false,
+				type: 'put',
+				data: '{"nombre": "catarata", "valor": "1"}',
+
+				success: function (res){
+					console.log(res.placa);
+					if (res.placa == 0) {
+						document.getElementById('catarata').innerHTML = "Está PRENDIDO"
+						document.getElementById("catarata").style.background = "#ff5b5a";    //rojo
+					}
+
+				},
+				error: function(){
+					alert("Hubo algun tipo de error.");
+					}
+			});
+		}
+
+	});
 	</script>
 </html>

@@ -84,6 +84,8 @@ func UpdateReptil(id string,update_reptil schema.Reptil)(reptil schema.Reptil,er
   }
   if(err != nil && err == sql.ErrNoRows){
     _,errExec = db.Exec("INSERT INTO config_cliente VALUES(?,?,?,?,?,?,?,?,?,?,?)",new_id,update_reptil.Sol_max,update_reptil.Sol_min,update_reptil.Temp_max,update_reptil.Temp_min,update_reptil.Humedad_min,update_reptil.Config_chosen,update_reptil.Uv_inicio,update_reptil.Uv_tiempo,update_reptil.Catarata_on,update_reptil.Catarata_off)
+    _,err = db.Exec("INSERT INTO esp (id_cliente,sensor_sol,sensor_terrario,sensor_humedad,estado_placa,estado_bombillo,estado_cascada,estado_uv) VALUES (?,0,0,0,0,0,0,0)",new_id)
+    _,err = db.Exec("INSERT INTO estado_objetos (id_cliente,uv,foco_termico,placa_termica,catarata) VALUES (?,0,0,0,0)",new_id)
     connection.Disconnect(db)
     if(errExec != nil) {
       log.Println("Problema en INSERTAR Reptil:", err)

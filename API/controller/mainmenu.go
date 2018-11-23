@@ -41,21 +41,3 @@ func Register(w http.ResponseWriter, r *http.Request){
     w.WriteHeader(http.StatusCreated)
   }
 }
-
-
-/*
-log.Println("Se ha loggueado exitosamente")
-//
-//esta parte es para devolver a un usuariooooo
-// \/
-//setea la cabezera como tipo json
-w.Header().Set("Content-Type", "application/json")
-json, errjson := json.Marshal(persona)
-if errjson != nil {
-  http.Error(w,"error json", http.StatusInternalServerError)
-  return
-}
-//escribimos como cabezera que está todo bien y esscribimos el cuerpo
-w.WriteHeader(http.StatusOK)
-w.Write(json)
-*/

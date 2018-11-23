@@ -25,6 +25,7 @@ func GetInfoPersona(w http.ResponseWriter, r *http.Request){
       http.Error(w,"error json", http.StatusInternalServerError)
       return
     }
+    //escribir en cabezera
     w.WriteHeader(http.StatusOK)
     w.Write(json)
   }

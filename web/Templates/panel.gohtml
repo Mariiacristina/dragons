@@ -93,6 +93,8 @@ body, html {
 		Foco Termico:  <output id="foco_termico"></output>
 		<br>
 		Placa Termica:  <output id="placa_termica"></output>
+		<br>
+		Catarata Automática:  <output id="catarata"></output>
 	</p>
 </div>
 
@@ -101,13 +103,14 @@ body, html {
 
 $(document).ready(function () {
 //--------------GET ID-----------
+
 var id=localStorage.getItem("id_cliente")
 console.log("el id del cliente ingresado es:")
 console.log(id)
 
-//GET TEMPERATURA SOL
+//------------GET SENSORES---------------------
 $.ajax({
-	url: 'http://localhost:8000/pp/temp/'+id+'',
+	url: 'http://localhost:8000/sensores/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
@@ -115,104 +118,58 @@ $.ajax({
 	success: function (res){
 		console.log("SENSOR - TEMPERATURA SOL")
 		console.log(res);
-		document.getElementById('temp_sol').value = res.valor
+		document.getElementById('temp_sol').value = res.sol
+		document.getElementById('temp_terrario').value = res.terrario
+		document.getElementById('temp_humedad').value = res.humedad
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}
 	});
 
-//GET TEMPERATURA TERRARIO
+	//------------GET OBJETOS---------------------
 $.ajax({
-	url: 'http://localhost:8000/pp/tempterrario',
+	url: 'http://localhost:8000/accesorios/'+id+'',
 	contentType:"application/json; charset: utf-8",
 	crossDomain: true,
 	withCredentials:false,
 	type: 'GET',
 	success: function (res){
-		console.log("SENSOR - TEMPERATURA TERRARIO")
+		console.log("SENSOR - TEMPERATURA SOL")
 		console.log(res);
-		document.getElementById('temp_terrario').value = res.valor
+		if (res.uv == 1){
+			document.getElementById('foco_uv').value = "ON"
+		}else{
+			document.getElementById('foco_uv').value = "OFF"
+		}
+		if (res.focotermico == 1){
+			document.getElementById('foco_termico').value = "ON"
+		}else{
+			document.getElementById('foco_termico').value = "OFF"
+		}
+		if (res.placatermica == 1){
+			document.getElementById('placa_termica').value = "ON"
+		}else{
+			document.getElementById('placa_termica').value = "OFF"
+		}
+		if (res.catarata == 1){
+			document.getElementById('catarata').value = "ON"
+		}else{
+			document.getElementById('catarata').value = "OFF"
+		}
 	},
 	error: function(){
 		alert("Hubo algun tipo de error.");
 	}
 	});
 
-//GET TEMPERATURA HUMEDAD
-$.ajax({
-	url: 'http://localhost:8000/pp/humedad',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	success: function (res){
-		console.log("SENSOR - HUMEDAD TERRARIO")
-		console.log(res);
-		document.getElementById('temp_humedad').value = res.valor
-		},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
 
-//GET FOCO UV
-$.ajax({
-	url: 'http://localhost:8000/pp/luminocidad',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	success: function (res){
-		console.log("SENSOR - FOCO-UV")
-		console.log(res);
-		document.getElementById('foco_uv').value = res.estado
-		},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
-
-//GET FOCO TERIMCO
-$.ajax({
-	url: 'http://localhost:8000/pp/focotermico',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	success: function (res){
-		console.log("SENSOR - FOCO TERMICO")
-		console.log(res);
-		document.getElementById('foco_termico').value = res.estado
-		},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
-
-//GET PLACA TERMICA
-$.ajax({
-	url: 'http://localhost:8000/pp/placatermica',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	success: function (res){
-		console.log("SENSOR - PLACA TERMICA")
-		console.log(res);
-		document.getElementById('placa_termica').value = res.estado
-		},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
 });
 //-----------------BOTON SALIR----------------------
 $('#salir')
 .click(function(e){
 localStorage.removeItem("id_cliente");
 });
-
 </script>
 
 </html>
