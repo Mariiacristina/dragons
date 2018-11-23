@@ -9,6 +9,7 @@ import(
 )
 
 func UpdateESP(update_esp schema.Esp)(resp_update schema.Esp, err error){
+  log.Println(update_esp)
   db := connection.Connect()
     _,err = db.Exec("UPDATE esp SET sensor_sol = ?, sensor_terrario = ?, sensor_humedad = ?, estado_placa = ?, estado_bombillo = ?, estado_cascada = ?, estado_uv = ? WHERE esp.Id_cliente = ?",update_esp.Esp_sol,update_esp.Esp_terrario,update_esp.Esp_humedad,update_esp.Esp_placatermica,update_esp.Esp_focotermico,update_esp.Esp_catarata,update_esp.Esp_uv,update_esp.Id_cliente)
   connection.Disconnect(db)
@@ -25,7 +26,7 @@ func ConfigESP(id string)(resp_configs schema.Todo,err error){
   new_id,err := strconv.Atoi(id)
   db := connection.Connect()
   var Select_config_sensores schema.Todo
-  err = db.QueryRow("SELECT config_cliente.sol_max, config_cliente.sol_min, config_cliente.temp_max, config_cliente.temp_min, config_cliente.uv_inicio, config_cliente.uv_tiempo, config_cliente.catarata_on, config_cliente.catarata_off, estado_objetos.uv, estado_objetos.foco_termico, estado_objetos.placa_termica, estado_objetos.catarata, automatizacion.temp_sol,automatizacion.temp_terrario,automatizacion.humedad,automatizacion.luz FROM config_cliente, estado_objetos, automatizacion  WHERE config_cliente.id_cliente = ?",new_id).Scan(&Select_config_sensores.Sol_max,&Select_config_sensores.Sol_min,&Select_config_sensores.Temp_max,&Select_config_sensores.Temp_min,&Select_config_sensores.Humedad_min,&Select_config_sensores.Uv_inicio,&Select_config_sensores.Uv_tiempo,&Select_config_sensores.Catarata_on,&Select_config_sensores.Catarata_off,&Select_config_sensores.Uv,&Select_config_sensores.FocoTermico,&Select_config_sensores.PlacaTermica,&Select_config_sensores.Catarata,&Select_config_sensores.Auto_sol,&Select_config_sensores.Auto_terrario,&Select_config_sensores.Auto_humedad,&Select_config_sensores.Auto_luz)
+  err = db.QueryRow("SELECT config_cliente.sol_max, config_cliente.sol_min, config_cliente.temp_max, config_cliente.temp_min,config_cliente.humedad_min, config_cliente.uv_inicio, config_cliente.uv_tiempo, config_cliente.catarata_on, config_cliente.catarata_off, estado_objetos.uv, estado_objetos.foco_termico, estado_objetos.placa_termica, estado_objetos.catarata, automatizacion.temp_sol,automatizacion.temp_terrario,automatizacion.humedad,automatizacion.luz FROM config_cliente, estado_objetos, automatizacion  WHERE config_cliente.id_cliente = ? AND estado_objetos.id_cliente = ? AND automatizacion.id_cliente = ?",new_id,new_id,new_id).Scan(&Select_config_sensores.Sol_max,&Select_config_sensores.Sol_min,&Select_config_sensores.Temp_max,&Select_config_sensores.Temp_min,&Select_config_sensores.Humedad_min,&Select_config_sensores.Uv_inicio,&Select_config_sensores.Uv_tiempo,&Select_config_sensores.Catarata_on,&Select_config_sensores.Catarata_off,&Select_config_sensores.Uv,&Select_config_sensores.FocoTermico,&Select_config_sensores.PlacaTermica,&Select_config_sensores.Catarata,&Select_config_sensores.Auto_sol,&Select_config_sensores.Auto_terrario,&Select_config_sensores.Auto_humedad,&Select_config_sensores.Auto_luz)
   connection.Disconnect(db)
   if(err == sql.ErrNoRows){
     return Select_config_sensores,nil

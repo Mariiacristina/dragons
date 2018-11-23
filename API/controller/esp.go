@@ -11,6 +11,7 @@ import (
 
 
 func UpdateEsp(w http.ResponseWriter, r *http.Request) {
+	log.Println("POST ESP")
 	var update_todo schema.Esp
 	_=json.NewDecoder(r.Body).Decode(&update_todo)
 	update_ready,err := model.UpdateESP(update_todo)

@@ -55,7 +55,7 @@ type Esp struct {
 	Id_cliente   		       int `json:"id_cliente, omitempty"`
 	Esp_sol     				   int `json:"esp_sol, omitempty"`
 	Esp_terrario    			 int `json:"esp_terrario, omitempty"`
-	Esp_humedad     					 int `json:"humedad, omitempty"`
+	Esp_humedad     			 int `json:"esp_humedad, omitempty"`
 	Esp_uv      					 int `json:"esp_uv, omitempty"`
 	Esp_focotermico   		 int `json:"esp_focotermico, omitempty"`
 	Esp_placatermica 			 int `json:"esp_placatermica, omitempty"`
@@ -64,7 +64,7 @@ type Esp struct {
 
 type Alarma struct {
 	Id_cliente   		       int `json:"id_cliente, omitempty"`
-	Hora     				  		 int `json:"hora, omitempty"`
+	Hora     				  		 string `json:"hora, omitempty"`
 	Razon   				 			 string `json:"razon, omitempty"`
 }
 
