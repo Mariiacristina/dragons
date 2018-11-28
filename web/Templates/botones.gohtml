@@ -11,6 +11,10 @@
             display: inline;
         }
 
+		div {
+			display:inline-block;
+		}
+
         /* Style the navigation bar */
         .navbar {
         width: 100%;
@@ -63,6 +67,15 @@
 			background-color: #ccffcc;
 			text-align:center;
 			padding: 25px;
+			position: relative;
+		}
+		.desplazada-left {
+			float: left;
+			padding: 25px;
+		}
+		.desplazada-right {
+			float: right;
+			padding: 25px;
 		}
 	 </style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -82,8 +95,10 @@
 
 
 	<h1>BOTONES DE EMERGENCIA</h2>
-    
+    <div>
 		<br><br>
+		<div class = "desplazada-left">
+
         <h2>GESTIONAR PLACA</h2>
 		<button class="emergencia" type="submit" id="apagarplaca" value="placa">
 			  <h3>GESTIONAR PLACA </h3> 
@@ -95,20 +110,22 @@
 		<button class="emergencia1" type="submit" id="apagarbombillo" value="bombillo">
 	    <h3>GESTIONAR BOMBILLO </h3> 
 		</button>
-
-        <br><br>
+		</div>
+		
+		<div class="desplazada-right">
 		<h2>GESTIONAR CASCADA </h2>
 		<button class="emergencia1" type="submit" id="apagarcascada" value="cascada">
         <h3>GESTIONAR CASCADA </h3> 
 		</button>
 
-        <br><br>
+        <br>
 		<h2>GESTIONAR UV </h2>
 		<br><br>
 		<button class="emergencia1" type="submit" id="apagaruv" value="uv">
             <h3>GESTIONAR UV </h3> 
 		</button>
-
+		</div>
+	</div>
 </body>
 
 	<script>
