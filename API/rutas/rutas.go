@@ -41,7 +41,8 @@ func Enrutamiento() http.Handler {
 	router.HandleFunc("/esp/{idPersona}", controller.UpdateEsp).Methods("PUT")
 	router.HandleFunc("/esp/{idPersona}", controller.GetConfigAPI).Methods("GET")
 	router.HandleFunc("/alarma/{idPersona}", controller.PostAlarma).Methods("POST")
-
+	//ALARMAS
+		//router.HandleFunc("/alarmas/{idPersona}", controller.GetAlarmas).Methods("GET")
 
 
 

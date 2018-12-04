@@ -9,7 +9,7 @@
 	<style>
 	body, html {
 		height: 100%;
-		background-image: url("https://wpblink.com/sites/default/files/wallpaper/animal/66185/lizard-wallpapers-hd-66185-9461845.png");
+		background-image: url("https://c2.staticflickr.com/2/1160/862796717_a80a8e73fd_z.jpg?zz=1");
 		background-repeat: no-repeat;
 		background-size: cover;
 		position: relative;
@@ -136,7 +136,9 @@
 		font-style: italic;
 		font-size: 20px;
 	}
-
+	.txt {
+		color : white;
+	}
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -150,10 +152,10 @@
 	</div>
 
 <div class = "row">
-	<h1>PERFIL PERSONA</h1>
+	<h1 class = "txt" >PERFIL PERSONA</h1>
 	<div class = "columna info_persona">
 		<div style = "float: left">Nombre :</div>
-		<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nombre">	</div>
+		<div style = "float: left;width: 200px;height: 20px;" contentEditable="true" id="nombre">	</div>
 		<br>
 		<br>
 
@@ -168,7 +170,7 @@
 		<br>
 
 		<div style = "float: left">Fecha Nacimiento Reptil :</div>
-		<div style = "float: left;width: 100px;height: 20px;" contentEditable="true" id="nacimiento">	</div>
+		<div style = "float: left;width: 300px;height: 20px;" contentEditable="true" id="nacimiento">	</div>
 		<br>
 		<br>
 
@@ -179,8 +181,8 @@
 		<br>
 	</div>
 
-	<h1  style = "float: right; width: 48%;" >CONFIG REPTIL</h1>
-	<br>
+	<h1 class = "txt" style = "float: right; width: 48%; margin-top: -60px;" >CONFIG REPTIL</h1>
+
 	<div class = "columna css_reptil">
 	Elegir Configuraión:
 	<select class = "desplegable" id="config" onchange="Change()" >
@@ -235,7 +237,7 @@
 	<br>
 </div>
 
-	<h1>AUTOMATIZACIÓN TERRARIO</h1>
+	<h1 class = "txt">AUTOMATIZACIÓN TERRARIO</h1>
 	<div class = "columna css_automatizacion">
 	<p>En esta sección se debe clickear lo que se desea que esté automatizado, por default todo está en manual</p>
 	<br>
