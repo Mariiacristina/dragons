@@ -79,37 +79,40 @@
   </div>
   <h1 class = "tx"> ALARMAS </h1>
   <br>
-	<div class="tx">
-		<output id="alarmas"></output>
-	</div>
-  <br>
   <br>
 	<div class="alarma">
 		<br>
 		<br>
-		<br>
-		<br>
+		<div class="tx" id="alarma">
 
+		</div>
+		<br>
+		<br>
+	</div>
 </body>
 <script>
 var id=localStorage.getItem("id_cliente")
 console.log("el id del cliente ingresado es:")
 console.log(id)
-/*
 $.ajax({
-	url: 'http://localhost:8000/alarmas/'+id+'',
-	contentType:"application/json; charset: utf-8",
-	crossDomain: true,
-	withCredentials:false,
-	type: 'GET',
-	success: function (res){
-		console.log("ALARMAS - GET ALARMAS")
-		document.getElementById('alarma').value = res
-	},
-	error: function(){
-		alert("Hubo algun tipo de error.");
-	}
-	});
-*/
+ url: 'http://localhost:8000/alarmas/'+id+'',
+ contentType:"application/json; charset: utf-8",
+ withCredentials:false,
+ type: 'GET',
+ success: function (res){
+   console.log(res)
+	 console.log("ALARMAS - GET ALARMAS")
+	 res.forEach( x => {divc = "<div>.container.content-rows";
+	 var divc = document.createElement("div");
+	 divc.classList.add("container");
+	 divc.classList.add("content-rows");
+	 divc.classList.add("proglist");
+	 divc.textContent =x ;
+	 document.getElementById('alarma').appendChild(divc)
+ }
+ 	);
+
+ }
+ });
 </script>
 </html>

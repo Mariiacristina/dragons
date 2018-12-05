@@ -35,14 +35,13 @@ func Enrutamiento() http.Handler {
 	router.HandleFunc("/auto/humedad/{idPersona}", controller.GetAutoHumedad).Methods("GET")
 	router.HandleFunc("/auto/luminocidad/{idPersona}", controller.GetAutoLuz).Methods("GET")
 	//Botones
-	//router.HandleFunc("/accesorios/{idPersona}", controller.GetAccesorios).Methods("GET")
 	router.HandleFunc("/botones/update/{idPersona}", controller.UpdateEstadosAccesorios).Methods("PUT")
 	//FUNCIONES PARA LA ESP
 	router.HandleFunc("/esp/{idPersona}", controller.UpdateEsp).Methods("PUT")
 	router.HandleFunc("/esp/{idPersona}", controller.GetConfigAPI).Methods("GET")
 	router.HandleFunc("/alarma/{idPersona}", controller.PostAlarma).Methods("POST")
 	//ALARMAS
-		//router.HandleFunc("/alarmas/{idPersona}", controller.GetAlarmas).Methods("GET")
+		router.HandleFunc("/alarmas/{idPersona}", controller.GetAlarmas).Methods("GET")
 
 
 
