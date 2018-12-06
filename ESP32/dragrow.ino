@@ -81,18 +81,14 @@ struct PostSensores {
 
 //-------------------------------------------------------------------------------------FUNCIONES--------------------------------------------------------------------------------------------------------
 int Getconfig (int id){
-  Serial.print("OBTENER CONFIGURACIÓN DEL CLIENTE ");
-  Serial.print("obteniendo configuracion para el id :");
-  Serial.print(id);
+  Serial.print("----------------------GET CONFIGURACION CLIENTE-------------------------");
   Serial.print('\n');
-  Serial.print("----------------------GET CONFIG-------------------------");
      HTTPClient http;
    http.addHeader("Content-Type", "application/json");
    http.begin("http://192.168.43.97:8000/esp/1"); //URL DE LA API 
    int httpCode = http.GET();
    if (httpCode > 0) {
         String res = http.getString();
-        Serial.println(httpCode);
         DynamicJsonBuffer jsonBuffer;
         JsonObject& parsed = jsonBuffer.parseObject(res);
         Serial.println(parsed["sol_max"].as<String>());
@@ -128,15 +124,14 @@ String Gethora()
     Serial.println("Failed to obtain time");
   }
   char hola[80];
-  strftime(hola,80,"%A, %B %d %Y %H:%M:%S",&timeinfo);
+  strftime(hola,80,"%B %d - %H:%M",&timeinfo);
   return String(hola);
 }
 
 void UpdateObjetos(){
-  Serial.print("UPDATE OBJETOS - API");
+  Serial.print("UPDATE OBJETOS(variables globales) CON RESPECTO A CONFIG PERFIL");
   Serial.print('\n');
   if(API_uv == 1){Uv = 1;}
-  Serial.print(API_uv);
   if(API_focoTermico == 1){Foco_termico = 1;}
   if(API_placaTermica == 1){Placa_termica = 1;}
   if(API_uv == 0){Uv = 0;}
@@ -146,6 +141,7 @@ void UpdateObjetos(){
 
 void GestionarObjetos(){
   Serial.print("UPDATE OBJETOS ESP");
+  Serial.print('\n');
   if (Uv == 1)            {digitalWrite(entradauv, HIGH);} //PRENDER UV
   if (Foco_termico == 1)  {digitalWrite(entradabombillo, HIGH);} // PRENDER FOCO TERMICO
   if(Placa_termica == 1)  {digitalWrite(entradaplaca, HIGH);} // PRENDER PLACA TERMICA
@@ -157,12 +153,13 @@ void GestionarObjetos(){
   
   }
 struct PostSensores LeerDatos(){
+  Serial.print("OBTENER TEMPERATURAS DE LOS SENSORES");
+  Serial.print('\n');
   //direcciones de one wire
   DeviceAddress sensor1 = { 0x28, 0x1A, 0x98, 0xA2, 0x8, 0x0, 0x0, 0x88 };
   DeviceAddress sensor2 = { 0x28, 0x21, 0xC5, 0xA3, 0x8, 0x0, 0x0, 0x6B };
   float h = dht.readHumidity();
 
-  Serial.print("OBTENER TEMPERATURAS DE LOS SENSORES");
   Sensor_sol = sensors.getTempC(sensor1);
   Sensor_terrario = sensors.getTempC(sensor2);
   Sensor_humedad = (int)h;
@@ -176,7 +173,8 @@ struct PostSensores LeerDatos(){
  }
 
  void PostDatosApi (struct PostSensores holi){
-  Serial.print("POSTEAR TEMPERATURA DE LOS SENSORES ");
+  Serial.print("------------POST SENSORES----------- ");
+  Serial.print('\n');
   const String endpoint = "http://192.168.43.97:8000/esp/";
   const String key = String(Id_cliente);
   HTTPClient http;
@@ -185,11 +183,9 @@ struct PostSensores LeerDatos(){
   String objeto_post = "{\"id_cliente\":"+String(Id_cliente)+",\"esp_sol\":"+String(holi.sol)+",\"esp_terrario\":"+String(holi.terrario)+",\"esp_humedad\":"+String(holi.h)+",\"esp_uv\":"+String(Uv)+",\"esp_focotermico\":"+String(Foco_termico)+",\"esp_placatermica\":"+String(Placa_termica)+",\"esp_catarata\":"+String(Catarata)+"}";
   int httpResponseCode = http.POST(objeto_post);
   if(httpResponseCode>0){
-    String response = http.getString(); 
-    Serial.println(httpResponseCode);   
+    String response = http.getString();  
  }else{
      Serial.print("Error on sending POST: ");
-    Serial.println(httpResponseCode);
  }
  http.end();
  }
@@ -206,6 +202,7 @@ int ValidacionSensores(struct PostSensores holi){
 
 void PostAlarma(String razon, int id_cliente ){
   Serial.print("------------POST ALARMA-----------");
+  Serial.print('\n');
   String hora_alarma = Gethora();
   const String endpoint = "http://192.168.43.97:8000/alarma/";
   const String key = String(Id_cliente);
@@ -213,20 +210,19 @@ void PostAlarma(String razon, int id_cliente ){
   http.begin(endpoint + key);
   http.addHeader("Content-Type", "application/json");
   String objeto_alarma = "{\"id_cliente\":"+String(Id_cliente)+",\"hora\":\""+hora_alarma+"\",\"razon\":\""+razon+"\"}";
-  Serial.print(objeto_alarma);
   int httpResponseCode = http.POST(objeto_alarma);
   if(httpResponseCode>0){
-    String response = http.getString(); 
-    Serial.println(httpResponseCode);  
+    String response = http.getString();   
  }else{
-     Serial.print("Error on sending POST: ");
-    Serial.println(httpResponseCode);
+    Serial.print("Error on sending POST: ");
  }
  http.end();
  Serial.print('\n');
 }
 
 void GestionarCascada(){
+  Serial.print("GESTIONAR CASCADA");
+  Serial.print('\n');
   Count_catarata_on = Count_catarata_on +1;
   if(Count_catarata_on >= (API_catarata_on.toInt() * 720 ) ){
     Count_catarata_off = Count_catarata_off + 1;
@@ -242,6 +238,8 @@ void GestionarCascada(){
    }
    
 void GestionarLuzUv(){
+  Serial.print("GESTIONAR LUZ UV");
+  Serial.print('\n');
   if(API_auto_luz == 1){
       if (API_uv_inicio.toInt() == Tiempo){
         Uv = 1; 
@@ -299,16 +297,10 @@ void setup() {
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   
   //--------------------------------------------------------------------------------GET CONFIGURACIÓN DEL CLIENTE --------------------------------------------------------------------------------------------
-  Serial.print("como primer paso buscaremos la configuración del cliente de id: ");
   Getconfig(Id_cliente);
-  Serial.print('\n');
   //----------------------------------------------------------------------------------ACTUALIZAR OBJETOS RESPECTO A LA API-----------------------------------------------------------------------------
-  Serial.print("Actualizar objetos respecto a la API");
   UpdateObjetos();
-  Serial.print('\n');
   //---------------------------------------------------------------------------ACTUALIZAR OBJETOS ESP --------------------------------------------------------------------------------------
-  Serial.print("actualizar objetos de la esp");
-  Serial.print('\n');
   GestionarObjetos();
 }
 
@@ -320,9 +312,6 @@ void loop() {
   Serial.print('\n');
   Serial.print("LOOP NUMERO:");
   Serial.print(Loop);
-  Serial.print('\n');
-  Serial.print("COUNT AMBOS:");
-  Serial.print(Count_ambos);
   Serial.print('\n');
   //--------------------------------------------------------------------------LEER SENSORES---------------------------------------------------------------------------------------------------------------
   struct PostSensores datos;
@@ -355,7 +344,8 @@ void loop() {
           Count_sol = Count_sol + 1;
           if (Count_sol > 360){Count_sol = 0;}
        }
-       else{Count_sol = Count_sol + 1;}
+       else{Count_sol = Count_sol + 1;
+        if (Count_sol > 360){Count_sol = 0;}}
     }
     if (validacion == 2){
       if(Count_sol == 0 || Count_sol > 360){
@@ -370,7 +360,8 @@ void loop() {
           Count_sol = Count_sol + 1;
           if (Count_sol > 360){Count_sol = 0;}
       }
-      else{Count_sol = Count_sol + 1;}
+      else{Count_sol = Count_sol + 1;
+        if (Count_sol > 360){Count_sol = 0;}}
     }    
     if (validacion == 3){
         if(Count_terrario == 0 || Count_terrario > 360){ 
@@ -385,7 +376,8 @@ void loop() {
           Count_terrario = Count_terrario + 1;
           if (Count_terrario > 360){Count_terrario = 0;}
         }
-        else{Count_terrario = Count_terrario + 1;}       
+        else{Count_terrario = Count_terrario + 1;
+          if (Count_terrario > 360){Count_terrario = 0;}}       
     }
     if (validacion == 4){
         if(Count_terrario == 0 || Count_terrario > 360){ 
@@ -400,7 +392,8 @@ void loop() {
           Count_terrario = Count_terrario + 1;
           if (Count_terrario > 360){Count_terrario = 0;}
         }
-        else{Count_terrario = Count_terrario + 1;}
+        else{Count_terrario = Count_terrario + 1;
+          if (Count_terrario > 360){Count_terrario = 0;}}
     }
     if (validacion == 5){
        if (Count_ambos == 0 || Count_ambos > 360){
@@ -414,9 +407,10 @@ void loop() {
             GestionarObjetos();
             }
            Count_ambos = Count_ambos + 1;
-           if (Count_ambos > 5){Count_ambos = 360;}
+           if (Count_ambos > 360){Count_ambos = 0;}
         }
-        else{Count_ambos = Count_ambos + 1;}
+        else{Count_ambos = Count_ambos + 1;
+          if (Count_ambos > 360){Count_ambos = 0;}}
         }
     if (validacion == 6){
         if(Count_ambos == 0 || Count_ambos > 360){
@@ -432,11 +426,12 @@ void loop() {
             Count_ambos = Count_ambos + 1;
             if (Count_ambos > 360){Count_ambos = 0;}
         }
-        else{Count_ambos = Count_ambos + 1;}
+        else{Count_ambos = Count_ambos + 1;
+          if (Count_ambos > 360){Count_ambos = 0;}}
     }
     if(validacion == 0){
        Serial.print('\n');
-       Serial.print("TODO EN ORDEN");
+       Serial.print("ESTA TODO EN ORDEN");
        Serial.print('\n');
        Count_sol = 0;
        Count_terrario = 0;
@@ -447,16 +442,27 @@ void loop() {
   GestionarCascada();
 //---------------------------------------------------------------------------------GESTIONAR LUZ UV -----------------------------------------------------------------------------------------------------------------
   GestionarLuzUv();
+  Serial.print("DATOS OBTENIDOS DE LOS SENSORES");
+  Serial.print("Sensor sol: ");
   Serial.print(Sensor_sol);
-  Serial.print(Sensor_terrario);
-  Serial.print(Sensor_humedad);
-  Serial.print("-----------------------");
   Serial.print('\n');
+  Serial.print("Sensor terrario: ");
+  Serial.print(Sensor_terrario);
+  Serial.print('\n');
+  Serial.print("Sensor humedad: ");
+  Serial.print(Sensor_humedad);
+  Serial.print('\n');
+  Serial.print("ESTADO DE LOS OBJETOS (variables globales)");
+  Serial.print('\n');
+  Serial.print("Estado luz Uv: ");
   Serial.print(Uv);
-    Serial.print('\n');
+  Serial.print('\n');
+  Serial.print("Estado Foco termico: ");
   Serial.print(Foco_termico);
-    Serial.print('\n');
+  Serial.print('\n');
+  Serial.print("Estado Placa Termica: ");
   Serial.print(Placa_termica);
+  Serial.print('\n');
   Loop = Loop + 1;
   delay(5000); //DELAY 5 SEGUNDOS
 }
