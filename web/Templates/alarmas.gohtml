@@ -84,7 +84,8 @@
 		<br>
 		<br>
 		<div class="tx" id="alarma">
-
+			<p id="hora" class="hora"></p>
+			<p id="razon" class="razon"></p>
 		</div>
 		<br>
 		<br>
@@ -102,13 +103,15 @@ $.ajax({
  success: function (res){
    console.log(res)
 	 console.log("ALARMAS - GET ALARMAS")
+	 var cont = 0;
 	 res.forEach( x => {divc = "<div>.container.content-rows";
+	 var hora = res[cont].hora
+	 var razon = res[cont].razon
 	 var divc = document.createElement("div");
-	 divc.classList.add("container");
-	 divc.classList.add("content-rows");
-	 divc.classList.add("proglist");
-	 divc.textContent =x ;
-	 document.getElementById('alarma').appendChild(divc)
+	 divc.textContent = "hora: " + hora +"  razon: " + razon;
+	 document.getElementById('alarma').appendChild(divc);
+
+		 cont = cont + 1;
  }
  	);
 

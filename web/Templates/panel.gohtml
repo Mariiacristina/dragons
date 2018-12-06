@@ -100,13 +100,13 @@ body, html {
 
 </body>
 <script>
-
-$(document).ready(function () {
 //--------------GET ID-----------
 
 var id=localStorage.getItem("id_cliente")
 console.log("el id del cliente ingresado es:")
 console.log(id)
+
+$(document).ready(function () {
 
 //------------GET SENSORES---------------------
 $.ajax({
@@ -165,6 +165,65 @@ $.ajax({
 
 
 });
+
+setInterval(function(){
+	//------------GET SENSORES---------------------
+	$.ajax({
+		url: 'http://localhost:8000/sensores/'+id+'',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log("SENSOR - TEMPERATURA SOL")
+			console.log(res);
+			document.getElementById('temp_sol').value = res.sol
+			document.getElementById('temp_terrario').value = res.terrario
+			document.getElementById('temp_humedad').value = res.humedad
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
+		});
+
+		//------------GET OBJETOS---------------------
+	$.ajax({
+		url: 'http://localhost:8000/accesorios/'+id+'',
+		contentType:"application/json; charset: utf-8",
+		crossDomain: true,
+		withCredentials:false,
+		type: 'GET',
+		success: function (res){
+			console.log("SENSOR - TEMPERATURA SOL")
+			console.log(res);
+			if (res.uv == 1){
+				document.getElementById('foco_uv').value = "ON"
+			}else{
+				document.getElementById('foco_uv').value = "OFF"
+			}
+			if (res.focotermico == 1){
+				document.getElementById('foco_termico').value = "ON"
+			}else{
+				document.getElementById('foco_termico').value = "OFF"
+			}
+			if (res.placatermica == 1){
+				document.getElementById('placa_termica').value = "ON"
+			}else{
+				document.getElementById('placa_termica').value = "OFF"
+			}
+			if (res.catarata == 1){
+				document.getElementById('catarata').value = "ON"
+			}else{
+				document.getElementById('catarata').value = "OFF"
+			}
+		},
+		error: function(){
+			alert("Hubo algun tipo de error.");
+		}
+		});
+
+}, 8000);
+
 //-----------------BOTON SALIR----------------------
 $('#salir')
 .click(function(e){
