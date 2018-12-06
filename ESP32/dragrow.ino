@@ -10,8 +10,6 @@
 
 //CLIENTE
 int Id_cliente = 1;
-//TIEMPO
-int Tiempo = 20;
 
 //variables para el time
 const char* ntpServer = "Ntp.shoa.cl";
@@ -128,6 +126,18 @@ String Gethora()
   return String(hola);
 }
 
+int GetHora_enInt()
+{
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo)){
+    Serial.println("Failed to obtain time");
+  }
+  char hour[80];
+  strftime(hour,80,"%H",&timeinfo);
+  String new_hr = String(hour);
+  return new_hr.toInt();
+}
+
 void UpdateObjetos(){
   Serial.print("UPDATE OBJETOS(variables globales) CON RESPECTO A CONFIG PERFIL");
   Serial.print('\n');
@@ -241,15 +251,17 @@ void GestionarLuzUv(){
   Serial.print("GESTIONAR LUZ UV");
   Serial.print('\n');
   if(API_auto_luz == 1){
-      if (API_uv_inicio.toInt() == Tiempo){
-        Uv = 1; 
-        GestionarObjetos();
-        }
-      }
+      int Tiempo = GetHora_enInt();
+       if (API_uv_inicio.toInt() == Tiempo){
+          Uv = 1; 
+         GestionarObjetos();
+         }
+        
       if (API_uv_tiempo.toInt() == Tiempo){
         Uv = 0; 
         GestionarObjetos();
         }
+      }
   }
 
 void setup() {
