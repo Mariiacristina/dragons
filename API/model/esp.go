@@ -9,7 +9,6 @@ import(
 )
 
 func UpdateESP(update_esp schema.Esp)(resp_update schema.Esp, err error){
-  log.Println(update_esp)
   db := connection.Connect()
     _,err = db.Exec("UPDATE esp SET sensor_sol = ?, sensor_terrario = ?, sensor_humedad = ?, estado_placa = ?, estado_bombillo = ?, estado_cascada = ?, estado_uv = ? WHERE esp.Id_cliente = ?",update_esp.Esp_sol,update_esp.Esp_terrario,update_esp.Esp_humedad,update_esp.Esp_placatermica,update_esp.Esp_focotermico,update_esp.Esp_catarata,update_esp.Esp_uv,update_esp.Id_cliente)
   connection.Disconnect(db)
@@ -42,6 +41,7 @@ func ConfigESP(id string)(resp_configs schema.Todo,err error){
 
 //FALTAN
 func PostAlarmaESP(post_alarma schema.Alarma)(resp_alarma schema.Alarma,err error){
+log.Println(post_alarma)
   db := connection.Connect()
   _,err = db.Exec("INSERT INTO alarmas (id_cliente,hora,razon) VALUES (?,?,?)",post_alarma.Id_cliente,post_alarma.Hora,post_alarma.Razon)
   connection.Disconnect(db)
